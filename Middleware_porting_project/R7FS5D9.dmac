@@ -1,0 +1,160 @@
+/*
+  Trace Clock Operating Frequency Select
+  0 - /1
+  1 - /2 * default
+  2 - /4
+*/
+__param _TRACE_clksel = 1;
+
+/*
+  Use QSPI configuration and memory autodetection
+*/
+__param QSPI = 0;
+
+/*
+  Port Drive Capability
+  0: Low drive
+  1: Middle drive
+  2: High drive
+*/
+__param port_drive = 1;
+
+__EnableTraceClock()
+{
+__var TRCKCR;
+
+  /* Trim value */
+  _TRACE_clksel &= 0x03;
+  /* Read Trace Clock Control Register */
+  TRCKCR = __readMemory8(0x4001E03F, "Memory");
+  /* If changed */
+  if (TRCKCR != (0x80 | _TRACE_clksel))
+  {
+    __var PRCR_RESTORE;
+    /* Save Protect Register Value */
+    PRCR_RESTORE = __readMemory16(0x4001E3FE, "Memory");
+    /* Disable Register Protect */
+    __writeMemory16(0xA501, 0x4001E3FE, "Memory");
+    /* If trace clock is enabled */
+    if (TRCKCR & 0x80)
+    {
+      /* Disable Trace Clock */
+      __writeMemory8((TRCKCR & 0x7F), 0x4001E03F, "Memory");
+    }
+    /* Set Trace Clock Selection */
+    __writeMemory8(_TRACE_clksel, 0x4001E03F, "Memory");
+    /* Enable Trace Clock */
+    __writeMemory8(0x80 | _TRACE_clksel, 0x4001E03F, "Memory");
+    /* Restore Protect Register Value */
+    __writeMemory16(0xA500 | PRCR_RESTORE, 0x4001E3FE, "Memory");
+  }
+}
+
+__EnableTracePins()
+{
+__var PFS;
+  /* Enable Writing in PWPR */
+  __writeMemory8(0x00, 0x40040D03, "Memory");
+  __writeMemory8(0x40, 0x40040D03, "Memory");
+
+  if( 0 == port_drive){
+    PFS = 0x1A010000;
+  } else if( 1 == port_drive){
+    PFS = 0x1A010400;
+  } else {
+    PFS = 0x1A010C00;
+  }
+
+  /* Port P2_14 PFS, TCLK, HIGH Drive */
+  __writeMemory32(PFS, 0x400408B8, "Memory");
+  /* Port P2_11 PFS, TDATA0, HIGH Drive */
+  __writeMemory32(PFS, 0x400408AC, "Memory");
+
+  if ( __getTracePortSize() > 1 )
+  {
+    /* Port P2_10 PFS, TDATA1, HIGH Drive */
+    __writeMemory32(PFS, 0x400408A8, "Memory");
+  }
+
+  if ( __getTracePortSize() > 2 )
+  {
+    /* Port P2_09 PFS, TDATA2, HIGH Drive */
+    __writeMemory32(0x1A010C00, 0x400408A4, "Memory");
+    /* Port P2_08 PFS, TDATA3, HIGH Drive */
+    __writeMemory32(PFS, 0x400408A0, "Memory");
+  }
+
+  /* Disable Writing in PWPR */
+  __writeMemory8(0x00, 0x40040D03, "Memory");
+  __writeMemory8(0x80, 0x40040D03, "Memory");
+
+}
+
+__ConfigureTrace()
+{
+  __var modemask;
+  __var etbena;
+
+  modemask = __getTraceProperty(2);     // Get mask of selected modes
+  etbena   = 0;                         // Mask of bits for Funnel
+
+  if (modemask & 0x6) {
+    // ETB (0x4) or SWO (0x2) are allowed
+    if (modemask & 0x2) {
+      etbena = 0x2;                     // Only ETM should go to ETB
+    } else {
+      etbena = 0x1 | 0x2;               // Both ETM and ITM should go to ETB
+    }
+  } else {
+      etbena = 0x0;                     // Both ETM and SWO go to TPIU
+  }
+
+  /* Set ATB Funnel */
+  if( (__readMemory32(0xE0042000, "Memory") & 0x3) != etbena)
+  {
+    __writeMemory32(0x00000300 | etbena, 0xE0042000, "Memory");
+  }
+
+  if (modemask & 0x10) {         // Is ETM enabled?
+    __EnableTracePins();         // Yes - enable GPIO for ETM
+  }
+}
+
+execConfigureTraceETM()
+{
+  __EnableTraceClock();
+
+  if ( __driverType("ijet") || __driverType("cmsisdap") )
+  {
+    __ConfigureTrace();
+  }
+  else
+  {
+    __EnableTracePins();
+  }
+}
+
+execConfigureTraceSWO()
+{
+  __EnableTraceClock();
+}
+
+_ExecDevicePreload()
+{
+  /* Setup QSPI for verification after the flashloader */
+  if(QSPI)
+  {
+    setup_clock();
+    setup_qspi(1);
+  }
+}
+
+_ExecDeviceReset()
+{
+  /* Restore default QSPI register values */
+  if(QSPI)
+  {
+    restore_clock();
+    reset_qspi();
+  }
+}

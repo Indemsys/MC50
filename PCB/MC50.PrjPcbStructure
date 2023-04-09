@@ -1,0 +1,4 @@
+Record=TopLevelDocument|FileName=MC50_BLE.SchDoc|SheetNumber= 
+Record=NoMainPathDocument|SourceDocument=MC50_BLE.SchDoc|FileName=MC50_CPU.SchDoc|SheetNumber= 
+Record=NoMainPathDocument|SourceDocument=MC50_BLE.SchDoc|FileName=MC50_Periph.SchDoc|SheetNumber= 
+Record=NoMainPathDocument|SourceDocument=MC50_BLE.SchDoc|FileName=MC50_Pwr_MotDrv.SchDoc|SheetNumber= 
