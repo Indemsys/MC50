@@ -1,0 +1,191 @@
+;   ETM-M3/ETM-M4, implementation of ETMv3.5
+
+
+[Sfr]
+
+; ETM architecture specification doesn't give bitfield names for ETM registers.
+; Bitfield names here are a composite of different ARM ETM manuals and the architecture specification.
+
+;
+;               ETM
+;
+;     Name                        Zone      Address     Bytesize  Displaybase Bitrange
+;     ----                        ----      -------     --------  ----------- --------
+
+sfr = "ETM_CR"                                                , "Memory", 0xE0041000, 4, base=16, tooltip="Main Control Register"
+sfr = "ETM_CR.ETM_power_down"                                 , "Memory", 0xE0041000, 4, base=16, bitRange=0-0
+sfr = "ETM_CR.Port_size"                                      , "Memory", 0xE0041000, 4, base=16, bitRange=4-6
+sfr = "ETM_CR.Stall_processor"                                , "Memory", 0xE0041000, 4, base=16, bitRange=7-7
+sfr = "ETM_CR.Branch_output"                                  , "Memory", 0xE0041000, 4, base=16, bitRange=8-8
+sfr = "ETM_CR.Debug_request_control"                          , "Memory", 0xE0041000, 4, base=16, bitRange=9-9
+sfr = "ETM_CR.ETM_programming"                                , "Memory", 0xE0041000, 4, base=16, bitRange=10-10
+sfr = "ETM_CR.ETM_port_selection"                             , "Memory", 0xE0041000, 4, base=16, bitRange=11-11
+sfr = "ETM_CR.Port_mode2"                                     , "Memory", 0xE0041000, 4, base=16, bitRange=13-13
+sfr = "ETM_CR.Port_mode"                                      , "Memory", 0xE0041000, 4, base=16, bitRange=16-17
+sfr = "ETM_CR.Port_size3"                                     , "Memory", 0xE0041000, 4, base=16, bitRange=21-21
+sfr = "ETM_CR.Timestamp_enable"                               , "Memory", 0xE0041000, 4, base=16, bitRange=28-28
+
+sfr = "ETM_CCR"                                               , "Memory", 0xE0041004, 4, base=16, readOnly, tooltip="Configuration Code Register"
+sfr = "ETM_CCR.Number_of_address_comparator_pairs"            , "Memory", 0xE0041004, 4, base=16, bitRange=0-3
+sfr = "ETM_CCR.Number_of_data_value_comparators"              , "Memory", 0xE0041004, 4, base=16, bitRange=4-7
+sfr = "ETM_CCR.Number_of_memory_map_decoders"                 , "Memory", 0xE0041004, 4, base=16, bitRange=8-12
+sfr = "ETM_CCR.Number_of_counters"                            , "Memory", 0xE0041004, 4, base=16, bitRange=13-15
+sfr = "ETM_CCR.Sequencer_present"                             , "Memory", 0xE0041004, 4, base=16, bitRange=16-16
+sfr = "ETM_CCR.Number_of_external_inputs"                     , "Memory", 0xE0041004, 4, base=16, bitRange=17-19
+sfr = "ETM_CCR.Number_of_external_outputs"                    , "Memory", 0xE0041004, 4, base=16, bitRange=20-22
+sfr = "ETM_CCR.FIFOFULL_logic_present"                        , "Memory", 0xE0041004, 4, base=16, bitRange=23-23
+sfr = "ETM_CCR.Number_of_Context_ID_comparators"              , "Memory", 0xE0041004, 4, base=16, bitRange=24-25
+sfr = "ETM_CCR.Trace_startstop_block_present"                 , "Memory", 0xE0041004, 4, base=16, bitRange=26-26
+sfr = "ETM_CCR.Coprocessor_and_memory_access"                 , "Memory", 0xE0041004, 4, base=16, bitRange=27-27
+sfr = "ETM_CCR.ETM_ID_register_present"                       , "Memory", 0xE0041004, 4, base=16, bitRange=31-31
+
+sfr = "ETM_TRIGGER"                                           , "Memory", 0xE0041008, 4, base=16, tooltip="Trigger Event Register"
+sfr = "ETM_TRIGGER.Trigger_event"                             , "Memory", 0xE0041008, 4, base=16, bitRange=0-16
+sfr = "ETM_TRIGGER.Resource_A_Index"                          , "Memory", 0xE0041008, 4, base=16, bitRange=0-3
+sfr = "ETM_TRIGGER.Resource_A_Type"                           , "Memory", 0xE0041008, 4, base=16, bitRange=4-6
+sfr = "ETM_TRIGGER.Resource_B_Index"                          , "Memory", 0xE0041008, 4, base=16, bitRange=7-10
+sfr = "ETM_TRIGGER.Resource_B_Type"                           , "Memory", 0xE0041008, 4, base=16, bitRange=11-13
+sfr = "ETM_TRIGGER.Function"                                  , "Memory", 0xE0041008, 4, base=16, bitRange=14-16
+
+sfr = "ETM_SR"                                                , "Memory", 0xE0041010, 4, base=16, tooltip="Status Register"
+sfr = "ETM_SR.Untraced_overflow_flag"                         , "Memory", 0xE0041010, 4, base=16, bitRange=0-0
+sfr = "ETM_SR.ETM_programming_bit"                            , "Memory", 0xE0041010, 4, base=16, bitRange=1-1
+sfr = "ETM_SR.Trace_startstop_resource_status"                , "Memory", 0xE0041010, 4, base=16, bitRange=2-2
+sfr = "ETM_SR.Trigger_flag"                                   , "Memory", 0xE0041010, 4, base=16, bitRange=3-3
+
+sfr = "ETM_SCR"                                               , "Memory", 0xE0041014, 4, base=16, readOnly, tooltip="System Configuration Register"
+sfr = "ETM_SCR.Maximum_port_size"                             , "Memory", 0xE0041014, 4, base=16, bitRange=0-2
+sfr = "ETM_SCR.FIFOFULL_supported"                            , "Memory", 0xE0041014, 4, base=16, bitRange=8-8
+sfr = "ETM_SCR.Maximum_port_size3"                            , "Memory", 0xE0041014, 4, base=16, bitRange=9-9
+sfr = "ETM_SCR.Port_size_supported"                           , "Memory", 0xE0041014, 4, base=16, bitRange=10-10
+sfr = "ETM_SCR.Port_mode_supported"                           , "Memory", 0xE0041014, 4, base=16, bitRange=11-11
+sfr = "ETM_SCR.Number_of_supported_processors"                , "Memory", 0xE0041014, 4, base=16, bitRange=12-14
+sfr = "ETM_SCR.No_fetch_comparisions"                         , "Memory", 0xE0041014, 4, base=16, bitRange=17-17
+
+sfr = "ETM_TEEVR"                                             , "Memory", 0xE0041020, 4, base=16, tooltip="TraceEnable Event Register"
+sfr = "ETM_TEEVR.TraceEnable_event"                           , "Memory", 0xE0041020, 4, base=16, bitRange=0-16
+sfr = "ETM_TEEVR.Resource_A_Index"                            , "Memory", 0xE0041020, 4, base=16, bitRange=0-3
+sfr = "ETM_TEEVR.Resource_A_Type"                             , "Memory", 0xE0041020, 4, base=16, bitRange=4-6
+sfr = "ETM_TEEVR.Resource_B_Index"                            , "Memory", 0xE0041020, 4, base=16, bitRange=7-10
+sfr = "ETM_TEEVR.Resource_B_Type"                             , "Memory", 0xE0041020, 4, base=16, bitRange=11-13
+sfr = "ETM_TEEVR.Function"                                    , "Memory", 0xE0041020, 4, base=16, bitRange=14-16
+
+sfr = "ETM_TECR1"                                             , "Memory", 0xE0041024, 4, base=16, tooltip="TraceEnable Control 1 Register"
+sfr = "ETM_TECR1.Trace_control_enable"                        , "Memory", 0xE0041024, 4, base=16, bitRange=25-25
+
+sfr = "ETM_FFLR"                                              , "Memory", 0xE004102C, 4, base=16, tooltip="FIFOFULL Level Register"
+sfr = "ETM_FFLR.FIFO_full_level"                              , "Memory", 0xE004102C, 4, base=16, bitRange=0-7
+
+sfr = "ETM_CNTRLDVR1"                                         , "Memory", 0xE0041140, 4, base=16, tooltip="Counter Reload Value Register 1"
+sfr = "ETM_CNTRLDVR1.Initial_count"                           , "Memory", 0xE0041140, 4, base=10, bitRange=0-15
+sfr = "ETM_CNTRLDVR2"                                         , "Memory", 0xE0041144, 4, base=16, tooltip="Counter Reload Value Register 2"
+sfr = "ETM_CNTRLDVR2.Initial_count"                           , "Memory", 0xE0041144, 4, base=10, bitRange=0-15
+sfr = "ETM_CNTRLDVR3"                                         , "Memory", 0xE0041148, 4, base=16, tooltip="Counter Reload Value Register 3"
+sfr = "ETM_CNTRLDVR3.Initial_count"                           , "Memory", 0xE0041148, 4, base=10, bitRange=0-15
+sfr = "ETM_CNTRLDVR4"                                         , "Memory", 0xE004114C, 4, base=16, tooltip="Counter Reload Value Register 4"
+sfr = "ETM_CNTRLDVR4.Initial_count"                           , "Memory", 0xE004114C, 4, base=10, bitRange=0-15
+
+sfr = "ETM_SYNCFR"                                            , "Memory", 0xE00411E0, 4, base=16, tooltip="Synchronization Frequency Register"
+sfr = "ETM_SYNCFR.Synchronization_frequency"                  , "Memory", 0xE00411E0, 4, base=10, bitRange=0-11
+
+sfr = "ETM_IDR"                                               , "Memory", 0xE00411E4, 4, base=16, readOnly, tooltip="ID Register"
+sfr = "ETM_IDR.Implementation_revision"                       , "Memory", 0xE00411E4, 4, base=16, bitRange=0-3
+sfr = "ETM_IDR.Minor_ETM_architecture_version"                , "Memory", 0xE00411E4, 4, base=16, bitRange=4-7
+sfr = "ETM_IDR.Major_ETM_architecture_version"                , "Memory", 0xE00411E4, 4, base=16, bitRange=8-11
+sfr = "ETM_IDR.Processor_family"                              , "Memory", 0xE00411E4, 4, base=16, bitRange=12-15
+sfr = "ETM_IDR.Load_PC_first"                                 , "Memory", 0xE00411E4, 4, base=16, bitRange=16-16
+sfr = "ETM_IDR.Support_32bit_Thumb_instructions"              , "Memory", 0xE00411E4, 4, base=16, bitRange=18-18
+sfr = "ETM_IDR.Support_Security_Extensionstions"              , "Memory", 0xE00411E4, 4, base=16, bitRange=19-19
+sfr = "ETM_IDR.Implements_alternative_branch_packet_encoding" , "Memory", 0xE00411E4, 4, base=16, bitRange=20-20
+sfr = "ETM_IDR.Implementer_code"                              , "Memory", 0xE00411E4, 4, base=16, bitRange=24-31
+
+sfr = "ETM_CCER"                                              , "Memory", 0xE00411E8, 4, base=16, readOnly, tooltip="Configuration Code Extension Register"
+sfr = "ETM_CCER.Number_of_extended_external_input_selectors"  , "Memory", 0xE00411E8, 4, base=16, bitRange=0-2
+sfr = "ETM_CCER.Extended_external_input_bus_size"             , "Memory", 0xE00411E8, 4, base=16, bitRange=3-10
+sfr = "ETM_CCER.All_registers_readable"                       , "Memory", 0xE00411E8, 4, base=16, bitRange=11-11
+sfr = "ETM_CCER.Data_address_comparision_supported"           , "Memory", 0xE00411E8, 4, base=16, bitRange=12-12
+sfr = "ETM_CCER.Number_of_Instrumentation_resources"          , "Memory", 0xE00411E8, 4, base=16, bitRange=13-15
+sfr = "ETM_CCER.Number_of_EmbeddedICE_watchpoint_inputs"      , "Memory", 0xE00411E8, 4, base=16, bitRange=16-19
+sfr = "ETM_CCER.Trace_StartStop_block_uses_EmbeddedICE_inputs", "Memory", 0xE00411E8, 4, base=16, bitRange=20-20
+sfr = "ETM_CCER.ETMEIBCR_implemented"                         , "Memory", 0xE00411E8, 4, base=16, bitRange=21-21
+sfr = "ETM_CCER.Timestamping_implemented"                     , "Memory", 0xE00411E8, 4, base=16, bitRange=22-22
+sfr = "ETM_CCER.Reduced_function_counter"                     , "Memory", 0xE00411E8, 4, base=16, bitRange=27-27
+sfr = "ETM_CCER.Timestamp_encoding"                           , "Memory", 0xE00411E8, 4, base=16, bitRange=28-28
+sfr = "ETM_CCER.Timestamp_size"                               , "Memory", 0xE00411E8, 4, base=16, bitRange=29-29
+
+sfr = "ETM_TESSEICR"                                          , "Memory", 0xE00411F0, 4, base=16, tooltip="TraceEnable Start/Stop Interrupt Clear Register"
+sfr = "ETM_TESSEICR.Start_resource_select"                    , "Memory", 0xE00411F0, 4, base=16, bitRange=0-3
+sfr = "ETM_TESSEICR.Stop_resource_select"                     , "Memory", 0xE00411F0, 4, base=16, bitRange=16-19
+
+sfr = "ETM_TSEVR"                                             , "Memory", 0xE00411F8, 4, base=16, tooltip="Timestamp Event Register"
+sfr = "ETM_TSEVR.Timestamp_event"                             , "Memory", 0xE00411F8, 4, base=16, bitRange=0-16
+sfr = "ETM_TSEVR.Resource_A_Index"                            , "Memory", 0xE00411F8, 4, base=16, bitRange=0-3
+sfr = "ETM_TSEVR.Resource_A_Type"                             , "Memory", 0xE00411F8, 4, base=16, bitRange=4-6
+sfr = "ETM_TSEVR.Resource_B_Index"                            , "Memory", 0xE00411F8, 4, base=16, bitRange=7-10
+sfr = "ETM_TSEVR.Resource_B_Type"                             , "Memory", 0xE00411F8, 4, base=16, bitRange=11-13
+sfr = "ETM_TSEVR.Function"                                    , "Memory", 0xE00411F8, 4, base=16, bitRange=14-16
+
+sfr = "ETM_TRACEIDR"                                          , "Memory", 0xE0041200, 4, base=16, tooltip="Trace ID Register"
+sfr = "ETM_TRACEIDR.Trace_ID"                                 , "Memory", 0xE0041200, 4, base=16, bitRange=0-6
+
+sfr = "ETM_IDR2"                                              , "Memory", 0xE0041208, 4, base=16, readOnly, tooltip="ID Register 2"
+sfr = "ETM_IDR2.RFE_transfer_order"                           , "Memory", 0xE0041208, 4, base=16, bitRange=0-0
+sfr = "ETM_IDR2.SWP_transfer_order"                           , "Memory", 0xE0041208, 4, base=16, bitRange=1-1
+
+sfr = "ETM_PDSR"                                              , "Memory", 0xE0041314, 4, base=16, tooltip="Device Power-Down Status Register"
+sfr = "ETM_PDSR.ETM_powered_up"                               , "Memory", 0xE0041314, 4, base=16, bitRange=0-0
+
+sfr = "ETM_ITMISCIN"                                          , "Memory", 0xE0041EE0, 4, base=16, readOnly, tooltip="Integration Test Miscellaneous Inputs"
+sfr = "ETM_ITMISCIN.EXTIN"                                    , "Memory", 0xE0041EE0, 4, base=16, bitRange=0-1
+sfr = "ETM_ITMISCIN.COREHALT"                                 , "Memory", 0xE0041EE0, 4, base=16, bitRange=4-4
+
+sfr = "ETM_ITTRIGOUT"                                         , "Memory", 0xE0041EE8, 4, base=16, writeOnly, tooltip="Integration Test Trigger Output Register"
+sfr = "ETM_ITTRIGOUT.TRIGGER_output_value"                    , "Memory", 0xE0041EE8, 4, base=16, bitRange=0-0
+
+sfr = "ETM_ITCTRL"                                            , "Memory", 0xE0041F00, 4, base=16, tooltip="Integration Mode Control Register"
+
+sfr = "ETM_CLAIMSET"                                          , "Memory", 0xE0041FA0, 4, base=16, tooltip="Claim Tag Set Register"
+sfr = "ETM_CLAIMSET.Tag"                                      , "Memory", 0xE0041FA0, 4, base=16, bitRange=0-7
+
+sfr = "ETM_CLAIMCLR"                                          , "Memory", 0xE0041FA4, 4, base=16, tooltip="Claim Tag Clear Register"
+sfr = "ETM_CLAIMCLR.Tag"                                      , "Memory", 0xE0041FA4, 4, base=16, bitRange=0-7
+
+sfr = "ETM_AUTHSTATUS"                                        , "Memory", 0xE0041FB8, 4, base=16, readOnly, tooltip="Authentication Status Register"
+
+sfr = "ETM_DEVID"                                             , "Memory", 0xE0041FC8, 4, base=16, readOnly, tooltip="Device Configuration Register"
+
+sfr = "ETM_DEVTYPE"                                           , "Memory", 0xE0041FCC, 4, base=16, readOnly, tooltip="Device Type Register"
+sfr = "ETM_DEVTYPE.Main_type"                                 , "Memory", 0xE0041FCC, 4, base=16, bitRange=0-3
+sfr = "ETM_DEVTYPE.Sub_type"                                  , "Memory", 0xE0041FCC, 4, base=16, bitRange=4-7
+
+sfr = "ETM_PIDR4"                                             , "Memory", 0xE0041FD0, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 4"
+sfr = "ETM_PIDR4.DES_2"                                       , "Memory", 0xE0041FD0, 4, base=16, bitRange=0-3
+sfr = "ETM_PIDR4.SIZE"                                        , "Memory", 0xE0041FD0, 4, base=16, bitRange=4-7
+
+sfr = "ETM_PIDR5"                                             , "Memory", 0xE0041FD4, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 5"
+sfr = "ETM_PIDR6"                                             , "Memory", 0xE0041FD8, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 6"
+sfr = "ETM_PIDR7"                                             , "Memory", 0xE0041FDC, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 7"
+
+sfr = "ETM_PIDR0"                                             , "Memory", 0xE0041FE0, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 0"
+sfr = "ETM_PIDR0.PART_0"                                      , "Memory", 0xE0041FE0, 4, base=16, bitRange=0-7
+
+sfr = "ETM_PIDR1"                                             , "Memory", 0xE0041FE4, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 1"
+sfr = "ETM_PIDR1.PART_1"                                      , "Memory", 0xE0041FE4, 4, base=16, bitRange=0-3
+sfr = "ETM_PIDR1.DES_0"                                       , "Memory", 0xE0041FE4, 4, base=16, bitRange=4-7
+
+sfr = "ETM_PIDR2"                                             , "Memory", 0xE0041FE8, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 2"
+sfr = "ETM_PIDR2.DES_1"                                       , "Memory", 0xE0041FE8, 4, base=16, bitRange=0-2
+sfr = "ETM_PIDR2.JEDEC"                                       , "Memory", 0xE0041FE8, 4, base=16, bitRange=3-3
+sfr = "ETM_PIDR2.REVISION"                                    , "Memory", 0xE0041FE8, 4, base=16, bitRange=4-7
+
+sfr = "ETM_PIDR3"                                             , "Memory", 0xE0041FEC, 4, base=16, readOnly, tooltip="ETM Peripheral Identification Register 3"
+sfr = "ETM_PIDR3.CMOD"                                        , "Memory", 0xE0041FEC, 4, base=16, bitRange=0-3
+sfr = "ETM_PIDR3.REVAND"                                      , "Memory", 0xE0041FEC, 4, base=16, bitRange=4-6
+
+sfr = "ETM_CIDR0"                                             , "Memory", 0xE0041FF0, 4, base=16, readOnly, tooltip="Component Identification Register 0"
+sfr = "ETM_CIDR1"                                             , "Memory", 0xE0041FF4, 4, base=16, readOnly, tooltip="Component Identification Register 1"
+sfr = "ETM_CIDR2"                                             , "Memory", 0xE0041FF8, 4, base=16, readOnly, tooltip="Component Identification Register 2"
+sfr = "ETM_CIDR3"                                             , "Memory", 0xE0041FFC, 4, base=16, readOnly, tooltip="Component Identification Register 3"
+
+sfr = "ETM_LSR"                                               , "Memory", 0xE0041FB4, 4, base=16, readOnly, tooltip="Lock Status Register"
+sfr = "ETM_LAR"                                               , "Memory", 0xE0041FB0, 4, base=16, writeOnly, tooltip="Lock Access Register"

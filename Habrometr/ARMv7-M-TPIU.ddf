@@ -1,0 +1,113 @@
+;   Optional TPIU
+[Sfr]
+
+
+;
+;               TPIU                         , mandatory when ETM implemented
+;
+;     Name                        Zone      Address     Bytesize  Displaybase Bitrange
+;     ----                        ----      -------     --------  ----------- --------
+sfr = "TPIU_SSPSR"                           , "Memory", 0xE0040000, 4, base=16, readOnly, tooltip="Supported Parallel Port Size Register"
+sfr = "TPIU_SSPSR.SWIDTH"                    , "Memory", 0xE0040000, 4, base=16, bitRange=0-31
+
+sfr = "TPIU_CSPSR"                           , "Memory", 0xE0040004, 4, base=16, tooltip="Current Parallel Port Size Register"
+sfr = "TPIU_CSPSR.CWIDTH"                    , "Memory", 0xE0040004, 4, base=16, bitRange=0-31
+
+sfr = "TPIU_ACPR"                            , "Memory", 0xE0040010, 4, base=16, tooltip="Asynchronous Clock Prescaler Register"
+sfr = "TPIU_ACPR.PRESCALER"                  , "Memory", 0xE0040010, 4, base=16, bitRange=0-12
+
+sfr = "TPIU_SPPR"                            , "Memory", 0xE00400F0, 4, base=16, tooltip="Selected Pin Protocol Register"
+sfr = "TPIU_SPPR.TXMODE"                     , "Memory", 0xE00400F0, 4, base=16, bitRange=0-1
+
+sfr = "TPIU_FFSR"                            , "Memory", 0xE0040300, 4, base=16, readOnly, tooltip="Formatter and Flush Status Register"
+sfr = "TPIU_FFSR.FlInProg"                   , "Memory", 0xE0040300, 4, base=16, bitRange=0-0
+sfr = "TPIU_FFSR.FtStopped"                  , "Memory", 0xE0040300, 4, base=16, bitRange=1-1
+sfr = "TPIU_FFSR.TCPresent"                  , "Memory", 0xE0040300, 4, base=16, bitRange=2-2
+sfr = "TPIU_FFSR.FtNonStop"                  , "Memory", 0xE0040300, 4, base=16, bitRange=3-3
+
+sfr = "TPIU_FFCR"                            , "Memory", 0xE0040304, 4, base=16, tooltip="Formatter and Flush Control Register"
+sfr = "TPIU_FFCR.EnFCont"                    , "Memory", 0xE0040304, 4, base=16, bitRange=1-1
+sfr = "TPIU_FFCR.TrigIn"                     , "Memory", 0xE0040304, 4, base=16, bitRange=8-8
+
+sfr = "TPIU_FSCR"                            , "Memory", 0xE0040308, 4, base=16, readOnly, tooltip="Formatter Synchronization Counter Register"
+
+sfr = "TPIU_TRIGGER"                         , "Memory", 0xE0040308, 4, base=16, readOnly, tooltip="TRIGGER Register"
+sfr = "TPIU_TRIGGER.TRIGGER_input_value"     , "Memory", 0xE0040308, 4, base=16, bitRange=0-0
+
+sfr = "TPIU_FIFO_data_0"                     , "Memory", 0xE0040EEC, 4, base=16, readOnly, tooltip="Integration FIFO data 0"
+sfr = "TPIU_FIFO_data_0.ETM_data_0"          , "Memory", 0xE0040EEC, 4, base=16, bitRange=0-7
+sfr = "TPIU_FIFO_data_0.ETM_data_1"          , "Memory", 0xE0040EEC, 4, base=16, bitRange=8-15
+sfr = "TPIU_FIFO_data_0.ETM_data_2"          , "Memory", 0xE0040EEC, 4, base=16, bitRange=16-23
+sfr = "TPIU_FIFO_data_0.ETM_byte_count"      , "Memory", 0xE0040EEC, 4, base=16, bitRange=24-25
+sfr = "TPIU_FIFO_data_0.ETM_ATVALID_input"   , "Memory", 0xE0040EEC, 4, base=16, bitRange=26-26
+sfr = "TPIU_FIFO_data_0.ITM_byte_count"      , "Memory", 0xE0040EEC, 4, base=16, bitRange=27-28
+sfr = "TPIU_FIFO_data_0.ITM_ATVALID_input"   , "Memory", 0xE0040EEC, 4, base=16, bitRange=29-29
+
+sfr = "TPIU_ITATBCTR2"                       , "Memory", 0xE0040EF0, 4, base=16, readOnly, tooltip="Integration Test Advanced Trace Bus Control Register 2"
+sfr = "TPIU_ITATBCTR2.ATREADY"               , "Memory", 0xE0040EF0, 4, base=16, bitRange=0-0
+
+sfr = "TPIU_FIFO_data_1"                     , "Memory", 0xE0040EFC, 4, base=16, readOnly, tooltip="Integration FIFO data 1"
+sfr = "TPIU_FIFO_data_1.ITM_data_0"          , "Memory", 0xE0040EFC, 4, base=16, bitRange=0-7
+sfr = "TPIU_FIFO_data_1.ITM_data_1"          , "Memory", 0xE0040EFC, 4, base=16, bitRange=8-15
+sfr = "TPIU_FIFO_data_1.ITM_data_2"          , "Memory", 0xE0040EFC, 4, base=16, bitRange=16-23
+sfr = "TPIU_FIFO_data_1.ETM_byte_count"      , "Memory", 0xE0040EFC, 4, base=16, bitRange=24-25
+sfr = "TPIU_FIFO_data_1.ETM_ATVALID_input"   , "Memory", 0xE0040EFC, 4, base=16, bitRange=26-26
+sfr = "TPIU_FIFO_data_1.ITM_byte_count"      , "Memory", 0xE0040EFC, 4, base=16, bitRange=27-28
+sfr = "TPIU_FIFO_data_1.ITM_ATVALID_input"   , "Memory", 0xE0040EFC, 4, base=16, bitRange=29-29
+
+sfr = "TPIU_ITATBCTR0"                       , "Memory", 0xE0040EF8, 4, base=16, readOnly, tooltip="Integration Test Advanced Trace Bus Control Register 0"
+sfr = "TPIU_ITATBCTR0.ATVALID"               , "Memory", 0xE0040EF8, 4, base=16, bitRange=0-0
+
+sfr = "TPIU_ITCTRL"                          , "Memory", 0xE0040F00, 4, base=16, tooltip="Integration Mode Control"
+sfr = "TPIU_ITCTRL.Mode"                     , "Memory", 0xE0040F00, 4, base=16, bitRange=0-1
+
+sfr = "TPIU_CLAIMSET"                        , "Memory", 0xE0040FA0, 4, base=16, tooltip="Claim Tag Set Register"
+sfr = "TPIU_CLAIMSET.Tag"                    , "Memory", 0xE0040FA0, 4, base=16, bitRange=0-7
+
+sfr = "TPIU_CLAIMCLR"                        , "Memory", 0xE0040FA4, 4, base=16, tooltip="Claim Tag Clear Register"
+sfr = "TPIU_CLAIMCLR.Tag"                    , "Memory", 0xE0040FA4, 4, base=16, bitRange=0-7
+
+sfr = "TPIU_DEVID"                           , "Memory", 0xE0040FC8, 4, base=16, readOnly, tooltip="Device Identifier"
+sfr = "TPIU_DEVID.Number_of_trace_inputs"    , "Memory", 0xE0040FC8, 4, base=16, bitRange=0-4
+sfr = "TPIU_DEVID.Asynchronous_TRACECLKIN"   , "Memory", 0xE0040FC8, 4, base=16, bitRange=5-5
+sfr = "TPIU_DEVID.Minimum_buffer_size"       , "Memory", 0xE0040FC8, 4, base=16, bitRange=6-8
+sfr = "TPIU_DEVID.Trace_data_and_clock_modes", "Memory", 0xE0040FC8, 4, base=16, bitRange=9-9
+sfr = "TPIU_DEVID.SWO_Manchester"            , "Memory", 0xE0040FC8, 4, base=16, bitRange=10-10
+sfr = "TPIU_DEVID.SWO_NRZ"                   , "Memory", 0xE0040FC8, 4, base=16, bitRange=11-11
+
+sfr = "TPIU_DEVTYPE"                         , "Memory", 0xE0040FCC, 4, base=16, readOnly, tooltip="Device Type Identifier Register"
+sfr = "TPIU_DEVTYPE.Major_type"              , "Memory", 0xE0040FCC, 4, base=16, bitRange=0-3
+sfr = "TPIU_DEVTYPE.Sub_type"                , "Memory", 0xE0040FCC, 4, base=16, bitRange=4-7
+
+sfr = "TPIU_PIDR4"                           , "Memory", 0xE0040FD0, 4, base=16, readOnly, tooltip="Peripheral Identification Register 4"
+sfr = "TPIU_PIDR4.DES_2"                     , "Memory", 0xE0040FD0, 4, base=16, bitRange=0-3
+sfr = "TPIU_PIDR4.SIZE"                      , "Memory", 0xE0040FD0, 4, base=16, bitRange=4-7
+
+sfr = "TPIU_PIDR5"                           , "Memory", 0xE0040FD4, 4, base=16, readOnly, tooltip="Peripheral Identification Register 5"
+sfr = "TPIU_PIDR6"                           , "Memory", 0xE0040FD8, 4, base=16, readOnly, tooltip="Peripheral Identification Register 6"
+sfr = "TPIU_PIDR7"                           , "Memory", 0xE0040FDC, 4, base=16, readOnly, tooltip="Peripheral Identification Register 7"
+
+sfr = "TPIU_PIDR0"                           , "Memory", 0xE0040FE0, 4, base=16, readOnly, tooltip="Peripheral Identification Register 0"
+sfr = "TPIU_PIDR0.PART_0"                    , "Memory", 0xE0040FE0, 4, base=16, bitRange=0-7
+
+sfr = "TPIU_PIDR1"                           , "Memory", 0xE0040FE4, 4, base=16, readOnly, tooltip="Peripheral Identification Register 1"
+sfr = "TPIU_PIDR1.PART_1"                    , "Memory", 0xE0040FE4, 4, base=16, bitRange=0-3
+sfr = "TPIU_PIDR1.DES_0"                     , "Memory", 0xE0040FE4, 4, base=16, bitRange=4-7
+
+sfr = "TPIU_PIDR2"                           , "Memory", 0xE0040FE8, 4, base=16, readOnly, tooltip="Peripheral Identification Register 2"
+sfr = "TPIU_PIDR2.DES_1"                     , "Memory", 0xE0040FE8, 4, base=16, bitRange=0-2
+sfr = "TPIU_PIDR2.JEDEC"                     , "Memory", 0xE0040FE8, 4, base=16, bitRange=3-3
+sfr = "TPIU_PIDR2.REVISION"                  , "Memory", 0xE0040FE8, 4, base=16, bitRange=4-7
+
+sfr = "TPIU_PIDR3"                           , "Memory", 0xE0040FEC, 4, base=16, readOnly, tooltip="Peripheral Identification Register 3"
+sfr = "TPIU_PIDR3.CMOD"                      , "Memory", 0xE0040FEC, 4, base=16, bitRange=0-3
+sfr = "TPIU_PIDR3.REVAND"                    , "Memory", 0xE0040FEC, 4, base=16, bitRange=4-6
+
+sfr = "TPIU_CIDR0"                           , "Memory", 0xE0040FF0, 4, base=16, readOnly, tooltip="Component Identification Register 0"
+sfr = "TPIU_CIDR1"                           , "Memory", 0xE0040FF4, 4, base=16, readOnly, tooltip="Component Identification Register 1"
+sfr = "TPIU_CIDR2"                           , "Memory", 0xE0040FF8, 4, base=16, readOnly, tooltip="Component Identification Register 2"
+sfr = "TPIU_CIDR3"                           , "Memory", 0xE0040FFC, 4, base=16, readOnly, tooltip="Component Identification Register 3"
+
+sfr = "TPIU_LSR"                             , "Memory", 0xE0040FB4, 4, base=16, readOnly, tooltip="Lock Status Register"
+sfr = "TPIU_LAR"                             , "Memory", 0xE0040FB0, 4, base=16, writeOnly, tooltip="Lock Access Register"
+
