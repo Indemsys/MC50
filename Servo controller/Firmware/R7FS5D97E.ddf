@@ -1,0 +1,37 @@
+
+;; Architecture extensions
+#include weak "ARMv7-M-ETM.ddf"
+#include weak "ARMv7-M-MPU.ddf"
+#include weak "ARMv7-M-TPIU.ddf"
+
+;; Memory information ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Used to define address zones within the ARM address space (Memory).
+;;
+;;   Name      may be almost anything
+;;   AdrSpace  must be Memory
+;;   StartAdr  start of memory block
+;;   EndAdr    end of memory block
+;;   AccType   type of access, read-only (R), read-write (RW) or SFR (W)
+
+[Memory]
+;;         Name             AdrSpace    StartAdr    EndAdr      AccType   Width
+Memory =  OPT_ROM          Memory      0x0100A140  0x0100A1FF  R  
+Memory =  FlashRemap       Memory      0x02000000  0x027FFFFF  R  
+Memory =  Periph0          Memory      0x40000000  0x400FFFFF  W  
+Memory =  DataFlash        Memory      0x40100000  0x4010FFFF  R  
+Memory =  PeriphFlash      Memory      0x407E0000  0x407FFFFF  W  
+Memory =  ExtSPI           Memory      0x60000000  0x67FFFFFF  W  
+Memory =  ExtDev           Memory      0x80000000  0x87FFFFFF  W  
+Memory =  ExtMem           Memory      0x90000000  0x97FFFFFF  RW 
+Memory =  SystemSFR        Memory      0xE0000000  0xFFFFFFFF  W  
+Memory =  Flash            Memory      0x00000000  0x001FFFFF  R  
+Memory =  RAM_0            Memory      0x1FFE0000  0x1FFFFFFF  RW 
+Memory =  RAM_1            Memory      0x20000000  0x2007FFFF  RW 
+Memory =  StandbyRAM       Memory      0x200F0000  0x200FFFFF  RW 
+
+TrustedRanges = true
+UseSfrFilter = true
+
+[SfrInclude]
+File = R7FS5D9x.svd
