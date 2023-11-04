@@ -5,8 +5,8 @@
 /*  resource file(s). For more information please refer to the Azure RTOS GUIX */
 /*  Studio User Guide, or visit our web site at azure.com/rtos                 */
 /*                                                                             */
-/*  GUIX Studio Revision 6.2.1.4                                               */
-/*  Date (dd.mm.yyyy):  7. 8.2023   Time (hh:mm): 18:37                        */
+/*  GUIX Studio Revision 6.3.0.0                                               */
+/*  Date (dd.mm.yyyy):  4.11.2023   Time (hh:mm): 16:38                        */
 /*******************************************************************************/
 
 
@@ -8442,7 +8442,6 @@ GX_CONST GX_UBYTE display_1_STRING_20_English[] = "0xFFFFFFFF";
 GX_CONST GX_UBYTE display_1_STRING_21_English[] = "Long press to save";
 GX_CONST GX_UBYTE display_1_STRING_22_English[] = "Saved";
 GX_CONST GX_UBYTE display_1_STRING_29_English[] = "Speed:";
-GX_CONST GX_UBYTE display_1_STRING_33_English[] = "Main screen";
 GX_CONST GX_UBYTE display_1_STRING_34_English[] = "MENU";
 GX_CONST GX_UBYTE display_1_STRING_48_English[] = "Power consump.:";
 GX_CONST GX_UBYTE display_1_STRING_50_English[] = "W";
@@ -8475,22 +8474,56 @@ GX_CONST GX_UBYTE display_1_STRING_105_English[] = "Stop";
 GX_CONST GX_UBYTE display_1_STRING_107_English[] = "Freewheeling";
 GX_CONST GX_UBYTE display_1_STRING_108_English[] = "Return";
 GX_CONST GX_UBYTE display_1_STRING_109_English[] = "Step1. Set the lever to position 0 deg and long press to save";
-GX_CONST GX_UBYTE display_1_STRING_4_English[] = "2023 08 07 13:31";
-GX_CONST GX_UBYTE display_1_STRING_7_English[] = "ver: 2023 08 07 13:31";
-GX_CONST GX_UBYTE display_1_STRING_15_English[] = "Ver: 2023 08 07 13:31";
-GX_CONST GX_UBYTE display_1_STRING_26_English[] = "Ver: ----";
-GX_CONST GX_UBYTE display_1_STRING_30_English[] = "-";
-GX_CONST GX_UBYTE display_1_STRING_31_English[] = "---------------";
-GX_CONST GX_UBYTE display_1_STRING_32_English[] = "CAN sender";
 GX_CONST GX_UBYTE display_1_STRING_35_English[] = "DIAGNOSTIC MENU";
 GX_CONST GX_UBYTE display_1_STRING_36_English[] = "Diagnostic";
-GX_CONST GX_UBYTE display_1_STRING_37_English[] = "CAN MENU";
 GX_CONST GX_UBYTE display_1_STRING_40_English[] = "CAN bus remote control";
 GX_CONST GX_UBYTE display_1_STRING_42_English[] = "CAN rem. control";
+GX_CONST GX_UBYTE display_1_STRING_44_English[] = "Rotor speed:";
+GX_CONST GX_UBYTE display_1_STRING_45_English[] = "RPM";
+GX_CONST GX_UBYTE display_1_STRING_46_English[] = "C";
+GX_CONST GX_UBYTE display_1_STRING_47_English[] = "Driver temp.:";
+GX_CONST GX_UBYTE display_1_STRING_59_English[] = "Rotate CCW";
+GX_CONST GX_UBYTE display_1_STRING_58_English[] = "Hard Stop";
+GX_CONST GX_UBYTE display_1_STRING_49_English[] = "Manual motor control";
+GX_CONST GX_UBYTE display_1_STRING_51_English[] = "Rotate CW";
+GX_CONST GX_UBYTE display_1_STRING_60_English[] = "Pwr (W)";
+GX_CONST GX_UBYTE display_1_STRING_69_English[] = "Mot.I (A)";
+GX_CONST GX_UBYTE display_1_STRING_72_English[] = "000";
+GX_CONST GX_UBYTE display_1_STRING_73_English[] = "0000";
+GX_CONST GX_UBYTE display_1_STRING_74_English[] = "T(C)";
+GX_CONST GX_UBYTE display_1_STRING_75_English[] = "Manual control";
+GX_CONST GX_UBYTE display_1_STRING_76_English[] = "version";
+GX_CONST GX_UBYTE display_1_STRING_80_English[] = "PWM:";
+GX_CONST GX_UBYTE display_1_STRING_81_English[] = "%";
+GX_CONST GX_UBYTE display_1_STRING_84_English[] = "DC MOTOR";
+GX_CONST GX_UBYTE display_1_STRING_4_English[] = "BLDC TEST";
+GX_CONST GX_UBYTE display_1_STRING_7_English[] = "6-step test";
+GX_CONST GX_UBYTE display_1_STRING_15_English[] = "6-step rotation test";
+GX_CONST GX_UBYTE display_1_STRING_26_English[] = "Rotate forward";
+GX_CONST GX_UBYTE display_1_STRING_30_English[] = "Rotate backword";
+GX_CONST GX_UBYTE display_1_STRING_31_English[] = "Rotate backward";
+GX_CONST GX_UBYTE display_1_STRING_32_English[] = "Sech 6step table";
+GX_CONST GX_UBYTE display_1_STRING_33_English[] = "Sech 6step law";
+GX_CONST GX_UBYTE display_1_STRING_37_English[] = "Search 6step law";
+GX_CONST GX_UBYTE display_1_STRING_43_English[] = "Max.current";
+GX_CONST GX_UBYTE display_1_STRING_57_English[] = "6step law:";
+GX_CONST GX_UBYTE display_1_STRING_61_English[] = "Search 6step table";
+GX_CONST GX_UBYTE display_1_STRING_62_English[] = "Search comm. law";
+GX_CONST GX_UBYTE display_1_STRING_63_English[] = "Comm. law:";
+GX_CONST GX_UBYTE display_1_STRING_64_English[] = "BLDC rotation test";
+GX_CONST GX_UBYTE display_1_STRING_65_English[] = "PWM ";
+GX_CONST GX_UBYTE display_1_STRING_79_English[] = "Max.current:";
+GX_CONST GX_UBYTE display_1_STRING_85_English[] = "---";
+GX_CONST GX_UBYTE display_1_STRING_86_English[] = "BLDC TESTING";
+GX_CONST GX_UBYTE display_1_STRING_87_English[] = "Rot fw";
+GX_CONST GX_UBYTE display_1_STRING_88_English[] = "Rot rev";
+GX_CONST GX_UBYTE display_1_STRING_91_English[] = "Rot fwd";
+GX_CONST GX_UBYTE display_1_STRING_98_English[] = "Freewheel";
+GX_CONST GX_UBYTE display_1_STRING_99_English[] = "Save";
 
 /* String Table for display_1 language English                                 */
 
-GX_CONST GX_STRING display_1_English_string_table[74] =
+GX_CONST GX_STRING display_1_English_string_table[107] =
 {
     {GX_NULL, 0},
     {(GX_CONST GX_CHAR *)display_1_STRING_8_English, sizeof(display_1_STRING_8_English) - 1},
@@ -8521,7 +8554,6 @@ GX_CONST GX_STRING display_1_English_string_table[74] =
     {(GX_CONST GX_CHAR *)display_1_STRING_21_English, sizeof(display_1_STRING_21_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_22_English, sizeof(display_1_STRING_22_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_29_English, sizeof(display_1_STRING_29_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_33_English, sizeof(display_1_STRING_33_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_34_English, sizeof(display_1_STRING_34_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_48_English, sizeof(display_1_STRING_48_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_50_English, sizeof(display_1_STRING_50_English) - 1},
@@ -8554,6 +8586,28 @@ GX_CONST GX_STRING display_1_English_string_table[74] =
     {(GX_CONST GX_CHAR *)display_1_STRING_107_English, sizeof(display_1_STRING_107_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_108_English, sizeof(display_1_STRING_108_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_109_English, sizeof(display_1_STRING_109_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_35_English, sizeof(display_1_STRING_35_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_36_English, sizeof(display_1_STRING_36_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_40_English, sizeof(display_1_STRING_40_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_42_English, sizeof(display_1_STRING_42_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_44_English, sizeof(display_1_STRING_44_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_45_English, sizeof(display_1_STRING_45_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_46_English, sizeof(display_1_STRING_46_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_47_English, sizeof(display_1_STRING_47_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_59_English, sizeof(display_1_STRING_59_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_58_English, sizeof(display_1_STRING_58_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_49_English, sizeof(display_1_STRING_49_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_51_English, sizeof(display_1_STRING_51_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_60_English, sizeof(display_1_STRING_60_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_69_English, sizeof(display_1_STRING_69_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_72_English, sizeof(display_1_STRING_72_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_73_English, sizeof(display_1_STRING_73_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_74_English, sizeof(display_1_STRING_74_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_75_English, sizeof(display_1_STRING_75_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_76_English, sizeof(display_1_STRING_76_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_80_English, sizeof(display_1_STRING_80_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_81_English, sizeof(display_1_STRING_81_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_84_English, sizeof(display_1_STRING_84_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_4_English, sizeof(display_1_STRING_4_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_7_English, sizeof(display_1_STRING_7_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_15_English, sizeof(display_1_STRING_15_English) - 1},
@@ -8561,11 +8615,23 @@ GX_CONST GX_STRING display_1_English_string_table[74] =
     {(GX_CONST GX_CHAR *)display_1_STRING_30_English, sizeof(display_1_STRING_30_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_31_English, sizeof(display_1_STRING_31_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_32_English, sizeof(display_1_STRING_32_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_35_English, sizeof(display_1_STRING_35_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_36_English, sizeof(display_1_STRING_36_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_33_English, sizeof(display_1_STRING_33_English) - 1},
     {(GX_CONST GX_CHAR *)display_1_STRING_37_English, sizeof(display_1_STRING_37_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_40_English, sizeof(display_1_STRING_40_English) - 1},
-    {(GX_CONST GX_CHAR *)display_1_STRING_42_English, sizeof(display_1_STRING_42_English) - 1}
+    {(GX_CONST GX_CHAR *)display_1_STRING_43_English, sizeof(display_1_STRING_43_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_57_English, sizeof(display_1_STRING_57_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_61_English, sizeof(display_1_STRING_61_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_62_English, sizeof(display_1_STRING_62_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_63_English, sizeof(display_1_STRING_63_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_64_English, sizeof(display_1_STRING_64_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_65_English, sizeof(display_1_STRING_65_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_79_English, sizeof(display_1_STRING_79_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_85_English, sizeof(display_1_STRING_85_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_86_English, sizeof(display_1_STRING_86_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_87_English, sizeof(display_1_STRING_87_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_88_English, sizeof(display_1_STRING_88_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_91_English, sizeof(display_1_STRING_91_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_98_English, sizeof(display_1_STRING_98_English) - 1},
+    {(GX_CONST GX_CHAR *)display_1_STRING_99_English, sizeof(display_1_STRING_99_English) - 1}
 };
 
 /*  Language Table                                                             */

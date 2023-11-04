@@ -165,5 +165,8 @@ void Write_system_start_report(void)
   }
 
 
+  APPLOG("Application type = %d", wvar.app_type);
+
+
 }
 

@@ -5,8 +5,8 @@
 /*  specification file(s). For more information please refer to the Azure RTOS */
 /*  GUIX Studio User Guide, or visit our web site at azure.com/rtos            */
 /*                                                                             */
-/*  GUIX Studio Revision 6.2.1.4                                               */
-/*  Date (dd.mm.yyyy):  7. 8.2023   Time (hh:mm): 18:37                        */
+/*  GUIX Studio Revision 6.3.0.0                                               */
+/*  Date (dd.mm.yyyy):  4.11.2023   Time (hh:mm): 16:38                        */
 /*******************************************************************************/
 
 
@@ -16,16 +16,21 @@
 #include "MC50_specifications.h"
 
 static GX_WIDGET *gx_studio_nested_widget_create(GX_BYTE *control, GX_CONST GX_STUDIO_WIDGET *definition, GX_WIDGET *parent);
-WINDOW_CANRC_CONTROL_BLOCK window_canrc;
-WINDOW_DMENU_CONTROL_BLOCK window_dmenu;
-WINDOW_QMENU_CONTROL_BLOCK window_qmenu;
-WINDOW_SPEED_EDIT_CONTROL_BLOCK window_speed_edit;
-WINDOW_ANGLE_CALIBR_CONTROL_BLOCK window_angle_calibr;
-WINDOW_MAIN_CONTROL_BLOCK window_main;
-WINDOW_CAN_ID_CONTROL_BLOCK window_can_id;
-WINDOW_MENU_CONTROL_BLOCK window_menu;
+W_COMM_LAW_CONTROL_BLOCK w_comm_law;
+W_MN_MOTTEST_CONTROL_BLOCK w_mn_mottest;
+WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK window_CAN_rem_control;
 WINDOW_SDCARD_STATE_CONTROL_BLOCK window_sdcard_state;
 WINDOW_NET_STATE_CONTROL_BLOCK window_net_state;
+WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK window_diagnostic_menu;
+WINDOW_CAN_ID_CONTROL_BLOCK window_can_id;
+WINDOW_MENU_DC_CONTROL_BLOCK window_menu_DC;
+WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK window_manual_DC_ctrl;
+WINDOW_MAIN_DC_CONTROL_BLOCK window_main_DC;
+WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK window_man_BLDC_ctrl;
+WINDOW_SPEED_EDIT_CONTROL_BLOCK window_speed_edit;
+WINDOW_ANGLE_CALIBR_CONTROL_BLOCK window_angle_calibr;
+WINDOW_MAIN_BLDC_CONTROL_BLOCK window_main_BLDC;
+WINDOW_MENU_BLDC_CONTROL_BLOCK window_menu_BLDC;
 GX_DISPLAY display_1_control_block;
 GX_WINDOW_ROOT display_1_root_window;
 GX_CANVAS  display_1_canvas_control_block;
@@ -124,19 +129,35 @@ UINT gx_studio_multi_line_text_view_create(GX_CONST GX_STUDIO_WIDGET *info, GX_W
     }
     return status;
 }
-GX_WINDOW_PROPERTIES window_canrc_properties =
+GX_WINDOW_PROPERTIES w_comm_law_properties =
 {
     0                                        /* wallpaper pixelmap id          */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmpt_close_properties =
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_search_properties =
 {
-    GX_STRING_ID_STRING_104,                 /* string id                      */
+    GX_STRING_ID_STRING_62,                  /* string id                      */
     GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_WHITE,                       /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmpt_stop_properties =
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_rot_forward_properties =
+{
+    GX_STRING_ID_STRING_91,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_rot_reverse_properties =
+{
+    GX_STRING_ID_STRING_88,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_stop_properties =
 {
     GX_STRING_ID_STRING_105,                 /* string id                      */
     GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
@@ -144,31 +165,47 @@ GX_PROMPT_PROPERTIES window_canrc_prmpt_stop_properties =
     GX_COLOR_ID_WHITE,                       /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_lb_menu_properties =
+GX_PROMPT_PROPERTIES w_comm_law_lb_max_current_properties =
 {
-    GX_STRING_ID_STRING_40,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_STRING_ID_STRING_79,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
     GX_COLOR_ID_CIAN,                        /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmpt_open_properties =
+GX_PROMPT_PROPERTIES w_comm_law_lb_shaft_position_properties =
 {
-    GX_STRING_ID_STRING_102,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_STRING_ID_STRING_63,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
     GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmpt_freewheeling_properties =
+GX_PROMPT_PROPERTIES w_comm_law_Val_current_properties =
 {
-    GX_STRING_ID_STRING_107,                 /* string id                      */
+    GX_STRING_ID_STRING_101,                 /* string id                      */
     GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmpt_return_properties =
+GX_PROMPT_PROPERTIES w_comm_law_Val_comm_law_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_lb_amps_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_return_properties =
 {
     GX_STRING_ID_STRING_108,                 /* string id                      */
     GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
@@ -176,7 +213,1084 @@ GX_PROMPT_PROPERTIES window_canrc_prmpt_return_properties =
     GX_COLOR_ID_WHITE,                       /* selected text color            */
     GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
 };
-GX_PROMPT_PROPERTIES window_canrc_prmt_node_num_properties =
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_caption_properties =
+{
+    GX_STRING_ID_STRING_86,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_lb_pwm_value_properties =
+{
+    GX_STRING_ID_STRING_80,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_Val_pwm_properties =
+{
+    GX_STRING_ID_STRING_85,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_lb_perc_properties =
+{
+    GX_STRING_ID_STRING_81,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_freewheel_properties =
+{
+    GX_STRING_ID_STRING_98,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_comm_law_prmpt_save_properties =
+{
+    GX_STRING_ID_STRING_99,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_save_define =
+{
+    "prmpt_save",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 139, 116, 162},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_save), /* control block */
+    (void *) &w_comm_law_prmpt_save_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_freewheel_define =
+{
+    "prmpt_freewheel",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {122, 79, 219, 102},                     /* widget size                    */
+    &w_comm_law_prmpt_save_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_freewheel), /* control block */
+    (void *) &w_comm_law_prmpt_freewheel_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_lb_perc_define =
+{
+    "lb_perc",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {190, 190, 239, 213},                    /* widget size                    */
+    &w_comm_law_prmpt_freewheel_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_lb_perc), /* control block   */
+    (void *) &w_comm_law_lb_perc_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_Val_pwm_define =
+{
+    "Val_pwm",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {136, 190, 185, 209},                    /* widget size                    */
+    &w_comm_law_lb_perc_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_Val_pwm), /* control block   */
+    (void *) &w_comm_law_Val_pwm_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_lb_pwm_value_define =
+{
+    "lb_pwm_value",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 190, 124, 213},                      /* widget size                    */
+    &w_comm_law_Val_pwm_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_lb_pwm_value), /* control block */
+    (void *) &w_comm_law_lb_pwm_value_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_caption_define =
+{
+    "prmpt_caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 19},                         /* widget size                    */
+    &w_comm_law_lb_pwm_value_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_caption), /* control block */
+    (void *) &w_comm_law_prmpt_caption_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 19, 219, 42},                       /* widget size                    */
+    &w_comm_law_prmpt_caption_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_return), /* control block */
+    (void *) &w_comm_law_prmpt_return_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_lb_amps_define =
+{
+    "lb_amps",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {190, 167, 239, 190},                    /* widget size                    */
+    &w_comm_law_prmpt_return_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_lb_amps), /* control block   */
+    (void *) &w_comm_law_lb_amps_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_Val_comm_law_define =
+{
+    "Val_comm_law",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {100, 219, 220, 238},                    /* widget size                    */
+    &w_comm_law_lb_amps_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_Val_comm_law), /* control block */
+    (void *) &w_comm_law_Val_comm_law_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_Val_current_define =
+{
+    "Val_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {136, 167, 185, 186},                    /* widget size                    */
+    &w_comm_law_Val_comm_law_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_Val_current), /* control block */
+    (void *) &w_comm_law_Val_current_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_lb_shaft_position_define =
+{
+    "lb_shaft_position",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 219, 100, 242},                      /* widget size                    */
+    &w_comm_law_Val_current_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_lb_shaft_position), /* control block */
+    (void *) &w_comm_law_lb_shaft_position_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_lb_max_current_define =
+{
+    "lb_max_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 167, 124, 190},                      /* widget size                    */
+    &w_comm_law_lb_shaft_position_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_lb_max_current), /* control block */
+    (void *) &w_comm_law_lb_max_current_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_stop_define =
+{
+    "prmpt_stop",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 79, 116, 102},                      /* widget size                    */
+    &w_comm_law_lb_max_current_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_stop), /* control block */
+    (void *) &w_comm_law_prmpt_stop_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_rot_reverse_define =
+{
+    "prmpt_rot_reverse",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {122, 49, 219, 72},                      /* widget size                    */
+    &w_comm_law_prmpt_stop_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_rot_reverse), /* control block */
+    (void *) &w_comm_law_prmpt_rot_reverse_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_rot_forward_define =
+{
+    "prmpt_rot_forward",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 49, 116, 72},                       /* widget size                    */
+    &w_comm_law_prmpt_rot_reverse_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_rot_forward), /* control block */
+    (void *) &w_comm_law_prmpt_rot_forward_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_prmpt_search_define =
+{
+    "prmpt_search",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 109, 219, 132},                     /* widget size                    */
+    &w_comm_law_prmpt_rot_forward_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_COMM_LAW_CONTROL_BLOCK, w_comm_law_prmpt_search), /* control block */
+    (void *) &w_comm_law_prmpt_search_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_comm_law_define =
+{
+    "w_comm_law",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(W_COMM_LAW_CONTROL_BLOCK),        /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) W_comm_law_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) W_comm_law_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &w_comm_law_prmpt_search_define,         /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &w_comm_law_properties          /* extended properties            */
+};
+GX_WINDOW_PROPERTIES w_mn_mottest_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_power_consumtion_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_power_consumption_properties =
+{
+    GX_STRING_ID_STRING_48,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_53,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_55,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_A1_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_W_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_V_properties =
+{
+    GX_STRING_ID_STRING_52,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_motor_current_properties =
+{
+    GX_STRING_ID_STRING_56,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_motor_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_A2_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ICON_PROPERTIES w_mn_mottest_icon_properties =
+{
+    0,                                       /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_errors_properties =
+{
+    GX_STRING_ID_STRING_66,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_errors_properties =
+{
+    GX_STRING_ID_STRING_67,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_Val_version_properties =
+{
+    GX_STRING_ID_STRING_76,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES w_mn_mottest_lb_caption_properties =
+{
+    GX_STRING_ID_STRING_4,                   /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_caption_define =
+{
+    "lb_caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 85, 16},                          /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_caption), /* control block */
+    (void *) &w_mn_mottest_lb_caption_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_version_define =
+{
+    "Val_version",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 21, 183, 35},                        /* widget size                    */
+    &w_mn_mottest_lb_caption_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_version), /* control block */
+    (void *) &w_mn_mottest_Val_version_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_errors_define =
+{
+    "Val_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 217, 229, 236},                    /* widget size                    */
+    &w_mn_mottest_Val_version_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_errors), /* control block */
+    (void *) &w_mn_mottest_Val_errors_properties /* extended properties        */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_errors_define =
+{
+    "lb_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 215, 124, 238},                      /* widget size                    */
+    &w_mn_mottest_Val_errors_define,         /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_errors), /* control block */
+    (void *) &w_mn_mottest_lb_errors_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_icon_define =
+{
+    "icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 35, 239, 35},                        /* widget size                    */
+    &w_mn_mottest_lb_errors_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_icon), /* control block  */
+    (void *) &w_mn_mottest_icon_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_A2_define =
+{
+    "lb_A2",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 143, 239, 166},                    /* widget size                    */
+    &w_mn_mottest_icon_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_A2), /* control block */
+    (void *) &w_mn_mottest_lb_A2_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_motor_current_define =
+{
+    "Val_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 139, 212, 168},                    /* widget size                    */
+    &w_mn_mottest_lb_A2_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_motor_current), /* control block */
+    (void *) &w_mn_mottest_Val_motor_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_motor_current_define =
+{
+    "lb_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 143, 138, 166},                      /* widget size                    */
+    &w_mn_mottest_Val_motor_current_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_motor_current), /* control block */
+    (void *) &w_mn_mottest_lb_motor_current_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_V_define =
+{
+    "lb_V",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 77, 239, 100},                     /* widget size                    */
+    &w_mn_mottest_lb_motor_current_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_V), /* control block  */
+    (void *) &w_mn_mottest_lb_V_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_W_define =
+{
+    "lb_W",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 46, 239, 69},                      /* widget size                    */
+    &w_mn_mottest_lb_V_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_W), /* control block  */
+    (void *) &w_mn_mottest_lb_W_properties   /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_A1_define =
+{
+    "lb_A1",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 110, 239, 133},                    /* widget size                    */
+    &w_mn_mottest_lb_W_define,               /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_A1), /* control block */
+    (void *) &w_mn_mottest_lb_A1_properties  /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_pwr_src_current_define =
+{
+    "Val_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 107, 212, 136},                    /* widget size                    */
+    &w_mn_mottest_lb_A1_define,              /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_pwr_src_current), /* control block */
+    (void *) &w_mn_mottest_Val_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_pwr_src_current_define =
+{
+    "lb_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 110, 138, 133},                      /* widget size                    */
+    &w_mn_mottest_Val_pwr_src_current_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_pwr_src_current), /* control block */
+    (void *) &w_mn_mottest_lb_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_pwr_src_voltage_define =
+{
+    "lb_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 77, 138, 100},                       /* widget size                    */
+    &w_mn_mottest_lb_pwr_src_current_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_pwr_src_voltage), /* control block */
+    (void *) &w_mn_mottest_lb_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_pwr_src_voltage_define =
+{
+    "Val_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 75, 212, 104},                     /* widget size                    */
+    &w_mn_mottest_lb_pwr_src_voltage_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_pwr_src_voltage), /* control block */
+    (void *) &w_mn_mottest_Val_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_lb_power_consumption_define =
+{
+    "lb_power_consumption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 46, 138, 69},                        /* widget size                    */
+    &w_mn_mottest_Val_pwr_src_voltage_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_lb_power_consumption), /* control block */
+    (void *) &w_mn_mottest_lb_power_consumption_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_Val_power_consumtion_define =
+{
+    "Val_power_consumtion",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 43, 212, 72},                      /* widget size                    */
+    &w_mn_mottest_lb_power_consumption_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(W_MN_MOTTEST_CONTROL_BLOCK, w_mn_mottest_Val_power_consumtion), /* control block */
+    (void *) &w_mn_mottest_Val_power_consumtion_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET w_mn_mottest_define =
+{
+    "w_mn_mottest",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(W_MN_MOTTEST_CONTROL_BLOCK),      /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Mn_mot_test_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Mn_mot_test_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &w_mn_mottest_Val_power_consumtion_define, /* child widget                 */
+    0,                                       /* control block                  */
+    (void *) &w_mn_mottest_properties        /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_CAN_rem_control_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmpt_close_properties =
+{
+    GX_STRING_ID_STRING_104,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmpt_stop_properties =
+{
+    GX_STRING_ID_STRING_105,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_lb_menu_properties =
+{
+    GX_STRING_ID_STRING_40,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmpt_open_properties =
+{
+    GX_STRING_ID_STRING_102,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmpt_freewheeling_properties =
+{
+    GX_STRING_ID_STRING_107,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_CAN_rem_control_prmt_node_num_properties =
 {
     GX_STRING_ID_STRING_17,                  /* string id                      */
     GX_FONT_ID_BSB_40PX,                     /* font id                        */
@@ -185,7 +1299,7 @@ GX_PROMPT_PROPERTIES window_canrc_prmt_node_num_properties =
     GX_COLOR_ID_BLACK                        /* disabled text color            */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmt_node_num_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmt_node_num_define =
 {
     "prmt_node_num",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -205,11 +1319,11 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmt_node_num_define =
     {70, 150, 169, 199},                     /* widget size                    */
     GX_NULL,                                 /* no next widget                 */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmt_node_num), /* control block */
-    (void *) &window_canrc_prmt_node_num_properties /* extended properties     */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmt_node_num), /* control block */
+    (void *) &window_CAN_rem_control_prmt_node_num_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_return_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmpt_return_define =
 {
     "prmpt_return",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -227,13 +1341,13 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_return_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {19, 209, 219, 232},                     /* widget size                    */
-    &window_canrc_prmt_node_num_define,      /* next widget definition         */
+    &window_CAN_rem_control_prmt_node_num_define, /* next widget definition    */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmpt_return), /* control block */
-    (void *) &window_canrc_prmpt_return_properties /* extended properties      */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmpt_return), /* control block */
+    (void *) &window_CAN_rem_control_prmpt_return_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_freewheeling_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmpt_freewheeling_define =
 {
     "prmpt_freewheeling",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -251,13 +1365,13 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_freewheeling_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {20, 119, 220, 142},                     /* widget size                    */
-    &window_canrc_prmpt_return_define,       /* next widget definition         */
+    &window_CAN_rem_control_prmpt_return_define, /* next widget definition     */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmpt_freewheeling), /* control block */
-    (void *) &window_canrc_prmpt_freewheeling_properties /* extended properties */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmpt_freewheeling), /* control block */
+    (void *) &window_CAN_rem_control_prmpt_freewheeling_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_open_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmpt_open_define =
 {
     "prmpt_open",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -275,13 +1389,13 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_open_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {20, 29, 220, 52},                       /* widget size                    */
-    &window_canrc_prmpt_freewheeling_define, /* next widget definition         */
+    &window_CAN_rem_control_prmpt_freewheeling_define, /* next widget definition */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmpt_open), /* control block */
-    (void *) &window_canrc_prmpt_open_properties /* extended properties        */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmpt_open), /* control block */
+    (void *) &window_CAN_rem_control_prmpt_open_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_lb_menu_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_lb_menu_define =
 {
     "lb_menu",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -299,13 +1413,13 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_lb_menu_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {0, -1, 239, 22},                        /* widget size                    */
-    &window_canrc_prmpt_open_define,         /* next widget definition         */
+    &window_CAN_rem_control_prmpt_open_define, /* next widget definition       */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_lb_menu), /* control block */
-    (void *) &window_canrc_lb_menu_properties /* extended properties           */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_lb_menu), /* control block */
+    (void *) &window_CAN_rem_control_lb_menu_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_stop_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmpt_stop_define =
 {
     "prmpt_stop",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -323,13 +1437,13 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_stop_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {20, 89, 220, 112},                      /* widget size                    */
-    &window_canrc_lb_menu_define,            /* next widget definition         */
+    &window_CAN_rem_control_lb_menu_define,  /* next widget definition         */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmpt_stop), /* control block */
-    (void *) &window_canrc_prmpt_stop_properties /* extended properties        */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmpt_stop), /* control block */
+    (void *) &window_CAN_rem_control_prmpt_stop_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_close_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_prmpt_close_define =
 {
     "prmpt_close",
     GX_TYPE_PROMPT,                          /* widget type                    */
@@ -347,15 +1461,15 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_prmpt_close_define =
     GX_NULL,                                 /* drawing function override      */
     GX_NULL,                                 /* event function override        */
     {20, 59, 220, 82},                       /* widget size                    */
-    &window_canrc_prmpt_stop_define,         /* next widget definition         */
+    &window_CAN_rem_control_prmpt_stop_define, /* next widget definition       */
     GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CANRC_CONTROL_BLOCK, window_canrc_prmpt_close), /* control block */
-    (void *) &window_canrc_prmpt_close_properties /* extended properties       */
+    offsetof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK, window_CAN_rem_control_prmpt_close), /* control block */
+    (void *) &window_CAN_rem_control_prmpt_close_properties /* extended properties */
 };
 
-GX_CONST GX_STUDIO_WIDGET window_canrc_define =
+GX_CONST GX_STUDIO_WIDGET window_CAN_rem_control_define =
 {
-    "window_canrc",
+    "window_CAN_rem_control",
     GX_TYPE_WINDOW,                          /* widget type                    */
     GX_ID_NONE,                              /* widget id                      */
     #if defined(GX_WIDGET_USER_DATA)
@@ -363,7 +1477,7 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_define =
     #endif
     GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
     0,                                       /* status flags                   */
-    sizeof(WINDOW_CANRC_CONTROL_BLOCK),      /* control block size             */
+    sizeof(WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK), /* control block size        */
     GX_COLOR_ID_BLACK,                       /* normal color id                */
     GX_COLOR_ID_BLACK,                       /* selected color id              */
     GX_COLOR_ID_BLACK,                       /* disabled color id              */
@@ -372,2380 +1486,9 @@ GX_CONST GX_STUDIO_WIDGET window_canrc_define =
     (UINT (*)(GX_WIDGET *, GX_EVENT *)) CanRC_event_callback, /* event function override */
     {0, 0, 239, 239},                        /* widget size                    */
     GX_NULL,                                 /* next widget                    */
-    &window_canrc_prmpt_close_define,        /* child widget                   */
+    &window_CAN_rem_control_prmpt_close_define, /* child widget                */
     0,                                       /* control block                  */
-    (void *) &window_canrc_properties        /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_dmenu_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_dmenu_prmpt_sdcard_state_properties =
-{
-    GX_STRING_ID_STRING_41,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_dmenu_prmpt_communicationt_intf_properties =
-{
-    GX_STRING_ID_STRING_1,                   /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_dmenu_lb_menu_properties =
-{
-    GX_STRING_ID_STRING_35,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_dmenu_prmpt_can_rem_ctrl_properties =
-{
-    GX_STRING_ID_STRING_42,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_dmenu_prmpt_return_properties =
-{
-    GX_STRING_ID_STRING_108,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_prmpt_return_define =
-{
-    "prmpt_return",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {19, 119, 219, 142},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_DMENU_CONTROL_BLOCK, window_dmenu_prmpt_return), /* control block */
-    (void *) &window_dmenu_prmpt_return_properties /* extended properties      */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_prmpt_can_rem_ctrl_define =
-{
-    "prmpt_can_rem_ctrl",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 29, 220, 52},                       /* widget size                    */
-    &window_dmenu_prmpt_return_define,       /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_DMENU_CONTROL_BLOCK, window_dmenu_prmpt_can_rem_ctrl), /* control block */
-    (void *) &window_dmenu_prmpt_can_rem_ctrl_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_lb_menu_define =
-{
-    "lb_menu",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, -1, 239, 22},                        /* widget size                    */
-    &window_dmenu_prmpt_can_rem_ctrl_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_DMENU_CONTROL_BLOCK, window_dmenu_lb_menu), /* control block */
-    (void *) &window_dmenu_lb_menu_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_prmpt_communicationt_intf_define =
-{
-    "prmpt_communicationt_intf",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 89, 220, 112},                      /* widget size                    */
-    &window_dmenu_lb_menu_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_DMENU_CONTROL_BLOCK, window_dmenu_prmpt_communicationt_intf), /* control block */
-    (void *) &window_dmenu_prmpt_communicationt_intf_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_prmpt_sdcard_state_define =
-{
-    "prmpt_sdcard_state",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 59, 220, 82},                       /* widget size                    */
-    &window_dmenu_prmpt_communicationt_intf_define, /* next widget definition  */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_DMENU_CONTROL_BLOCK, window_dmenu_prmpt_sdcard_state), /* control block */
-    (void *) &window_dmenu_prmpt_sdcard_state_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_dmenu_define =
-{
-    "window_dmenu",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_DMENU_CONTROL_BLOCK),      /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Dmenu_draw_callback, /* drawing function override  */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Dmenu_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_dmenu_prmpt_sdcard_state_define, /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_dmenu_properties        /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_qmenu_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_freewheeling_properties =
-{
-    GX_STRING_ID_STRING_107,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_open_properties =
-{
-    GX_STRING_ID_STRING_102,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_close_properties =
-{
-    GX_STRING_ID_STRING_104,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_stop_properties =
-{
-    GX_STRING_ID_STRING_105,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_lb_shaft_rot_speed_properties =
-{
-    GX_STRING_ID_STRING_68,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_lb_shaft_position_properties =
-{
-    GX_STRING_ID_STRING_70,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_Val_shaft_rot_speed_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_GREEN,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_Val_shaft_position_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_GREEN,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_lb_grad_s_properties =
-{
-    GX_STRING_ID_STRING_82,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_lb_grad_properties =
-{
-    GX_STRING_ID_STRING_83,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_return_properties =
-{
-    GX_STRING_ID_STRING_108,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_qmenu_prmpt_ver_properties =
-{
-    GX_STRING_ID_STRING_31,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_ver_define =
-{
-    "prmpt_ver",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, 0, 239, 23},                         /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_ver), /* control block */
-    (void *) &window_qmenu_prmpt_ver_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_return_define =
-{
-    "prmpt_return",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 29, 220, 52},                       /* widget size                    */
-    &window_qmenu_prmpt_ver_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_return), /* control block */
-    (void *) &window_qmenu_prmpt_return_properties /* extended properties      */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_lb_grad_define =
-{
-    "lb_grad",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {185, 213, 234, 236},                    /* widget size                    */
-    &window_qmenu_prmpt_return_define,       /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_lb_grad), /* control block */
-    (void *) &window_qmenu_lb_grad_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_lb_grad_s_define =
-{
-    "lb_grad_s",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {185, 190, 234, 213},                    /* widget size                    */
-    &window_qmenu_lb_grad_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_lb_grad_s), /* control block */
-    (void *) &window_qmenu_lb_grad_s_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_Val_shaft_position_define =
-{
-    "Val_shaft_position",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {130, 215, 179, 234},                    /* widget size                    */
-    &window_qmenu_lb_grad_s_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_Val_shaft_position), /* control block */
-    (void *) &window_qmenu_Val_shaft_position_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_Val_shaft_rot_speed_define =
-{
-    "Val_shaft_rot_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {130, 192, 179, 211},                    /* widget size                    */
-    &window_qmenu_Val_shaft_position_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_Val_shaft_rot_speed), /* control block */
-    (void *) &window_qmenu_Val_shaft_rot_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_lb_shaft_position_define =
-{
-    "lb_shaft_position",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 213, 124, 236},                      /* widget size                    */
-    &window_qmenu_Val_shaft_rot_speed_define, /* next widget definition        */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_lb_shaft_position), /* control block */
-    (void *) &window_qmenu_lb_shaft_position_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_lb_shaft_rot_speed_define =
-{
-    "lb_shaft_rot_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 190, 124, 213},                      /* widget size                    */
-    &window_qmenu_lb_shaft_position_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_lb_shaft_rot_speed), /* control block */
-    (void *) &window_qmenu_lb_shaft_rot_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_stop_define =
-{
-    "prmpt_stop",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {19, 119, 219, 142},                     /* widget size                    */
-    &window_qmenu_lb_shaft_rot_speed_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_stop), /* control block */
-    (void *) &window_qmenu_prmpt_stop_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_close_define =
-{
-    "prmpt_close",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 89, 220, 112},                      /* widget size                    */
-    &window_qmenu_prmpt_stop_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_close), /* control block */
-    (void *) &window_qmenu_prmpt_close_properties /* extended properties       */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_open_define =
-{
-    "prmpt_open",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 59, 220, 82},                       /* widget size                    */
-    &window_qmenu_prmpt_close_define,        /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_open), /* control block */
-    (void *) &window_qmenu_prmpt_open_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_prmpt_freewheeling_define =
-{
-    "prmpt_freewheeling",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 149, 220, 172},                     /* widget size                    */
-    &window_qmenu_prmpt_open_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_QMENU_CONTROL_BLOCK, window_qmenu_prmpt_freewheeling), /* control block */
-    (void *) &window_qmenu_prmpt_freewheeling_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_qmenu_define =
-{
-    "window_qmenu",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_QMENU_CONTROL_BLOCK),      /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Qmenu_draw_callback, /* drawing function override  */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Qmenu_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_qmenu_prmpt_freewheeling_define, /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_qmenu_properties        /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_speed_edit_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_speed_edit_lb_caption_properties =
-{
-    GX_STRING_ID_STRING_95,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_speed_edit_Val_rot_speed_properties =
-{
-    GX_STRING_ID_STRING_17,                  /* string id                      */
-    GX_FONT_ID_BSB_40PX,                     /* font id                        */
-    GX_COLOR_ID_BLACK,                       /* normal text color              */
-    GX_COLOR_ID_BLACK,                       /* selected text color            */
-    GX_COLOR_ID_BLACK                        /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_speed_edit_prmpt_Long_press_properties =
-{
-    GX_STRING_ID_STRING_21,                  /* string id                      */
-    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_WHITE                        /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_speed_edit_prmpt_Saved_properties =
-{
-    GX_STRING_ID_STRING_22,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_RED,                         /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_RED                          /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_speed_edit_lb_degr_sec_properties =
-{
-    GX_STRING_ID_STRING_96,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_lb_degr_sec_define =
-{
-    "lb_degr_sec",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {80, 68, 230, 119},                      /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_lb_degr_sec), /* control block */
-    (void *) &window_speed_edit_lb_degr_sec_properties /* extended properties  */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_prmpt_Saved_define =
-{
-    "prmpt_Saved",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {61, 178, 180, 207},                     /* widget size                    */
-    &window_speed_edit_lb_degr_sec_define,   /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_prmpt_Saved), /* control block */
-    (void *) &window_speed_edit_prmpt_Saved_properties /* extended properties  */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_prmpt_Long_press_define =
-{
-    "prmpt_Long_press",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {1, 225, 240, 239},                      /* widget size                    */
-    &window_speed_edit_prmpt_Saved_define,   /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_prmpt_Long_press), /* control block */
-    (void *) &window_speed_edit_prmpt_Long_press_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_Val_rot_speed_define =
-{
-    "Val_rot_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WHITE,                       /* normal color id                */
-    GX_COLOR_ID_WHITE,                       /* selected color id              */
-    GX_COLOR_ID_WHITE,                       /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {6, 69, 75, 118},                        /* widget size                    */
-    &window_speed_edit_prmpt_Long_press_define, /* next widget definition      */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_Val_rot_speed), /* control block */
-    (void *) &window_speed_edit_Val_rot_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_lb_caption_define =
-{
-    "lb_caption",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, 0, 239, 36},                         /* widget size                    */
-    &window_speed_edit_Val_rot_speed_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_lb_caption), /* control block */
-    (void *) &window_speed_edit_lb_caption_properties /* extended properties   */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_speed_edit_define =
-{
-    "window_speed_edit",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_SPEED_EDIT_CONTROL_BLOCK), /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Speed_edit_draw_callback, /* drawing function override */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Speed_edit_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_speed_edit_lb_caption_define,    /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_speed_edit_properties   /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_angle_calibr_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_lb_Caption_properties =
-{
-    GX_STRING_ID_STRING_71,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_Val_angle_0_properties =
-{
-    GX_STRING_ID_STRING_77,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_prmpt_Saved_properties =
-{
-    GX_STRING_ID_STRING_22,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_RED,                         /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_RED                          /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_lb_angle_0_properties =
-{
-    GX_STRING_ID_STRING_92,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_lb_angle_90_properties =
-{
-    GX_STRING_ID_STRING_93,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_Val_angle_90_properties =
-{
-    GX_STRING_ID_STRING_78,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_ML_TEXT_VIEW_PROPERTIES window_angle_calibr_text_prompt_properties =
-{
-    GX_STRING_ID_STRING_109,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_TEXT_INPUT_TEXT,             /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
-    0,                                       /* whitespace                     */
-    0                                        /* line_space                     */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_Val_current_value_properties =
-{
-    GX_STRING_ID_STRING_78,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_GREEN,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_angle_calibr_lb_current_val_properties =
-{
-    GX_STRING_ID_STRING_94,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_current_val_define =
-{
-    "lb_current_val",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {4, 104, 145, 127},                      /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_current_val), /* control block */
-    (void *) &window_angle_calibr_lb_current_val_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_current_value_define =
-{
-    "Val_current_value",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {160, 105, 235, 126},                    /* widget size                    */
-    &window_angle_calibr_lb_current_val_define, /* next widget definition      */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_current_value), /* control block */
-    (void *) &window_angle_calibr_Val_current_value_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_text_prompt_define =
-{
-    "text_prompt",
-    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_multi_line_text_view_create,     /* create function              */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {10, 160, 230, 230},                     /* widget size                    */
-    &window_angle_calibr_Val_current_value_define, /* next widget definition   */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_text_prompt), /* control block */
-    (void *) &window_angle_calibr_text_prompt_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_angle_90_define =
-{
-    "Val_angle_90",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {160, 72, 235, 103},                     /* widget size                    */
-    &window_angle_calibr_text_prompt_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_angle_90), /* control block */
-    (void *) &window_angle_calibr_Val_angle_90_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_angle_90_define =
-{
-    "lb_angle_90",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {4, 76, 145, 99},                        /* widget size                    */
-    &window_angle_calibr_Val_angle_90_define, /* next widget definition        */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_angle_90), /* control block */
-    (void *) &window_angle_calibr_lb_angle_90_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_angle_0_define =
-{
-    "lb_angle_0",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {4, 42, 145, 65},                        /* widget size                    */
-    &window_angle_calibr_lb_angle_90_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_angle_0), /* control block */
-    (void *) &window_angle_calibr_lb_angle_0_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_prmpt_Saved_define =
-{
-    "prmpt_Saved",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {61, 126, 180, 155},                     /* widget size                    */
-    &window_angle_calibr_lb_angle_0_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_prmpt_Saved), /* control block */
-    (void *) &window_angle_calibr_prmpt_Saved_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_angle_0_define =
-{
-    "Val_angle_0",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {160, 38, 235, 69},                      /* widget size                    */
-    &window_angle_calibr_prmpt_Saved_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_angle_0), /* control block */
-    (void *) &window_angle_calibr_Val_angle_0_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_Caption_define =
-{
-    "lb_Caption",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, 0, 239, 36},                         /* widget size                    */
-    &window_angle_calibr_Val_angle_0_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_Caption), /* control block */
-    (void *) &window_angle_calibr_lb_Caption_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_angle_calibr_define =
-{
-    "window_angle_calibr",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK), /* control block size           */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Angle_calibr_draw_callback, /* drawing function override */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Angle_calibr_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_angle_calibr_lb_Caption_define,  /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_angle_calibr_properties /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_main_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_main_Val_power_consumtion_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_power_consumption_properties =
-{
-    GX_STRING_ID_STRING_48,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_pwr_src_voltage_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_pwr_src_voltage_properties =
-{
-    GX_STRING_ID_STRING_53,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_pwr_src_current_properties =
-{
-    GX_STRING_ID_STRING_55,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_pwr_src_current_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_node_number_properties =
-{
-    GX_STRING_ID_STRING_17,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_node_number_properties =
-{
-    GX_STRING_ID_STRING_97,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_A1_properties =
-{
-    GX_STRING_ID_STRING_54,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_W_properties =
-{
-    GX_STRING_ID_STRING_50,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_V_properties =
-{
-    GX_STRING_ID_STRING_52,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_motor_current_properties =
-{
-    GX_STRING_ID_STRING_56,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_motor_current_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_A2_properties =
-{
-    GX_STRING_ID_STRING_54,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_ICON_PROPERTIES window_main_icon_properties =
-{
-    0,                                       /* normal pixelmap id             */
-    0                                        /* selected pixelmap id           */
-};
-GX_PROMPT_PROPERTIES window_main_lb_shaft_rot_speed_properties =
-{
-    GX_STRING_ID_STRING_68,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_shaft_rot_speed_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_GREEN,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_grad_s_properties =
-{
-    GX_STRING_ID_STRING_82,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_shaft_position_properties =
-{
-    GX_STRING_ID_STRING_70,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_shaft_position_properties =
-{
-    GX_STRING_ID_STRING_101,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_GREEN,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_grad_properties =
-{
-    GX_STRING_ID_STRING_83,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_errors_properties =
-{
-    GX_STRING_ID_STRING_66,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_errors_properties =
-{
-    GX_STRING_ID_STRING_67,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_RED,                         /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_lb_speed_properties =
-{
-    GX_STRING_ID_STRING_29,                  /* string id                      */
-    GX_FONT_ID_PROMPT,                       /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_main_Val_speed_properties =
-{
-    GX_STRING_ID_STRING_17,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_speed_define =
-{
-    "Val_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {60, 2, 109, 31},                        /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_speed), /* control block */
-    (void *) &window_main_Val_speed_properties /* extended properties          */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_speed_define =
-{
-    "lb_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 5, 65, 28},                          /* widget size                    */
-    &window_main_Val_speed_define,           /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_speed), /* control block */
-    (void *) &window_main_lb_speed_properties /* extended properties           */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_errors_define =
-{
-    "Val_errors",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {130, 217, 229, 236},                    /* widget size                    */
-    &window_main_lb_speed_define,            /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_errors), /* control block */
-    (void *) &window_main_Val_errors_properties /* extended properties         */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_errors_define =
-{
-    "lb_errors",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 215, 124, 238},                      /* widget size                    */
-    &window_main_Val_errors_define,          /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_errors), /* control block */
-    (void *) &window_main_lb_errors_properties /* extended properties          */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_grad_define =
-{
-    "lb_grad",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {185, 193, 234, 216},                    /* widget size                    */
-    &window_main_lb_errors_define,           /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_grad), /* control block */
-    (void *) &window_main_lb_grad_properties /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_shaft_position_define =
-{
-    "Val_shaft_position",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {130, 195, 179, 214},                    /* widget size                    */
-    &window_main_lb_grad_define,             /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_shaft_position), /* control block */
-    (void *) &window_main_Val_shaft_position_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_shaft_position_define =
-{
-    "lb_shaft_position",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 193, 124, 216},                      /* widget size                    */
-    &window_main_Val_shaft_position_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_shaft_position), /* control block */
-    (void *) &window_main_lb_shaft_position_properties /* extended properties  */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_grad_s_define =
-{
-    "lb_grad_s",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {185, 170, 234, 193},                    /* widget size                    */
-    &window_main_lb_shaft_position_define,   /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_grad_s), /* control block */
-    (void *) &window_main_lb_grad_s_properties /* extended properties          */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_shaft_rot_speed_define =
-{
-    "Val_shaft_rot_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {130, 172, 179, 191},                    /* widget size                    */
-    &window_main_lb_grad_s_define,           /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_shaft_rot_speed), /* control block */
-    (void *) &window_main_Val_shaft_rot_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_shaft_rot_speed_define =
-{
-    "lb_shaft_rot_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 170, 124, 193},                      /* widget size                    */
-    &window_main_Val_shaft_rot_speed_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_shaft_rot_speed), /* control block */
-    (void *) &window_main_lb_shaft_rot_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_icon_define =
-{
-    "icon",
-    GX_TYPE_ICON,                            /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_ICON),                         /* control block size             */
-    GX_COLOR_ID_WHITE,                       /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_icon_create,                   /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, 35, 239, 35},                        /* widget size                    */
-    &window_main_lb_shaft_rot_speed_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_icon), /* control block    */
-    (void *) &window_main_icon_properties    /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_A2_define =
-{
-    "lb_A2",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {215, 143, 239, 166},                    /* widget size                    */
-    &window_main_icon_define,                /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_A2), /* control block   */
-    (void *) &window_main_lb_A2_properties   /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_motor_current_define =
-{
-    "Val_motor_current",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {138, 139, 212, 168},                    /* widget size                    */
-    &window_main_lb_A2_define,               /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_motor_current), /* control block */
-    (void *) &window_main_Val_motor_current_properties /* extended properties  */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_motor_current_define =
-{
-    "lb_motor_current",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 143, 138, 166},                      /* widget size                    */
-    &window_main_Val_motor_current_define,   /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_motor_current), /* control block */
-    (void *) &window_main_lb_motor_current_properties /* extended properties   */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_V_define =
-{
-    "lb_V",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {215, 77, 239, 100},                     /* widget size                    */
-    &window_main_lb_motor_current_define,    /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_V), /* control block    */
-    (void *) &window_main_lb_V_properties    /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_W_define =
-{
-    "lb_W",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {215, 46, 239, 69},                      /* widget size                    */
-    &window_main_lb_V_define,                /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_W), /* control block    */
-    (void *) &window_main_lb_W_properties    /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_A1_define =
-{
-    "lb_A1",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {215, 110, 239, 133},                    /* widget size                    */
-    &window_main_lb_W_define,                /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_A1), /* control block   */
-    (void *) &window_main_lb_A1_properties   /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_node_number_define =
-{
-    "lb_node_number",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {126, 5, 183, 28},                       /* widget size                    */
-    &window_main_lb_A1_define,               /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_node_number), /* control block */
-    (void *) &window_main_lb_node_number_properties /* extended properties     */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_node_number_define =
-{
-    "Val_node_number",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {185, 2, 234, 31},                       /* widget size                    */
-    &window_main_lb_node_number_define,      /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_node_number), /* control block */
-    (void *) &window_main_Val_node_number_properties /* extended properties    */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_pwr_src_current_define =
-{
-    "Val_pwr_src_current",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {138, 107, 212, 136},                    /* widget size                    */
-    &window_main_Val_node_number_define,     /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_pwr_src_current), /* control block */
-    (void *) &window_main_Val_pwr_src_current_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_pwr_src_current_define =
-{
-    "lb_pwr_src_current",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 110, 138, 133},                      /* widget size                    */
-    &window_main_Val_pwr_src_current_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_pwr_src_current), /* control block */
-    (void *) &window_main_lb_pwr_src_current_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_pwr_src_voltage_define =
-{
-    "lb_pwr_src_voltage",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 77, 138, 100},                       /* widget size                    */
-    &window_main_lb_pwr_src_current_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_pwr_src_voltage), /* control block */
-    (void *) &window_main_lb_pwr_src_voltage_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_pwr_src_voltage_define =
-{
-    "Val_pwr_src_voltage",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {138, 75, 212, 104},                     /* widget size                    */
-    &window_main_lb_pwr_src_voltage_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_pwr_src_voltage), /* control block */
-    (void *) &window_main_Val_pwr_src_voltage_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_lb_power_consumption_define =
-{
-    "lb_power_consumption",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {5, 46, 138, 69},                        /* widget size                    */
-    &window_main_Val_pwr_src_voltage_define, /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_lb_power_consumption), /* control block */
-    (void *) &window_main_lb_power_consumption_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_Val_power_consumtion_define =
-{
-    "Val_power_consumtion",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
-    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {138, 43, 212, 72},                      /* widget size                    */
-    &window_main_lb_power_consumption_define, /* next widget definition        */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MAIN_CONTROL_BLOCK, window_main_Val_power_consumtion), /* control block */
-    (void *) &window_main_Val_power_consumtion_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_main_define =
-{
-    "window_main",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_MAIN_CONTROL_BLOCK),       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Main_draw_callback, /* drawing function override   */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Main_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_main_Val_power_consumtion_define, /* child widget                  */
-    0,                                       /* control block                  */
-    (void *) &window_main_properties         /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_can_id_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_can_id_lb_caption_properties =
-{
-    GX_STRING_ID_STRING_14,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_can_id_prmt_full_id_properties =
-{
-    GX_STRING_ID_STRING_20,                  /* string id                      */
-    GX_FONT_ID_BSB_40PX,                     /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_can_id_prmt_node_num_properties =
-{
-    GX_STRING_ID_STRING_17,                  /* string id                      */
-    GX_FONT_ID_BSB_40PX,                     /* font id                        */
-    GX_COLOR_ID_BLACK,                       /* normal text color              */
-    GX_COLOR_ID_BLACK,                       /* selected text color            */
-    GX_COLOR_ID_BLACK                        /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_can_id_prmpt_Long_press_properties =
-{
-    GX_STRING_ID_STRING_21,                  /* string id                      */
-    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_WHITE                        /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_can_id_prmpt_Saved_properties =
-{
-    GX_STRING_ID_STRING_22,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
-    GX_COLOR_ID_RED,                         /* normal text color              */
-    GX_COLOR_ID_RED,                         /* selected text color            */
-    GX_COLOR_ID_RED                          /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_prmpt_Saved_define =
-{
-    "prmpt_Saved",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {61, 178, 180, 207},                     /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmpt_Saved), /* control block */
-    (void *) &window_can_id_prmpt_Saved_properties /* extended properties      */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_prmpt_Long_press_define =
-{
-    "prmpt_Long_press",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {1, 225, 240, 239},                      /* widget size                    */
-    &window_can_id_prmpt_Saved_define,       /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmpt_Long_press), /* control block */
-    (void *) &window_can_id_prmpt_Long_press_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_prmt_node_num_define =
-{
-    "prmt_node_num",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WHITE,                       /* normal color id                */
-    GX_COLOR_ID_WHITE,                       /* selected color id              */
-    GX_COLOR_ID_WHITE,                       /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {70, 119, 169, 168},                     /* widget size                    */
-    &window_can_id_prmpt_Long_press_define,  /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmt_node_num), /* control block */
-    (void *) &window_can_id_prmt_node_num_properties /* extended properties    */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_prmt_full_id_define =
-{
-    "prmt_full_id",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {1, 49, 238, 110},                       /* widget size                    */
-    &window_can_id_prmt_node_num_define,     /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmt_full_id), /* control block */
-    (void *) &window_can_id_prmt_full_id_properties /* extended properties     */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_lb_caption_define =
-{
-    "lb_caption",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, 0, 239, 36},                         /* widget size                    */
-    &window_can_id_prmt_full_id_define,      /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_lb_caption), /* control block */
-    (void *) &window_can_id_lb_caption_properties /* extended properties       */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_can_id_define =
-{
-    "window_can_id",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_CAN_ID_CONTROL_BLOCK),     /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Can_id_draw_callback, /* drawing function override */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Can_id_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_can_id_lb_caption_define,        /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_can_id_properties       /* extended properties            */
-};
-GX_WINDOW_PROPERTIES window_menu_properties =
-{
-    0                                        /* wallpaper pixelmap id          */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_diagnostic_properties =
-{
-    GX_STRING_ID_STRING_36,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_reset_properties =
-{
-    GX_STRING_ID_STRING_2,                   /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_can_id_edit_properties =
-{
-    GX_STRING_ID_STRING_3,                   /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_return_properties =
-{
-    GX_STRING_ID_STRING_108,                 /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_lb_menu_properties =
-{
-    GX_STRING_ID_STRING_34,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_YELLOW,                      /* normal text color              */
-    GX_COLOR_ID_CIAN,                        /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_angle_calibration_properties =
-{
-    GX_STRING_ID_STRING_89,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-GX_PROMPT_PROPERTIES window_menu_prmpt_rotation_speed_properties =
-{
-    GX_STRING_ID_STRING_90,                  /* string id                      */
-    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
-    GX_COLOR_ID_WHITE,                       /* normal text color              */
-    GX_COLOR_ID_WHITE,                       /* selected text color            */
-    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_rotation_speed_define =
-{
-    "prmpt_rotation_speed",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 51, 220, 74},                       /* widget size                    */
-    GX_NULL,                                 /* no next widget                 */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_rotation_speed), /* control block */
-    (void *) &window_menu_prmpt_rotation_speed_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_angle_calibration_define =
-{
-    "prmpt_angle_calibration",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 22, 220, 45},                       /* widget size                    */
-    &window_menu_prmpt_rotation_speed_define, /* next widget definition        */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_angle_calibration), /* control block */
-    (void *) &window_menu_prmpt_angle_calibration_properties /* extended properties */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_lb_menu_define =
-{
-    "lb_menu",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    0,                                       /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
-    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {0, -1, 239, 22},                        /* widget size                    */
-    &window_menu_prmpt_angle_calibration_define, /* next widget definition     */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_lb_menu), /* control block */
-    (void *) &window_menu_lb_menu_properties /* extended properties            */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_return_define =
-{
-    "prmpt_return",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 139, 220, 162},                     /* widget size                    */
-    &window_menu_lb_menu_define,             /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_return), /* control block */
-    (void *) &window_menu_prmpt_return_properties /* extended properties       */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_can_id_edit_define =
-{
-    "prmpt_can_id_edit",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 80, 220, 103},                      /* widget size                    */
-    &window_menu_prmpt_return_define,        /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_can_id_edit), /* control block */
-    (void *) &window_menu_prmpt_can_id_edit_properties /* extended properties  */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_reset_define =
-{
-    "prmpt_reset",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 209, 220, 232},                     /* widget size                    */
-    &window_menu_prmpt_can_id_edit_define,   /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_reset), /* control block */
-    (void *) &window_menu_prmpt_reset_properties /* extended properties        */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_prmpt_diagnostic_define =
-{
-    "prmpt_diagnostic",
-    GX_TYPE_PROMPT,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
-    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
-    sizeof(GX_PROMPT),                       /* control block size             */
-    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
-    GX_COLOR_ID_RED,                         /* selected color id              */
-    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
-    gx_studio_prompt_create,                 /* create function                */
-    GX_NULL,                                 /* drawing function override      */
-    GX_NULL,                                 /* event function override        */
-    {20, 109, 220, 132},                     /* widget size                    */
-    &window_menu_prmpt_reset_define,         /* next widget definition         */
-    GX_NULL,                                 /* no child widgets               */ 
-    offsetof(WINDOW_MENU_CONTROL_BLOCK, window_menu_prmpt_diagnostic), /* control block */
-    (void *) &window_menu_prmpt_diagnostic_properties /* extended properties   */
-};
-
-GX_CONST GX_STUDIO_WIDGET window_menu_define =
-{
-    "window_menu",
-    GX_TYPE_WINDOW,                          /* widget type                    */
-    GX_ID_NONE,                              /* widget id                      */
-    #if defined(GX_WIDGET_USER_DATA)
-    0,                                       /* user data                      */
-    #endif
-    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
-    0,                                       /* status flags                   */
-    sizeof(WINDOW_MENU_CONTROL_BLOCK),       /* control block size             */
-    GX_COLOR_ID_BLACK,                       /* normal color id                */
-    GX_COLOR_ID_BLACK,                       /* selected color id              */
-    GX_COLOR_ID_BLACK,                       /* disabled color id              */
-    gx_studio_window_create,                 /* create function                */
-    (VOID (*)(GX_WIDGET *)) Menu_draw_callback, /* drawing function override   */
-    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Menu_event_callback, /* event function override */
-    {0, 0, 239, 239},                        /* widget size                    */
-    GX_NULL,                                 /* next widget                    */
-    &window_menu_prmpt_diagnostic_define,    /* child widget                   */
-    0,                                       /* control block                  */
-    (void *) &window_menu_properties         /* extended properties            */
+    (void *) &window_CAN_rem_control_properties /* extended properties         */
 };
 GX_WINDOW_PROPERTIES window_sdcard_state_properties =
 {
@@ -3859,18 +2602,4043 @@ GX_CONST GX_STUDIO_WIDGET window_net_state_define =
     0,                                       /* control block                  */
     (void *) &window_net_state_properties    /* extended properties            */
 };
+GX_WINDOW_PROPERTIES window_diagnostic_menu_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_prmpt_sdcard_state_properties =
+{
+    GX_STRING_ID_STRING_41,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_prmpt_communicationt_intf_properties =
+{
+    GX_STRING_ID_STRING_1,                   /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_lb_menu_properties =
+{
+    GX_STRING_ID_STRING_35,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_prmpt_can_rem_ctrl_properties =
+{
+    GX_STRING_ID_STRING_42,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_diagnostic_menu_Val_version_properties =
+{
+    GX_STRING_ID_STRING_76,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_Val_version_define =
+{
+    "Val_version",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 225, 239, 239},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_Val_version), /* control block */
+    (void *) &window_diagnostic_menu_Val_version_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 119, 219, 142},                     /* widget size                    */
+    &window_diagnostic_menu_Val_version_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_prmpt_return), /* control block */
+    (void *) &window_diagnostic_menu_prmpt_return_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_prmpt_can_rem_ctrl_define =
+{
+    "prmpt_can_rem_ctrl",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 29, 220, 52},                       /* widget size                    */
+    &window_diagnostic_menu_prmpt_return_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_prmpt_can_rem_ctrl), /* control block */
+    (void *) &window_diagnostic_menu_prmpt_can_rem_ctrl_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_lb_menu_define =
+{
+    "lb_menu",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, -1, 239, 22},                        /* widget size                    */
+    &window_diagnostic_menu_prmpt_can_rem_ctrl_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_lb_menu), /* control block */
+    (void *) &window_diagnostic_menu_lb_menu_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_prmpt_communicationt_intf_define =
+{
+    "prmpt_communicationt_intf",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 89, 220, 112},                      /* widget size                    */
+    &window_diagnostic_menu_lb_menu_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_prmpt_communicationt_intf), /* control block */
+    (void *) &window_diagnostic_menu_prmpt_communicationt_intf_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_prmpt_sdcard_state_define =
+{
+    "prmpt_sdcard_state",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 59, 220, 82},                       /* widget size                    */
+    &window_diagnostic_menu_prmpt_communicationt_intf_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK, window_diagnostic_menu_prmpt_sdcard_state), /* control block */
+    (void *) &window_diagnostic_menu_prmpt_sdcard_state_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_diagnostic_menu_define =
+{
+    "window_diagnostic_menu",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK), /* control block size        */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Diagnostic_menu_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Diagnostic_menu_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_diagnostic_menu_prmpt_sdcard_state_define, /* child widget         */
+    0,                                       /* control block                  */
+    (void *) &window_diagnostic_menu_properties /* extended properties         */
+};
+GX_WINDOW_PROPERTIES window_can_id_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_can_id_lb_caption_properties =
+{
+    GX_STRING_ID_STRING_14,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_can_id_prmt_full_id_properties =
+{
+    GX_STRING_ID_STRING_20,                  /* string id                      */
+    GX_FONT_ID_BSB_40PX,                     /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_can_id_prmt_node_num_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_BSB_40PX,                     /* font id                        */
+    GX_COLOR_ID_BLACK,                       /* normal text color              */
+    GX_COLOR_ID_BLACK,                       /* selected text color            */
+    GX_COLOR_ID_BLACK                        /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_can_id_prmpt_Long_press_properties =
+{
+    GX_STRING_ID_STRING_21,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE                        /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_can_id_prmpt_Saved_properties =
+{
+    GX_STRING_ID_STRING_22,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED                          /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_prmpt_Saved_define =
+{
+    "prmpt_Saved",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {61, 178, 180, 207},                     /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmpt_Saved), /* control block */
+    (void *) &window_can_id_prmpt_Saved_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_prmpt_Long_press_define =
+{
+    "prmpt_Long_press",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {1, 225, 240, 239},                      /* widget size                    */
+    &window_can_id_prmpt_Saved_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmpt_Long_press), /* control block */
+    (void *) &window_can_id_prmpt_Long_press_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_prmt_node_num_define =
+{
+    "prmt_node_num",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_WHITE,                       /* selected color id              */
+    GX_COLOR_ID_WHITE,                       /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {70, 119, 169, 168},                     /* widget size                    */
+    &window_can_id_prmpt_Long_press_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmt_node_num), /* control block */
+    (void *) &window_can_id_prmt_node_num_properties /* extended properties    */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_prmt_full_id_define =
+{
+    "prmt_full_id",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {1, 49, 238, 110},                       /* widget size                    */
+    &window_can_id_prmt_node_num_define,     /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_prmt_full_id), /* control block */
+    (void *) &window_can_id_prmt_full_id_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_lb_caption_define =
+{
+    "lb_caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 36},                         /* widget size                    */
+    &window_can_id_prmt_full_id_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_CAN_ID_CONTROL_BLOCK, window_can_id_lb_caption), /* control block */
+    (void *) &window_can_id_lb_caption_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_can_id_define =
+{
+    "window_can_id",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_CAN_ID_CONTROL_BLOCK),     /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Can_id_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Can_id_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_can_id_lb_caption_define,        /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &window_can_id_properties       /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_menu_DC_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_menu_DC_prmpt_diagnostic_properties =
+{
+    GX_STRING_ID_STRING_36,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_DC_prmpt_reset_properties =
+{
+    GX_STRING_ID_STRING_2,                   /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_DC_prmpt_can_id_edit_properties =
+{
+    GX_STRING_ID_STRING_3,                   /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_DC_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_DC_lb_menu_properties =
+{
+    GX_STRING_ID_STRING_34,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_lb_menu_define =
+{
+    "lb_menu",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, -1, 239, 22},                        /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_DC_CONTROL_BLOCK, window_menu_DC_lb_menu), /* control block */
+    (void *) &window_menu_DC_lb_menu_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 76, 220, 99},                       /* widget size                    */
+    &window_menu_DC_lb_menu_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_DC_CONTROL_BLOCK, window_menu_DC_prmpt_return), /* control block */
+    (void *) &window_menu_DC_prmpt_return_properties /* extended properties    */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_prmpt_can_id_edit_define =
+{
+    "prmpt_can_id_edit",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 22, 220, 45},                       /* widget size                    */
+    &window_menu_DC_prmpt_return_define,     /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_DC_CONTROL_BLOCK, window_menu_DC_prmpt_can_id_edit), /* control block */
+    (void *) &window_menu_DC_prmpt_can_id_edit_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_prmpt_reset_define =
+{
+    "prmpt_reset",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 209, 220, 232},                     /* widget size                    */
+    &window_menu_DC_prmpt_can_id_edit_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_DC_CONTROL_BLOCK, window_menu_DC_prmpt_reset), /* control block */
+    (void *) &window_menu_DC_prmpt_reset_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_prmpt_diagnostic_define =
+{
+    "prmpt_diagnostic",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 49, 220, 72},                       /* widget size                    */
+    &window_menu_DC_prmpt_reset_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_DC_CONTROL_BLOCK, window_menu_DC_prmpt_diagnostic), /* control block */
+    (void *) &window_menu_DC_prmpt_diagnostic_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_DC_define =
+{
+    "window_menu_DC",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MENU_DC_CONTROL_BLOCK),    /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Menu_DC_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Menu_DC_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_menu_DC_prmpt_diagnostic_define, /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &window_menu_DC_properties      /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_manual_DC_ctrl_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmpt_rot_CCW_properties =
+{
+    GX_STRING_ID_STRING_59,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmpt_stop_properties =
+{
+    GX_STRING_ID_STRING_58,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_menu_properties =
+{
+    GX_STRING_ID_STRING_49,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmpt_rot_CW_properties =
+{
+    GX_STRING_ID_STRING_51,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmpt_freewheeling_properties =
+{
+    GX_STRING_ID_STRING_107,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_prmt_pwm_val_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_BSB_40PX,                     /* font id                        */
+    GX_COLOR_ID_BLACK,                       /* normal text color              */
+    GX_COLOR_ID_YELLOW,                      /* selected text color            */
+    GX_COLOR_ID_BLACK                        /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_pwr_properties =
+{
+    GX_STRING_ID_STRING_60,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_rpm_properties =
+{
+    GX_STRING_ID_STRING_45,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_curr_properties =
+{
+    GX_STRING_ID_STRING_69,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_rpm_1_properties =
+{
+    GX_STRING_ID_STRING_74,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_Val_pwr_properties =
+{
+    GX_STRING_ID_STRING_72,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_Val_moti_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_Val_rpm_properties =
+{
+    GX_STRING_ID_STRING_73,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_Val_temp_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_pwm_properties =
+{
+    GX_STRING_ID_STRING_80,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_manual_DC_ctrl_lb_perc_properties =
+{
+    GX_STRING_ID_STRING_81,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_perc_define =
+{
+    "lb_perc",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {185, 120, 215, 160},                    /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_perc), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_perc_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_pwm_define =
+{
+    "lb_pwm",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 120, 100, 160},                     /* widget size                    */
+    &window_manual_DC_ctrl_lb_perc_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_pwm), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_pwm_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_Val_temp_define =
+{
+    "Val_temp",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {181, 218, 235, 237},                    /* widget size                    */
+    &window_manual_DC_ctrl_lb_pwm_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_Val_temp), /* control block */
+    (void *) &window_manual_DC_ctrl_Val_temp_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_Val_rpm_define =
+{
+    "Val_rpm",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {122, 218, 176, 237},                    /* widget size                    */
+    &window_manual_DC_ctrl_Val_temp_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_Val_rpm), /* control block */
+    (void *) &window_manual_DC_ctrl_Val_rpm_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_Val_moti_define =
+{
+    "Val_moti",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {62, 218, 116, 237},                     /* widget size                    */
+    &window_manual_DC_ctrl_Val_rpm_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_Val_moti), /* control block */
+    (void *) &window_manual_DC_ctrl_Val_moti_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_Val_pwr_define =
+{
+    "Val_pwr",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {2, 218, 56, 237},                       /* widget size                    */
+    &window_manual_DC_ctrl_Val_moti_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_Val_pwr), /* control block */
+    (void *) &window_manual_DC_ctrl_Val_pwr_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_rpm_1_define =
+{
+    "lb_rpm_1",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {191, 199, 225, 218},                    /* widget size                    */
+    &window_manual_DC_ctrl_Val_pwr_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_rpm_1), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_rpm_1_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_curr_define =
+{
+    "lb_curr",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {59, 199, 122, 218},                     /* widget size                    */
+    &window_manual_DC_ctrl_lb_rpm_1_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_curr), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_curr_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_rpm_define =
+{
+    "lb_rpm",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 199, 170, 218},                    /* widget size                    */
+    &window_manual_DC_ctrl_lb_curr_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_rpm), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_rpm_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_pwr_define =
+{
+    "lb_pwr",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 199, 58, 218},                       /* widget size                    */
+    &window_manual_DC_ctrl_lb_rpm_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_pwr), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_pwr_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmt_pwm_val_define =
+{
+    "prmt_pwm_val",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_WHITE,                       /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {101, 119, 180, 163},                    /* widget size                    */
+    &window_manual_DC_ctrl_lb_pwr_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmt_pwm_val), /* control block */
+    (void *) &window_manual_DC_ctrl_prmt_pwm_val_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 168, 220, 189},                     /* widget size                    */
+    &window_manual_DC_ctrl_prmt_pwm_val_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmpt_return), /* control block */
+    (void *) &window_manual_DC_ctrl_prmpt_return_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmpt_freewheeling_define =
+{
+    "prmpt_freewheeling",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 94, 220, 115},                      /* widget size                    */
+    &window_manual_DC_ctrl_prmpt_return_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmpt_freewheeling), /* control block */
+    (void *) &window_manual_DC_ctrl_prmpt_freewheeling_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmpt_rot_CW_define =
+{
+    "prmpt_rot_CW",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 19, 220, 40},                       /* widget size                    */
+    &window_manual_DC_ctrl_prmpt_freewheeling_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmpt_rot_CW), /* control block */
+    (void *) &window_manual_DC_ctrl_prmpt_rot_CW_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_lb_menu_define =
+{
+    "lb_menu",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, -1, 239, 22},                        /* widget size                    */
+    &window_manual_DC_ctrl_prmpt_rot_CW_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_lb_menu), /* control block */
+    (void *) &window_manual_DC_ctrl_lb_menu_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmpt_stop_define =
+{
+    "prmpt_stop",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 69, 220, 90},                       /* widget size                    */
+    &window_manual_DC_ctrl_lb_menu_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmpt_stop), /* control block */
+    (void *) &window_manual_DC_ctrl_prmpt_stop_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_prmpt_rot_CCW_define =
+{
+    "prmpt_rot_CCW",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 44, 220, 65},                       /* widget size                    */
+    &window_manual_DC_ctrl_prmpt_stop_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK, window_manual_DC_ctrl_prmpt_rot_CCW), /* control block */
+    (void *) &window_manual_DC_ctrl_prmpt_rot_CCW_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_manual_DC_ctrl_define =
+{
+    "window_manual_DC_ctrl",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK), /* control block size         */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Manual_DC_ctrl_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Manual_DC_ctrl_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_manual_DC_ctrl_prmpt_rot_CCW_define, /* child widget               */
+    0,                                       /* control block                  */
+    (void *) &window_manual_DC_ctrl_properties /* extended properties          */
+};
+GX_WINDOW_PROPERTIES window_main_DC_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_power_consumtion_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_power_consumption_properties =
+{
+    GX_STRING_ID_STRING_48,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_53,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_55,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_node_number_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_node_number_properties =
+{
+    GX_STRING_ID_STRING_97,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_A1_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_W_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_V_properties =
+{
+    GX_STRING_ID_STRING_52,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_motor_current_properties =
+{
+    GX_STRING_ID_STRING_56,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_motor_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_A2_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ICON_PROPERTIES window_main_DC_icon_properties =
+{
+    0,                                       /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_44,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_mot_rpm_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_grad_s_properties =
+{
+    GX_STRING_ID_STRING_45,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_errors_properties =
+{
+    GX_STRING_ID_STRING_66,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_errors_properties =
+{
+    GX_STRING_ID_STRING_67,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_caption_properties =
+{
+    GX_STRING_ID_STRING_84,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_pcb_temper_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_driver_temp_properties =
+{
+    GX_STRING_ID_STRING_47,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_lb_grad_s_1_properties =
+{
+    GX_STRING_ID_STRING_46,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_DC_Val_version_properties =
+{
+    GX_STRING_ID_STRING_76,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_version_define =
+{
+    "Val_version",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 21, 183, 35},                        /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_version), /* control block */
+    (void *) &window_main_DC_Val_version_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_grad_s_1_define =
+{
+    "lb_grad_s_1",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {204, 192, 237, 215},                    /* widget size                    */
+    &window_main_DC_Val_version_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_grad_s_1), /* control block */
+    (void *) &window_main_DC_lb_grad_s_1_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_driver_temp_define =
+{
+    "lb_driver_temp",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 192, 124, 215},                      /* widget size                    */
+    &window_main_DC_lb_grad_s_1_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_driver_temp), /* control block */
+    (void *) &window_main_DC_lb_driver_temp_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_pcb_temper_define =
+{
+    "Val_pcb_temper",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 194, 200, 213},                    /* widget size                    */
+    &window_main_DC_lb_driver_temp_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_pcb_temper), /* control block */
+    (void *) &window_main_DC_Val_pcb_temper_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_caption_define =
+{
+    "lb_caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 85, 16},                          /* widget size                    */
+    &window_main_DC_Val_pcb_temper_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_caption), /* control block */
+    (void *) &window_main_DC_lb_caption_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_errors_define =
+{
+    "Val_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 217, 229, 236},                    /* widget size                    */
+    &window_main_DC_lb_caption_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_errors), /* control block */
+    (void *) &window_main_DC_Val_errors_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_errors_define =
+{
+    "lb_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 215, 124, 238},                      /* widget size                    */
+    &window_main_DC_Val_errors_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_errors), /* control block */
+    (void *) &window_main_DC_lb_errors_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_grad_s_define =
+{
+    "lb_grad_s",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {204, 170, 237, 193},                    /* widget size                    */
+    &window_main_DC_lb_errors_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_grad_s), /* control block */
+    (void *) &window_main_DC_lb_grad_s_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_mot_rpm_define =
+{
+    "Val_mot_rpm",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 172, 200, 191},                    /* widget size                    */
+    &window_main_DC_lb_grad_s_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_mot_rpm), /* control block */
+    (void *) &window_main_DC_Val_mot_rpm_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_rot_speed_define =
+{
+    "lb_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 170, 124, 193},                      /* widget size                    */
+    &window_main_DC_Val_mot_rpm_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_rot_speed), /* control block */
+    (void *) &window_main_DC_lb_rot_speed_properties /* extended properties    */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_icon_define =
+{
+    "icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 35, 239, 35},                        /* widget size                    */
+    &window_main_DC_lb_rot_speed_define,     /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_icon), /* control block */
+    (void *) &window_main_DC_icon_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_A2_define =
+{
+    "lb_A2",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 143, 239, 166},                    /* widget size                    */
+    &window_main_DC_icon_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_A2), /* control block */
+    (void *) &window_main_DC_lb_A2_properties /* extended properties           */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_motor_current_define =
+{
+    "Val_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 139, 212, 168},                    /* widget size                    */
+    &window_main_DC_lb_A2_define,            /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_motor_current), /* control block */
+    (void *) &window_main_DC_Val_motor_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_motor_current_define =
+{
+    "lb_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 143, 138, 166},                      /* widget size                    */
+    &window_main_DC_Val_motor_current_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_motor_current), /* control block */
+    (void *) &window_main_DC_lb_motor_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_V_define =
+{
+    "lb_V",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 77, 239, 100},                     /* widget size                    */
+    &window_main_DC_lb_motor_current_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_V), /* control block */
+    (void *) &window_main_DC_lb_V_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_W_define =
+{
+    "lb_W",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 46, 239, 69},                      /* widget size                    */
+    &window_main_DC_lb_V_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_W), /* control block */
+    (void *) &window_main_DC_lb_W_properties /* extended properties            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_A1_define =
+{
+    "lb_A1",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 110, 239, 133},                    /* widget size                    */
+    &window_main_DC_lb_W_define,             /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_A1), /* control block */
+    (void *) &window_main_DC_lb_A1_properties /* extended properties           */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_node_number_define =
+{
+    "lb_node_number",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {142, 0, 199, 16},                       /* widget size                    */
+    &window_main_DC_lb_A1_define,            /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_node_number), /* control block */
+    (void *) &window_main_DC_lb_node_number_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_node_number_define =
+{
+    "Val_node_number",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {199, 0, 238, 29},                       /* widget size                    */
+    &window_main_DC_lb_node_number_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_node_number), /* control block */
+    (void *) &window_main_DC_Val_node_number_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_pwr_src_current_define =
+{
+    "Val_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 107, 212, 136},                    /* widget size                    */
+    &window_main_DC_Val_node_number_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_pwr_src_current), /* control block */
+    (void *) &window_main_DC_Val_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_pwr_src_current_define =
+{
+    "lb_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 110, 138, 133},                      /* widget size                    */
+    &window_main_DC_Val_pwr_src_current_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_pwr_src_current), /* control block */
+    (void *) &window_main_DC_lb_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_pwr_src_voltage_define =
+{
+    "lb_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 77, 138, 100},                       /* widget size                    */
+    &window_main_DC_lb_pwr_src_current_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_pwr_src_voltage), /* control block */
+    (void *) &window_main_DC_lb_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_pwr_src_voltage_define =
+{
+    "Val_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 75, 212, 104},                     /* widget size                    */
+    &window_main_DC_lb_pwr_src_voltage_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_pwr_src_voltage), /* control block */
+    (void *) &window_main_DC_Val_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_lb_power_consumption_define =
+{
+    "lb_power_consumption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 46, 138, 69},                        /* widget size                    */
+    &window_main_DC_Val_pwr_src_voltage_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_lb_power_consumption), /* control block */
+    (void *) &window_main_DC_lb_power_consumption_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_Val_power_consumtion_define =
+{
+    "Val_power_consumtion",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 43, 212, 72},                      /* widget size                    */
+    &window_main_DC_lb_power_consumption_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_DC_CONTROL_BLOCK, window_main_DC_Val_power_consumtion), /* control block */
+    (void *) &window_main_DC_Val_power_consumtion_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_DC_define =
+{
+    "window_main_DC",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MAIN_DC_CONTROL_BLOCK),    /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Main_DC_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Main_DC_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_main_DC_Val_power_consumtion_define, /* child widget               */
+    0,                                       /* control block                  */
+    (void *) &window_main_DC_properties      /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_man_BLDC_ctrl_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_freewheeling_properties =
+{
+    GX_STRING_ID_STRING_107,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_open_properties =
+{
+    GX_STRING_ID_STRING_102,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_close_properties =
+{
+    GX_STRING_ID_STRING_104,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_stop_properties =
+{
+    GX_STRING_ID_STRING_105,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_lb_shaft_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_68,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_lb_shaft_position_properties =
+{
+    GX_STRING_ID_STRING_70,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_Val_shaft_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_Val_shaft_position_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_lb_grad_s_properties =
+{
+    GX_STRING_ID_STRING_82,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_lb_grad_properties =
+{
+    GX_STRING_ID_STRING_83,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_man_BLDC_ctrl_prmpt_ver_properties =
+{
+    GX_STRING_ID_STRING_75,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_ver_define =
+{
+    "prmpt_ver",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 23},                         /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_ver), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_ver_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 29, 220, 52},                       /* widget size                    */
+    &window_man_BLDC_ctrl_prmpt_ver_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_return), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_return_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_lb_grad_define =
+{
+    "lb_grad",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {185, 213, 234, 236},                    /* widget size                    */
+    &window_man_BLDC_ctrl_prmpt_return_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_lb_grad), /* control block */
+    (void *) &window_man_BLDC_ctrl_lb_grad_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_lb_grad_s_define =
+{
+    "lb_grad_s",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {185, 190, 234, 213},                    /* widget size                    */
+    &window_man_BLDC_ctrl_lb_grad_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_lb_grad_s), /* control block */
+    (void *) &window_man_BLDC_ctrl_lb_grad_s_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_Val_shaft_position_define =
+{
+    "Val_shaft_position",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 215, 179, 234},                    /* widget size                    */
+    &window_man_BLDC_ctrl_lb_grad_s_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_Val_shaft_position), /* control block */
+    (void *) &window_man_BLDC_ctrl_Val_shaft_position_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_Val_shaft_rot_speed_define =
+{
+    "Val_shaft_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 192, 179, 211},                    /* widget size                    */
+    &window_man_BLDC_ctrl_Val_shaft_position_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_Val_shaft_rot_speed), /* control block */
+    (void *) &window_man_BLDC_ctrl_Val_shaft_rot_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_lb_shaft_position_define =
+{
+    "lb_shaft_position",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 213, 124, 236},                      /* widget size                    */
+    &window_man_BLDC_ctrl_Val_shaft_rot_speed_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_lb_shaft_position), /* control block */
+    (void *) &window_man_BLDC_ctrl_lb_shaft_position_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_lb_shaft_rot_speed_define =
+{
+    "lb_shaft_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 190, 124, 213},                      /* widget size                    */
+    &window_man_BLDC_ctrl_lb_shaft_position_define, /* next widget definition  */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_lb_shaft_rot_speed), /* control block */
+    (void *) &window_man_BLDC_ctrl_lb_shaft_rot_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_stop_define =
+{
+    "prmpt_stop",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {19, 119, 219, 142},                     /* widget size                    */
+    &window_man_BLDC_ctrl_lb_shaft_rot_speed_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_stop), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_stop_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_close_define =
+{
+    "prmpt_close",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 89, 220, 112},                      /* widget size                    */
+    &window_man_BLDC_ctrl_prmpt_stop_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_close), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_close_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_open_define =
+{
+    "prmpt_open",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 59, 220, 82},                       /* widget size                    */
+    &window_man_BLDC_ctrl_prmpt_close_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_open), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_open_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_prmpt_freewheeling_define =
+{
+    "prmpt_freewheeling",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 149, 220, 172},                     /* widget size                    */
+    &window_man_BLDC_ctrl_prmpt_open_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK, window_man_BLDC_ctrl_prmpt_freewheeling), /* control block */
+    (void *) &window_man_BLDC_ctrl_prmpt_freewheeling_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_man_BLDC_ctrl_define =
+{
+    "window_man_BLDC_ctrl",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK), /* control block size          */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Qmenu_draw_callback, /* drawing function override  */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Qmenu_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_man_BLDC_ctrl_prmpt_freewheeling_define, /* child widget           */
+    0,                                       /* control block                  */
+    (void *) &window_man_BLDC_ctrl_properties /* extended properties           */
+};
+GX_WINDOW_PROPERTIES window_speed_edit_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_speed_edit_lb_caption_properties =
+{
+    GX_STRING_ID_STRING_95,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_speed_edit_Val_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_BSB_40PX,                     /* font id                        */
+    GX_COLOR_ID_BLACK,                       /* normal text color              */
+    GX_COLOR_ID_BLACK,                       /* selected text color            */
+    GX_COLOR_ID_BLACK                        /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_speed_edit_prmpt_Long_press_properties =
+{
+    GX_STRING_ID_STRING_21,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_WHITE                        /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_speed_edit_prmpt_Saved_properties =
+{
+    GX_STRING_ID_STRING_22,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED                          /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_speed_edit_lb_degr_sec_properties =
+{
+    GX_STRING_ID_STRING_96,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_lb_degr_sec_define =
+{
+    "lb_degr_sec",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {80, 68, 230, 119},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_lb_degr_sec), /* control block */
+    (void *) &window_speed_edit_lb_degr_sec_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_prmpt_Saved_define =
+{
+    "prmpt_Saved",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {61, 178, 180, 207},                     /* widget size                    */
+    &window_speed_edit_lb_degr_sec_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_prmpt_Saved), /* control block */
+    (void *) &window_speed_edit_prmpt_Saved_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_prmpt_Long_press_define =
+{
+    "prmpt_Long_press",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {1, 225, 240, 239},                      /* widget size                    */
+    &window_speed_edit_prmpt_Saved_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_prmpt_Long_press), /* control block */
+    (void *) &window_speed_edit_prmpt_Long_press_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_Val_rot_speed_define =
+{
+    "Val_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_WHITE,                       /* selected color id              */
+    GX_COLOR_ID_WHITE,                       /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {6, 69, 75, 118},                        /* widget size                    */
+    &window_speed_edit_prmpt_Long_press_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_Val_rot_speed), /* control block */
+    (void *) &window_speed_edit_Val_rot_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_lb_caption_define =
+{
+    "lb_caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 36},                         /* widget size                    */
+    &window_speed_edit_Val_rot_speed_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_SPEED_EDIT_CONTROL_BLOCK, window_speed_edit_lb_caption), /* control block */
+    (void *) &window_speed_edit_lb_caption_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_speed_edit_define =
+{
+    "window_speed_edit",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_SPEED_EDIT_CONTROL_BLOCK), /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Speed_edit_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Speed_edit_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_speed_edit_lb_caption_define,    /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &window_speed_edit_properties   /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_angle_calibr_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_lb_Caption_properties =
+{
+    GX_STRING_ID_STRING_71,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_Val_angle_0_properties =
+{
+    GX_STRING_ID_STRING_77,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_prmpt_Saved_properties =
+{
+    GX_STRING_ID_STRING_22,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_RED                          /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_lb_angle_0_properties =
+{
+    GX_STRING_ID_STRING_92,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_lb_angle_90_properties =
+{
+    GX_STRING_ID_STRING_93,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_Val_angle_90_properties =
+{
+    GX_STRING_ID_STRING_78,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ML_TEXT_VIEW_PROPERTIES window_angle_calibr_text_prompt_properties =
+{
+    GX_STRING_ID_STRING_109,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_TEXT_INPUT_TEXT,             /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT,               /* disabled text color            */
+    0,                                       /* whitespace                     */
+    0                                        /* line_space                     */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_Val_current_value_properties =
+{
+    GX_STRING_ID_STRING_78,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_SELECTED_TEXT,               /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_angle_calibr_lb_current_val_properties =
+{
+    GX_STRING_ID_STRING_94,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_current_val_define =
+{
+    "lb_current_val",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {4, 104, 145, 127},                      /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_current_val), /* control block */
+    (void *) &window_angle_calibr_lb_current_val_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_current_value_define =
+{
+    "Val_current_value",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {160, 105, 235, 126},                    /* widget size                    */
+    &window_angle_calibr_lb_current_val_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_current_value), /* control block */
+    (void *) &window_angle_calibr_Val_current_value_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_text_prompt_define =
+{
+    "text_prompt",
+    GX_TYPE_MULTI_LINE_TEXT_VIEW,            /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_MULTI_LINE_TEXT_VIEW),         /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_WINDOW_FILL,                 /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_multi_line_text_view_create,     /* create function              */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {10, 160, 230, 230},                     /* widget size                    */
+    &window_angle_calibr_Val_current_value_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_text_prompt), /* control block */
+    (void *) &window_angle_calibr_text_prompt_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_angle_90_define =
+{
+    "Val_angle_90",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {160, 72, 235, 103},                     /* widget size                    */
+    &window_angle_calibr_text_prompt_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_angle_90), /* control block */
+    (void *) &window_angle_calibr_Val_angle_90_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_angle_90_define =
+{
+    "lb_angle_90",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {4, 76, 145, 99},                        /* widget size                    */
+    &window_angle_calibr_Val_angle_90_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_angle_90), /* control block */
+    (void *) &window_angle_calibr_lb_angle_90_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_angle_0_define =
+{
+    "lb_angle_0",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {4, 42, 145, 65},                        /* widget size                    */
+    &window_angle_calibr_lb_angle_90_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_angle_0), /* control block */
+    (void *) &window_angle_calibr_lb_angle_0_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_prmpt_Saved_define =
+{
+    "prmpt_Saved",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {61, 126, 180, 155},                     /* widget size                    */
+    &window_angle_calibr_lb_angle_0_define,  /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_prmpt_Saved), /* control block */
+    (void *) &window_angle_calibr_prmpt_Saved_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_Val_angle_0_define =
+{
+    "Val_angle_0",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {160, 38, 235, 69},                      /* widget size                    */
+    &window_angle_calibr_prmpt_Saved_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_Val_angle_0), /* control block */
+    (void *) &window_angle_calibr_Val_angle_0_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_lb_Caption_define =
+{
+    "lb_Caption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 239, 36},                         /* widget size                    */
+    &window_angle_calibr_Val_angle_0_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK, window_angle_calibr_lb_Caption), /* control block */
+    (void *) &window_angle_calibr_lb_Caption_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_angle_calibr_define =
+{
+    "window_angle_calibr",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_ANGLE_CALIBR_CONTROL_BLOCK), /* control block size           */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Angle_calibr_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Angle_calibr_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_angle_calibr_lb_Caption_define,  /* child widget                   */
+    0,                                       /* control block                  */
+    (void *) &window_angle_calibr_properties /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_main_BLDC_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_power_consumtion_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_power_consumption_properties =
+{
+    GX_STRING_ID_STRING_48,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_pwr_src_voltage_properties =
+{
+    GX_STRING_ID_STRING_53,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_55,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_pwr_src_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_node_number_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_node_number_properties =
+{
+    GX_STRING_ID_STRING_97,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_A1_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_W_properties =
+{
+    GX_STRING_ID_STRING_50,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_V_properties =
+{
+    GX_STRING_ID_STRING_52,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_motor_current_properties =
+{
+    GX_STRING_ID_STRING_56,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_motor_current_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_30,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_A2_properties =
+{
+    GX_STRING_ID_STRING_54,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_ICON_PROPERTIES window_main_BLDC_icon_properties =
+{
+    0,                                       /* normal pixelmap id             */
+    0                                        /* selected pixelmap id           */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_shaft_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_68,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_shaft_rot_speed_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_grad_s_properties =
+{
+    GX_STRING_ID_STRING_82,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_shaft_position_properties =
+{
+    GX_STRING_ID_STRING_70,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_shaft_position_properties =
+{
+    GX_STRING_ID_STRING_101,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_GREEN,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_grad_properties =
+{
+    GX_STRING_ID_STRING_83,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_errors_properties =
+{
+    GX_STRING_ID_STRING_66,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_errors_properties =
+{
+    GX_STRING_ID_STRING_67,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_RED,                         /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_lb_speed_properties =
+{
+    GX_STRING_ID_STRING_29,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_speed_properties =
+{
+    GX_STRING_ID_STRING_17,                  /* string id                      */
+    GX_FONT_ID_PROMPT,                       /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_RED,                         /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_main_BLDC_Val_version_properties =
+{
+    GX_STRING_ID_STRING_76,                  /* string id                      */
+    GX_FONT_ID_MINIMALFONT5X7_15PX,          /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_version_define =
+{
+    "Val_version",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 21, 183, 35},                        /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_version), /* control block */
+    (void *) &window_main_BLDC_Val_version_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_speed_define =
+{
+    "Val_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {60, 0, 109, 15},                        /* widget size                    */
+    &window_main_BLDC_Val_version_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_speed), /* control block */
+    (void *) &window_main_BLDC_Val_speed_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_speed_define =
+{
+    "lb_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 0, 60, 16},                          /* widget size                    */
+    &window_main_BLDC_Val_speed_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_speed), /* control block */
+    (void *) &window_main_BLDC_lb_speed_properties /* extended properties      */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_errors_define =
+{
+    "Val_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 217, 229, 236},                    /* widget size                    */
+    &window_main_BLDC_lb_speed_define,       /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_errors), /* control block */
+    (void *) &window_main_BLDC_Val_errors_properties /* extended properties    */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_errors_define =
+{
+    "lb_errors",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 215, 124, 238},                      /* widget size                    */
+    &window_main_BLDC_Val_errors_define,     /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_errors), /* control block */
+    (void *) &window_main_BLDC_lb_errors_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_grad_define =
+{
+    "lb_grad",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {185, 193, 234, 216},                    /* widget size                    */
+    &window_main_BLDC_lb_errors_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_grad), /* control block */
+    (void *) &window_main_BLDC_lb_grad_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_shaft_position_define =
+{
+    "Val_shaft_position",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 195, 179, 214},                    /* widget size                    */
+    &window_main_BLDC_lb_grad_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_shaft_position), /* control block */
+    (void *) &window_main_BLDC_Val_shaft_position_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_shaft_position_define =
+{
+    "lb_shaft_position",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 193, 124, 216},                      /* widget size                    */
+    &window_main_BLDC_Val_shaft_position_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_shaft_position), /* control block */
+    (void *) &window_main_BLDC_lb_shaft_position_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_grad_s_define =
+{
+    "lb_grad_s",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {185, 170, 234, 193},                    /* widget size                    */
+    &window_main_BLDC_lb_shaft_position_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_grad_s), /* control block */
+    (void *) &window_main_BLDC_lb_grad_s_properties /* extended properties     */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_shaft_rot_speed_define =
+{
+    "Val_shaft_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {130, 172, 179, 191},                    /* widget size                    */
+    &window_main_BLDC_lb_grad_s_define,      /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_shaft_rot_speed), /* control block */
+    (void *) &window_main_BLDC_Val_shaft_rot_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_shaft_rot_speed_define =
+{
+    "lb_shaft_rot_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 170, 124, 193},                      /* widget size                    */
+    &window_main_BLDC_Val_shaft_rot_speed_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_shaft_rot_speed), /* control block */
+    (void *) &window_main_BLDC_lb_shaft_rot_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_icon_define =
+{
+    "icon",
+    GX_TYPE_ICON,                            /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED|GX_STYLE_HALIGN_LEFT|GX_STYLE_VALIGN_TOP,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_ICON),                         /* control block size             */
+    GX_COLOR_ID_WHITE,                       /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_icon_create,                   /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, 35, 239, 35},                        /* widget size                    */
+    &window_main_BLDC_lb_shaft_rot_speed_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_icon), /* control block */
+    (void *) &window_main_BLDC_icon_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_A2_define =
+{
+    "lb_A2",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 143, 239, 166},                    /* widget size                    */
+    &window_main_BLDC_icon_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_A2), /* control block */
+    (void *) &window_main_BLDC_lb_A2_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_motor_current_define =
+{
+    "Val_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 139, 212, 168},                    /* widget size                    */
+    &window_main_BLDC_lb_A2_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_motor_current), /* control block */
+    (void *) &window_main_BLDC_Val_motor_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_motor_current_define =
+{
+    "lb_motor_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 143, 138, 166},                      /* widget size                    */
+    &window_main_BLDC_Val_motor_current_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_motor_current), /* control block */
+    (void *) &window_main_BLDC_lb_motor_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_V_define =
+{
+    "lb_V",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 77, 239, 100},                     /* widget size                    */
+    &window_main_BLDC_lb_motor_current_define, /* next widget definition       */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_V), /* control block */
+    (void *) &window_main_BLDC_lb_V_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_W_define =
+{
+    "lb_W",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 46, 239, 69},                      /* widget size                    */
+    &window_main_BLDC_lb_V_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_W), /* control block */
+    (void *) &window_main_BLDC_lb_W_properties /* extended properties          */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_A1_define =
+{
+    "lb_A1",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {215, 110, 239, 133},                    /* widget size                    */
+    &window_main_BLDC_lb_W_define,           /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_A1), /* control block */
+    (void *) &window_main_BLDC_lb_A1_properties /* extended properties         */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_node_number_define =
+{
+    "lb_node_number",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {142, 0, 199, 16},                       /* widget size                    */
+    &window_main_BLDC_lb_A1_define,          /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_node_number), /* control block */
+    (void *) &window_main_BLDC_lb_node_number_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_node_number_define =
+{
+    "Val_node_number",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {199, 0, 238, 29},                       /* widget size                    */
+    &window_main_BLDC_lb_node_number_define, /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_node_number), /* control block */
+    (void *) &window_main_BLDC_Val_node_number_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_pwr_src_current_define =
+{
+    "Val_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 107, 212, 136},                    /* widget size                    */
+    &window_main_BLDC_Val_node_number_define, /* next widget definition        */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_pwr_src_current), /* control block */
+    (void *) &window_main_BLDC_Val_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_pwr_src_current_define =
+{
+    "lb_pwr_src_current",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 110, 138, 133},                      /* widget size                    */
+    &window_main_BLDC_Val_pwr_src_current_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_pwr_src_current), /* control block */
+    (void *) &window_main_BLDC_lb_pwr_src_current_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_pwr_src_voltage_define =
+{
+    "lb_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 77, 138, 100},                       /* widget size                    */
+    &window_main_BLDC_lb_pwr_src_current_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_pwr_src_voltage), /* control block */
+    (void *) &window_main_BLDC_lb_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_pwr_src_voltage_define =
+{
+    "Val_pwr_src_voltage",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 75, 212, 104},                     /* widget size                    */
+    &window_main_BLDC_lb_pwr_src_voltage_define, /* next widget definition     */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_pwr_src_voltage), /* control block */
+    (void *) &window_main_BLDC_Val_pwr_src_voltage_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_lb_power_consumption_define =
+{
+    "lb_power_consumption",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_LEFT,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {5, 46, 138, 69},                        /* widget size                    */
+    &window_main_BLDC_Val_pwr_src_voltage_define, /* next widget definition    */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_lb_power_consumption), /* control block */
+    (void *) &window_main_BLDC_lb_power_consumption_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_Val_power_consumtion_define =
+{
+    "Val_power_consumtion",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_DARK_BLUE,                   /* selected color id              */
+    GX_COLOR_ID_DARK_BLUE,                   /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {138, 43, 212, 72},                      /* widget size                    */
+    &window_main_BLDC_lb_power_consumption_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MAIN_BLDC_CONTROL_BLOCK, window_main_BLDC_Val_power_consumtion), /* control block */
+    (void *) &window_main_BLDC_Val_power_consumtion_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_main_BLDC_define =
+{
+    "window_main_BLDC",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MAIN_BLDC_CONTROL_BLOCK),  /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Main_draw_callback, /* drawing function override   */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Main_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_main_BLDC_Val_power_consumtion_define, /* child widget             */
+    0,                                       /* control block                  */
+    (void *) &window_main_BLDC_properties    /* extended properties            */
+};
+GX_WINDOW_PROPERTIES window_menu_BLDC_properties =
+{
+    0                                        /* wallpaper pixelmap id          */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_diagnostic_properties =
+{
+    GX_STRING_ID_STRING_36,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_reset_properties =
+{
+    GX_STRING_ID_STRING_2,                   /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_can_id_edit_properties =
+{
+    GX_STRING_ID_STRING_3,                   /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_return_properties =
+{
+    GX_STRING_ID_STRING_108,                 /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_lb_menu_properties =
+{
+    GX_STRING_ID_STRING_34,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_YELLOW,                      /* normal text color              */
+    GX_COLOR_ID_CIAN,                        /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_angle_calibration_properties =
+{
+    GX_STRING_ID_STRING_89,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+GX_PROMPT_PROPERTIES window_menu_BLDC_prmpt_rotation_speed_properties =
+{
+    GX_STRING_ID_STRING_90,                  /* string id                      */
+    GX_FONT_ID_ROBOTO_REGULAR_20,            /* font id                        */
+    GX_COLOR_ID_WHITE,                       /* normal text color              */
+    GX_COLOR_ID_WHITE,                       /* selected text color            */
+    GX_COLOR_ID_DISABLED_TEXT                /* disabled text color            */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_rotation_speed_define =
+{
+    "prmpt_rotation_speed",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 51, 220, 74},                       /* widget size                    */
+    GX_NULL,                                 /* no next widget                 */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_rotation_speed), /* control block */
+    (void *) &window_menu_BLDC_prmpt_rotation_speed_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_angle_calibration_define =
+{
+    "prmpt_angle_calibration",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 22, 220, 45},                       /* widget size                    */
+    &window_menu_BLDC_prmpt_rotation_speed_define, /* next widget definition   */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_angle_calibration), /* control block */
+    (void *) &window_menu_BLDC_prmpt_angle_calibration_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_lb_menu_define =
+{
+    "lb_menu",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_TRANSPARENT|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    0,                                       /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_WIDGET_FILL,                 /* normal color id                */
+    GX_COLOR_ID_SELECTED_FILL,               /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {0, -1, 239, 22},                        /* widget size                    */
+    &window_menu_BLDC_prmpt_angle_calibration_define, /* next widget definition */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_lb_menu), /* control block */
+    (void *) &window_menu_BLDC_lb_menu_properties /* extended properties       */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_return_define =
+{
+    "prmpt_return",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 139, 220, 162},                     /* widget size                    */
+    &window_menu_BLDC_lb_menu_define,        /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_return), /* control block */
+    (void *) &window_menu_BLDC_prmpt_return_properties /* extended properties  */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_can_id_edit_define =
+{
+    "prmpt_can_id_edit",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 80, 220, 103},                      /* widget size                    */
+    &window_menu_BLDC_prmpt_return_define,   /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_can_id_edit), /* control block */
+    (void *) &window_menu_BLDC_prmpt_can_id_edit_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_reset_define =
+{
+    "prmpt_reset",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 209, 220, 232},                     /* widget size                    */
+    &window_menu_BLDC_prmpt_can_id_edit_define, /* next widget definition      */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_reset), /* control block */
+    (void *) &window_menu_BLDC_prmpt_reset_properties /* extended properties   */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_prmpt_diagnostic_define =
+{
+    "prmpt_diagnostic",
+    GX_TYPE_PROMPT,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_THIN|GX_STYLE_ENABLED|GX_STYLE_TEXT_CENTER,   /* style flags */
+    GX_STATUS_ACCEPTS_FOCUS,                 /* status flags                   */
+    sizeof(GX_PROMPT),                       /* control block size             */
+    GX_COLOR_ID_DARK_BLUE,                   /* normal color id                */
+    GX_COLOR_ID_RED,                         /* selected color id              */
+    GX_COLOR_ID_DISABLED_FILL,               /* disabled color id              */
+    gx_studio_prompt_create,                 /* create function                */
+    GX_NULL,                                 /* drawing function override      */
+    GX_NULL,                                 /* event function override        */
+    {20, 109, 220, 132},                     /* widget size                    */
+    &window_menu_BLDC_prmpt_reset_define,    /* next widget definition         */
+    GX_NULL,                                 /* no child widgets               */ 
+    offsetof(WINDOW_MENU_BLDC_CONTROL_BLOCK, window_menu_BLDC_prmpt_diagnostic), /* control block */
+    (void *) &window_menu_BLDC_prmpt_diagnostic_properties /* extended properties */
+};
+
+GX_CONST GX_STUDIO_WIDGET window_menu_BLDC_define =
+{
+    "window_menu_BLDC",
+    GX_TYPE_WINDOW,                          /* widget type                    */
+    GX_ID_NONE,                              /* widget id                      */
+    #if defined(GX_WIDGET_USER_DATA)
+    0,                                       /* user data                      */
+    #endif
+    GX_STYLE_BORDER_NONE|GX_STYLE_ENABLED,   /* style flags                    */
+    0,                                       /* status flags                   */
+    sizeof(WINDOW_MENU_BLDC_CONTROL_BLOCK),  /* control block size             */
+    GX_COLOR_ID_BLACK,                       /* normal color id                */
+    GX_COLOR_ID_BLACK,                       /* selected color id              */
+    GX_COLOR_ID_BLACK,                       /* disabled color id              */
+    gx_studio_window_create,                 /* create function                */
+    (VOID (*)(GX_WIDGET *)) Menu_BLDC_draw_callback, /* drawing function override */
+    (UINT (*)(GX_WIDGET *, GX_EVENT *)) Menu_BLDC_event_callback, /* event function override */
+    {0, 0, 239, 239},                        /* widget size                    */
+    GX_NULL,                                 /* next widget                    */
+    &window_menu_BLDC_prmpt_diagnostic_define, /* child widget                 */
+    0,                                       /* control block                  */
+    (void *) &window_menu_BLDC_properties    /* extended properties            */
+};
 GX_CONST GX_STUDIO_WIDGET_ENTRY MC50_widget_table[] =
 {
-    { &window_canrc_define, (GX_WIDGET *) &window_canrc },
-    { &window_dmenu_define, (GX_WIDGET *) &window_dmenu },
-    { &window_qmenu_define, (GX_WIDGET *) &window_qmenu },
-    { &window_speed_edit_define, (GX_WIDGET *) &window_speed_edit },
-    { &window_angle_calibr_define, (GX_WIDGET *) &window_angle_calibr },
-    { &window_main_define, (GX_WIDGET *) &window_main },
-    { &window_can_id_define, (GX_WIDGET *) &window_can_id },
-    { &window_menu_define, (GX_WIDGET *) &window_menu },
+    { &w_comm_law_define, (GX_WIDGET *) &w_comm_law },
+    { &w_mn_mottest_define, (GX_WIDGET *) &w_mn_mottest },
+    { &window_CAN_rem_control_define, (GX_WIDGET *) &window_CAN_rem_control },
     { &window_sdcard_state_define, (GX_WIDGET *) &window_sdcard_state },
     { &window_net_state_define, (GX_WIDGET *) &window_net_state },
+    { &window_diagnostic_menu_define, (GX_WIDGET *) &window_diagnostic_menu },
+    { &window_can_id_define, (GX_WIDGET *) &window_can_id },
+    { &window_menu_DC_define, (GX_WIDGET *) &window_menu_DC },
+    { &window_manual_DC_ctrl_define, (GX_WIDGET *) &window_manual_DC_ctrl },
+    { &window_main_DC_define, (GX_WIDGET *) &window_main_DC },
+    { &window_man_BLDC_ctrl_define, (GX_WIDGET *) &window_man_BLDC_ctrl },
+    { &window_speed_edit_define, (GX_WIDGET *) &window_speed_edit },
+    { &window_angle_calibr_define, (GX_WIDGET *) &window_angle_calibr },
+    { &window_main_BLDC_define, (GX_WIDGET *) &window_main_BLDC },
+    { &window_menu_BLDC_define, (GX_WIDGET *) &window_menu_BLDC },
     {GX_NULL, GX_NULL}
 };
 

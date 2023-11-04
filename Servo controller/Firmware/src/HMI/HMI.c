@@ -114,7 +114,22 @@ void GUI_start(void)
 
   gx_studio_display_configure(DISPLAY_1, _565rgb_driver_setup, LANGUAGE_ENGLISH, DISPLAY_1_THEME_1,&root);
 
-  Init_main_screen();
+  if ((wvar.app_type == APP_TYPE_SERVO_OPS_BLDC) || (wvar.app_type == APP_TYPE_SERVO__BLDC) || (wvar.app_type == APP_TYPE_ASYNC_BLDC_ROTATION))
+  {
+    Init_main_BLDC_screen(0);
+  }
+  else if (wvar.app_type == APP_TYPE_TRACTION_DC)
+  {
+    Init_main_DC_screen(0);
+  }
+  else if (wvar.app_type == APP_TYPE_BLDC_TEST)
+  {
+    Init_BLDC_Test_screen(0);
+  }
+  else
+  {
+    Init_diagnostic_menu_screen(0);
+  }
 
   gx_widget_show(root);
   gx_system_start();

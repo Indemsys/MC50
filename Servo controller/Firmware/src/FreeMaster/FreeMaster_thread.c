@@ -84,47 +84,79 @@ static uint8_t Freemaster_Command_Manager(uint16_t app_command)
 
   switch (app_command)
   {
-  case FMCMD_CHECK_LOG_PIPE:
+  case FM_CHECK_LOG_PIPE:
     FMSTR_PipePuts(fm_pipe, "Log pipe checked.\r\n");
     break;
 
-  case FMCMD_SAVE_APP_PARAMS:
+  case FM_SAVE_APP_PARAMS:
     Request_save_app_settings();
     break;
 
-  case FMCMD_STOP_MOTOR:
-    MC_set_stop_motor();
+  case FM_MOTOR_HARD_STOP:
+    App_set_flags(MOTOR_HARD_STOP);
     break;
 
-  case FMCMD_START_MOTOR:
-    MC_set_start_motor();
+  case FM_MOTOR_FREEWHEELING:
+    App_set_flags(MOTOR_FREEWHEELING);
     break;
 
-  case FMCMD_MOVING_PULE:
-    MC_set_moving_pulse();
+  case FM_BLDC_MOVING_PULSE_HSTOP:
+    App_set_flags(BLDC_MOVING_PULSE_HSTOP);
     break;
 
-  case FMCMD_OPEN:
-    MC_set_open();
+  case FM_BLDC_MOVING_PULSE_FREE:
+    App_set_flags(BLDC_MOVING_PULSE_FREE);
     break;
 
-  case FMCMD_CLOSE:
-    MC_set_close();
+  case FM_BLDC_SERVO_OPEN:
+    App_set_flags(BLDC_SERVO_OPEN);
     break;
 
-  case FMCMD_CLOSE_PULSE:
-    MC_set_closing_pulse();
+  case FM_BLDC_SERVO_CLOSE:
+    App_set_flags(BLDC_SERVO_CLOSE);
     break;
 
-  case FMCMD_OPEN_PULSE:
-    MC_set_opening_pulse();
+  case FM_BLDC_SERVO_CLOSING_PULSE:
+    App_set_flags(BLDC_SERVO_CLOSING_PULSE);
     break;
 
-  case FMCMD_RESET_DRIVER_FAULTS:
-    MC_set_reset_tmc6200();
+  case FM_BLDC_SERVO_OPENING_PULSE:
+    App_set_flags(BLDC_SERVO_OPENING_PULSE);
     break;
 
-  case FMCMD_RESET_DEVICE:
+  case FM_DC_ROTATE_CW     :
+    App_set_flags(DC_ROT_CW);
+    break;
+
+  case FM_DC_ROTATE_CCW    :
+    App_set_flags(DC_ROT_CCW);
+    break;
+
+  case FM_DC_ROT_CW_NO_ACCEL     :
+    App_set_flags(DC_ROT_CW_NO_ACCEL);
+    break;
+
+  case FM_DC_ROT_CCW_NO_ACCEL     :
+    App_set_flags(DC_ROT_CCW_NO_ACCEL);
+    break;
+
+  case FM_SINUSOIDAL_ROT_ON  :
+    App_set_flags(SINUSOIDAL_ROT_ON);
+    break;
+
+  case FM_SINUSOIDAL_ROT_OFF :
+    App_set_flags(MOTOR_HARD_STOP);
+    break;
+
+  case FM_COMMUTATION_LAW_SEARCH:
+    App_set_flags(COMMUTATION_LAW_SEARCH);
+    break;
+
+  case FM_RESET_TMC6200_FAULTS:
+    TMC6200_faults_clear_request();
+    break;
+
+  case FM_RESET_DEVICE:
     Reset_SoC();
     break;
   default:

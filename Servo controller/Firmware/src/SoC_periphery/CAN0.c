@@ -578,6 +578,7 @@ uint32_t CAN_init(uint8_t speed_code)
   R_SYSTEM->PRCR                = 0xA50B; // Открываем доступ на запись к регистрам
   R_SYSTEM->VBTICTLR_b.VCH0INEN = 0;
   R_SYSTEM->VBTICTLR_b.VCH1INEN = 0;
+  R_SYSTEM->VBTICTLR_b.VCH2INEN = 0;
 
 
   R_MSTP->MSTPCRB_b.MSTPB2 = 0; // Разрешаем работу модуля CAN0

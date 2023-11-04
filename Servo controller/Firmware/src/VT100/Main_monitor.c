@@ -268,11 +268,12 @@ static void Task_VT100(ULONG arg)
 
     if (mcbl->menu_trace[mcbl->menu_nesting] == &MENU_MAIN)
     {
-      //unsigned int uid[4];
+      char ver_str[64];
       VT100_set_cursor_pos(22, 0);
       MPRINTF("Chip UID    : %s", g_cpu_id_str);
       VT100_set_cursor_pos(23, 0);
-      MPRINTF("Compile time: %s",__DATE__" "__TIME__);
+      Get_build_date_time(ver_str);
+      MPRINTF("Compile time: %s",ver_str);
       VT100_set_cursor_pos(24, 0);
       MPRINTF("Up time: %d ms",(_tx_time_get() * 1000ul) / TX_TIMER_TICKS_PER_SECOND);
 

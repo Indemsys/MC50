@@ -235,7 +235,7 @@ uint8_t* Isolate_string_in_buf(uint8_t **buf, uint32_t *buf_len)
 
   \return uint32_t
 -----------------------------------------------------------------------------------------------------*/
-void Get_nums_from_date(char *date_str, uint32_t *pmonts, uint32_t *pday, uint32_t *pyear)
+void Get_nums_from_date(const char *date_str, uint32_t *pmonts, uint32_t *pday, uint32_t *pyear)
 {
   char  month_str[8];
 
@@ -250,6 +250,8 @@ void Get_nums_from_date(char *date_str, uint32_t *pmonts, uint32_t *pday, uint32
   }
 }
 
+extern const char *Get_build_date(void);
+extern const char *Get_build_time(void);
 /*-----------------------------------------------------------------------------------------------------
 
 
@@ -260,6 +262,6 @@ void Get_build_date_time(char *ver_str)
   uint32_t monts;
   uint32_t day;
   uint32_t year;
-  Get_nums_from_date(__DATE__,&monts,&day,&year);
-  sprintf(ver_str, "Ver.: %d-%02d-%02d %s", year, monts, day, __TIME__);
+  Get_nums_from_date(Get_build_date(),&monts,&day,&year);
+  sprintf(ver_str, "Ver.: %d.%02d.%02d %s", year, monts, day, Get_build_time());
 }

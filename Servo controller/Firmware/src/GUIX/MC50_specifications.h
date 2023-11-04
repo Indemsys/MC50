@@ -5,8 +5,8 @@
 /*  specification file(s). For more information please refer to the Azure RTOS */
 /*  GUIX Studio User Guide, or visit our web site at azure.com/rtos            */
 /*                                                                             */
-/*  GUIX Studio Revision 6.2.1.4                                               */
-/*  Date (dd.mm.yyyy):  7. 8.2023   Time (hh:mm): 18:37                        */
+/*  GUIX Studio Revision 6.3.0.0                                               */
+/*  Date (dd.mm.yyyy):  4.11.2023   Time (hh:mm): 16:38                        */
 /*******************************************************************************/
 
 
@@ -100,120 +100,60 @@ typedef struct
 
 /* Declare top-level control blocks                                            */
 
-typedef struct WINDOW_CANRC_CONTROL_BLOCK_STRUCT
+typedef struct W_COMM_LAW_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_canrc_prmpt_close;
-    GX_PROMPT window_canrc_prmpt_stop;
-    GX_PROMPT window_canrc_lb_menu;
-    GX_PROMPT window_canrc_prmpt_open;
-    GX_PROMPT window_canrc_prmpt_freewheeling;
-    GX_PROMPT window_canrc_prmpt_return;
-    GX_PROMPT window_canrc_prmt_node_num;
-} WINDOW_CANRC_CONTROL_BLOCK;
+    GX_PROMPT w_comm_law_prmpt_search;
+    GX_PROMPT w_comm_law_prmpt_rot_forward;
+    GX_PROMPT w_comm_law_prmpt_rot_reverse;
+    GX_PROMPT w_comm_law_prmpt_stop;
+    GX_PROMPT w_comm_law_lb_max_current;
+    GX_PROMPT w_comm_law_lb_shaft_position;
+    GX_PROMPT w_comm_law_Val_current;
+    GX_PROMPT w_comm_law_Val_comm_law;
+    GX_PROMPT w_comm_law_lb_amps;
+    GX_PROMPT w_comm_law_prmpt_return;
+    GX_PROMPT w_comm_law_prmpt_caption;
+    GX_PROMPT w_comm_law_lb_pwm_value;
+    GX_PROMPT w_comm_law_Val_pwm;
+    GX_PROMPT w_comm_law_lb_perc;
+    GX_PROMPT w_comm_law_prmpt_freewheel;
+    GX_PROMPT w_comm_law_prmpt_save;
+} W_COMM_LAW_CONTROL_BLOCK;
 
-typedef struct WINDOW_DMENU_CONTROL_BLOCK_STRUCT
+typedef struct W_MN_MOTTEST_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_dmenu_prmpt_sdcard_state;
-    GX_PROMPT window_dmenu_prmpt_communicationt_intf;
-    GX_PROMPT window_dmenu_lb_menu;
-    GX_PROMPT window_dmenu_prmpt_can_rem_ctrl;
-    GX_PROMPT window_dmenu_prmpt_return;
-} WINDOW_DMENU_CONTROL_BLOCK;
+    GX_PROMPT w_mn_mottest_Val_power_consumtion;
+    GX_PROMPT w_mn_mottest_lb_power_consumption;
+    GX_PROMPT w_mn_mottest_Val_pwr_src_voltage;
+    GX_PROMPT w_mn_mottest_lb_pwr_src_voltage;
+    GX_PROMPT w_mn_mottest_lb_pwr_src_current;
+    GX_PROMPT w_mn_mottest_Val_pwr_src_current;
+    GX_PROMPT w_mn_mottest_lb_A1;
+    GX_PROMPT w_mn_mottest_lb_W;
+    GX_PROMPT w_mn_mottest_lb_V;
+    GX_PROMPT w_mn_mottest_lb_motor_current;
+    GX_PROMPT w_mn_mottest_Val_motor_current;
+    GX_PROMPT w_mn_mottest_lb_A2;
+    GX_ICON w_mn_mottest_icon;
+    GX_PROMPT w_mn_mottest_lb_errors;
+    GX_PROMPT w_mn_mottest_Val_errors;
+    GX_PROMPT w_mn_mottest_Val_version;
+    GX_PROMPT w_mn_mottest_lb_caption;
+} W_MN_MOTTEST_CONTROL_BLOCK;
 
-typedef struct WINDOW_QMENU_CONTROL_BLOCK_STRUCT
+typedef struct WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK_STRUCT
 {
     GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_qmenu_prmpt_freewheeling;
-    GX_PROMPT window_qmenu_prmpt_open;
-    GX_PROMPT window_qmenu_prmpt_close;
-    GX_PROMPT window_qmenu_prmpt_stop;
-    GX_PROMPT window_qmenu_lb_shaft_rot_speed;
-    GX_PROMPT window_qmenu_lb_shaft_position;
-    GX_PROMPT window_qmenu_Val_shaft_rot_speed;
-    GX_PROMPT window_qmenu_Val_shaft_position;
-    GX_PROMPT window_qmenu_lb_grad_s;
-    GX_PROMPT window_qmenu_lb_grad;
-    GX_PROMPT window_qmenu_prmpt_return;
-    GX_PROMPT window_qmenu_prmpt_ver;
-} WINDOW_QMENU_CONTROL_BLOCK;
-
-typedef struct WINDOW_SPEED_EDIT_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_speed_edit_lb_caption;
-    GX_PROMPT window_speed_edit_Val_rot_speed;
-    GX_PROMPT window_speed_edit_prmpt_Long_press;
-    GX_PROMPT window_speed_edit_prmpt_Saved;
-    GX_PROMPT window_speed_edit_lb_degr_sec;
-} WINDOW_SPEED_EDIT_CONTROL_BLOCK;
-
-typedef struct WINDOW_ANGLE_CALIBR_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_angle_calibr_lb_Caption;
-    GX_PROMPT window_angle_calibr_Val_angle_0;
-    GX_PROMPT window_angle_calibr_prmpt_Saved;
-    GX_PROMPT window_angle_calibr_lb_angle_0;
-    GX_PROMPT window_angle_calibr_lb_angle_90;
-    GX_PROMPT window_angle_calibr_Val_angle_90;
-    GX_MULTI_LINE_TEXT_VIEW window_angle_calibr_text_prompt;
-    GX_PROMPT window_angle_calibr_Val_current_value;
-    GX_PROMPT window_angle_calibr_lb_current_val;
-} WINDOW_ANGLE_CALIBR_CONTROL_BLOCK;
-
-typedef struct WINDOW_MAIN_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_main_Val_power_consumtion;
-    GX_PROMPT window_main_lb_power_consumption;
-    GX_PROMPT window_main_Val_pwr_src_voltage;
-    GX_PROMPT window_main_lb_pwr_src_voltage;
-    GX_PROMPT window_main_lb_pwr_src_current;
-    GX_PROMPT window_main_Val_pwr_src_current;
-    GX_PROMPT window_main_Val_node_number;
-    GX_PROMPT window_main_lb_node_number;
-    GX_PROMPT window_main_lb_A1;
-    GX_PROMPT window_main_lb_W;
-    GX_PROMPT window_main_lb_V;
-    GX_PROMPT window_main_lb_motor_current;
-    GX_PROMPT window_main_Val_motor_current;
-    GX_PROMPT window_main_lb_A2;
-    GX_ICON window_main_icon;
-    GX_PROMPT window_main_lb_shaft_rot_speed;
-    GX_PROMPT window_main_Val_shaft_rot_speed;
-    GX_PROMPT window_main_lb_grad_s;
-    GX_PROMPT window_main_lb_shaft_position;
-    GX_PROMPT window_main_Val_shaft_position;
-    GX_PROMPT window_main_lb_grad;
-    GX_PROMPT window_main_lb_errors;
-    GX_PROMPT window_main_Val_errors;
-    GX_PROMPT window_main_lb_speed;
-    GX_PROMPT window_main_Val_speed;
-} WINDOW_MAIN_CONTROL_BLOCK;
-
-typedef struct WINDOW_CAN_ID_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_can_id_lb_caption;
-    GX_PROMPT window_can_id_prmt_full_id;
-    GX_PROMPT window_can_id_prmt_node_num;
-    GX_PROMPT window_can_id_prmpt_Long_press;
-    GX_PROMPT window_can_id_prmpt_Saved;
-} WINDOW_CAN_ID_CONTROL_BLOCK;
-
-typedef struct WINDOW_MENU_CONTROL_BLOCK_STRUCT
-{
-    GX_WINDOW_MEMBERS_DECLARE
-    GX_PROMPT window_menu_prmpt_diagnostic;
-    GX_PROMPT window_menu_prmpt_reset;
-    GX_PROMPT window_menu_prmpt_can_id_edit;
-    GX_PROMPT window_menu_prmpt_return;
-    GX_PROMPT window_menu_lb_menu;
-    GX_PROMPT window_menu_prmpt_angle_calibration;
-    GX_PROMPT window_menu_prmpt_rotation_speed;
-} WINDOW_MENU_CONTROL_BLOCK;
+    GX_PROMPT window_CAN_rem_control_prmpt_close;
+    GX_PROMPT window_CAN_rem_control_prmpt_stop;
+    GX_PROMPT window_CAN_rem_control_lb_menu;
+    GX_PROMPT window_CAN_rem_control_prmpt_open;
+    GX_PROMPT window_CAN_rem_control_prmpt_freewheeling;
+    GX_PROMPT window_CAN_rem_control_prmpt_return;
+    GX_PROMPT window_CAN_rem_control_prmt_node_num;
+} WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK;
 
 typedef struct WINDOW_SDCARD_STATE_CONTROL_BLOCK_STRUCT
 {
@@ -258,28 +198,216 @@ typedef struct WINDOW_NET_STATE_CONTROL_BLOCK_STRUCT
     GX_PROMPT window_net_state_prmpt_Long_press;
 } WINDOW_NET_STATE_CONTROL_BLOCK;
 
+typedef struct WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_diagnostic_menu_prmpt_sdcard_state;
+    GX_PROMPT window_diagnostic_menu_prmpt_communicationt_intf;
+    GX_PROMPT window_diagnostic_menu_lb_menu;
+    GX_PROMPT window_diagnostic_menu_prmpt_can_rem_ctrl;
+    GX_PROMPT window_diagnostic_menu_prmpt_return;
+    GX_PROMPT window_diagnostic_menu_Val_version;
+} WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK;
+
+typedef struct WINDOW_CAN_ID_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_can_id_lb_caption;
+    GX_PROMPT window_can_id_prmt_full_id;
+    GX_PROMPT window_can_id_prmt_node_num;
+    GX_PROMPT window_can_id_prmpt_Long_press;
+    GX_PROMPT window_can_id_prmpt_Saved;
+} WINDOW_CAN_ID_CONTROL_BLOCK;
+
+typedef struct WINDOW_MENU_DC_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_menu_DC_prmpt_diagnostic;
+    GX_PROMPT window_menu_DC_prmpt_reset;
+    GX_PROMPT window_menu_DC_prmpt_can_id_edit;
+    GX_PROMPT window_menu_DC_prmpt_return;
+    GX_PROMPT window_menu_DC_lb_menu;
+} WINDOW_MENU_DC_CONTROL_BLOCK;
+
+typedef struct WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_manual_DC_ctrl_prmpt_rot_CCW;
+    GX_PROMPT window_manual_DC_ctrl_prmpt_stop;
+    GX_PROMPT window_manual_DC_ctrl_lb_menu;
+    GX_PROMPT window_manual_DC_ctrl_prmpt_rot_CW;
+    GX_PROMPT window_manual_DC_ctrl_prmpt_freewheeling;
+    GX_PROMPT window_manual_DC_ctrl_prmpt_return;
+    GX_PROMPT window_manual_DC_ctrl_prmt_pwm_val;
+    GX_PROMPT window_manual_DC_ctrl_lb_pwr;
+    GX_PROMPT window_manual_DC_ctrl_lb_rpm;
+    GX_PROMPT window_manual_DC_ctrl_lb_curr;
+    GX_PROMPT window_manual_DC_ctrl_lb_rpm_1;
+    GX_PROMPT window_manual_DC_ctrl_Val_pwr;
+    GX_PROMPT window_manual_DC_ctrl_Val_moti;
+    GX_PROMPT window_manual_DC_ctrl_Val_rpm;
+    GX_PROMPT window_manual_DC_ctrl_Val_temp;
+    GX_PROMPT window_manual_DC_ctrl_lb_pwm;
+    GX_PROMPT window_manual_DC_ctrl_lb_perc;
+} WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK;
+
+typedef struct WINDOW_MAIN_DC_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_main_DC_Val_power_consumtion;
+    GX_PROMPT window_main_DC_lb_power_consumption;
+    GX_PROMPT window_main_DC_Val_pwr_src_voltage;
+    GX_PROMPT window_main_DC_lb_pwr_src_voltage;
+    GX_PROMPT window_main_DC_lb_pwr_src_current;
+    GX_PROMPT window_main_DC_Val_pwr_src_current;
+    GX_PROMPT window_main_DC_Val_node_number;
+    GX_PROMPT window_main_DC_lb_node_number;
+    GX_PROMPT window_main_DC_lb_A1;
+    GX_PROMPT window_main_DC_lb_W;
+    GX_PROMPT window_main_DC_lb_V;
+    GX_PROMPT window_main_DC_lb_motor_current;
+    GX_PROMPT window_main_DC_Val_motor_current;
+    GX_PROMPT window_main_DC_lb_A2;
+    GX_ICON window_main_DC_icon;
+    GX_PROMPT window_main_DC_lb_rot_speed;
+    GX_PROMPT window_main_DC_Val_mot_rpm;
+    GX_PROMPT window_main_DC_lb_grad_s;
+    GX_PROMPT window_main_DC_lb_errors;
+    GX_PROMPT window_main_DC_Val_errors;
+    GX_PROMPT window_main_DC_lb_caption;
+    GX_PROMPT window_main_DC_Val_pcb_temper;
+    GX_PROMPT window_main_DC_lb_driver_temp;
+    GX_PROMPT window_main_DC_lb_grad_s_1;
+    GX_PROMPT window_main_DC_Val_version;
+} WINDOW_MAIN_DC_CONTROL_BLOCK;
+
+typedef struct WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_freewheeling;
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_open;
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_close;
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_stop;
+    GX_PROMPT window_man_BLDC_ctrl_lb_shaft_rot_speed;
+    GX_PROMPT window_man_BLDC_ctrl_lb_shaft_position;
+    GX_PROMPT window_man_BLDC_ctrl_Val_shaft_rot_speed;
+    GX_PROMPT window_man_BLDC_ctrl_Val_shaft_position;
+    GX_PROMPT window_man_BLDC_ctrl_lb_grad_s;
+    GX_PROMPT window_man_BLDC_ctrl_lb_grad;
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_return;
+    GX_PROMPT window_man_BLDC_ctrl_prmpt_ver;
+} WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK;
+
+typedef struct WINDOW_SPEED_EDIT_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_speed_edit_lb_caption;
+    GX_PROMPT window_speed_edit_Val_rot_speed;
+    GX_PROMPT window_speed_edit_prmpt_Long_press;
+    GX_PROMPT window_speed_edit_prmpt_Saved;
+    GX_PROMPT window_speed_edit_lb_degr_sec;
+} WINDOW_SPEED_EDIT_CONTROL_BLOCK;
+
+typedef struct WINDOW_ANGLE_CALIBR_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_angle_calibr_lb_Caption;
+    GX_PROMPT window_angle_calibr_Val_angle_0;
+    GX_PROMPT window_angle_calibr_prmpt_Saved;
+    GX_PROMPT window_angle_calibr_lb_angle_0;
+    GX_PROMPT window_angle_calibr_lb_angle_90;
+    GX_PROMPT window_angle_calibr_Val_angle_90;
+    GX_MULTI_LINE_TEXT_VIEW window_angle_calibr_text_prompt;
+    GX_PROMPT window_angle_calibr_Val_current_value;
+    GX_PROMPT window_angle_calibr_lb_current_val;
+} WINDOW_ANGLE_CALIBR_CONTROL_BLOCK;
+
+typedef struct WINDOW_MAIN_BLDC_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_main_BLDC_Val_power_consumtion;
+    GX_PROMPT window_main_BLDC_lb_power_consumption;
+    GX_PROMPT window_main_BLDC_Val_pwr_src_voltage;
+    GX_PROMPT window_main_BLDC_lb_pwr_src_voltage;
+    GX_PROMPT window_main_BLDC_lb_pwr_src_current;
+    GX_PROMPT window_main_BLDC_Val_pwr_src_current;
+    GX_PROMPT window_main_BLDC_Val_node_number;
+    GX_PROMPT window_main_BLDC_lb_node_number;
+    GX_PROMPT window_main_BLDC_lb_A1;
+    GX_PROMPT window_main_BLDC_lb_W;
+    GX_PROMPT window_main_BLDC_lb_V;
+    GX_PROMPT window_main_BLDC_lb_motor_current;
+    GX_PROMPT window_main_BLDC_Val_motor_current;
+    GX_PROMPT window_main_BLDC_lb_A2;
+    GX_ICON window_main_BLDC_icon;
+    GX_PROMPT window_main_BLDC_lb_shaft_rot_speed;
+    GX_PROMPT window_main_BLDC_Val_shaft_rot_speed;
+    GX_PROMPT window_main_BLDC_lb_grad_s;
+    GX_PROMPT window_main_BLDC_lb_shaft_position;
+    GX_PROMPT window_main_BLDC_Val_shaft_position;
+    GX_PROMPT window_main_BLDC_lb_grad;
+    GX_PROMPT window_main_BLDC_lb_errors;
+    GX_PROMPT window_main_BLDC_Val_errors;
+    GX_PROMPT window_main_BLDC_lb_speed;
+    GX_PROMPT window_main_BLDC_Val_speed;
+    GX_PROMPT window_main_BLDC_Val_version;
+} WINDOW_MAIN_BLDC_CONTROL_BLOCK;
+
+typedef struct WINDOW_MENU_BLDC_CONTROL_BLOCK_STRUCT
+{
+    GX_WINDOW_MEMBERS_DECLARE
+    GX_PROMPT window_menu_BLDC_prmpt_diagnostic;
+    GX_PROMPT window_menu_BLDC_prmpt_reset;
+    GX_PROMPT window_menu_BLDC_prmpt_can_id_edit;
+    GX_PROMPT window_menu_BLDC_prmpt_return;
+    GX_PROMPT window_menu_BLDC_lb_menu;
+    GX_PROMPT window_menu_BLDC_prmpt_angle_calibration;
+    GX_PROMPT window_menu_BLDC_prmpt_rotation_speed;
+} WINDOW_MENU_BLDC_CONTROL_BLOCK;
+
 
 /* extern statically defined control blocks                                    */
 
 #ifndef GUIX_STUDIO_GENERATED_FILE
-extern WINDOW_CANRC_CONTROL_BLOCK window_canrc;
-extern WINDOW_DMENU_CONTROL_BLOCK window_dmenu;
-extern WINDOW_QMENU_CONTROL_BLOCK window_qmenu;
-extern WINDOW_SPEED_EDIT_CONTROL_BLOCK window_speed_edit;
-extern WINDOW_ANGLE_CALIBR_CONTROL_BLOCK window_angle_calibr;
-extern WINDOW_MAIN_CONTROL_BLOCK window_main;
-extern WINDOW_CAN_ID_CONTROL_BLOCK window_can_id;
-extern WINDOW_MENU_CONTROL_BLOCK window_menu;
+extern W_COMM_LAW_CONTROL_BLOCK w_comm_law;
+extern W_MN_MOTTEST_CONTROL_BLOCK w_mn_mottest;
+extern WINDOW_CAN_REM_CONTROL_CONTROL_BLOCK window_CAN_rem_control;
 extern WINDOW_SDCARD_STATE_CONTROL_BLOCK window_sdcard_state;
 extern WINDOW_NET_STATE_CONTROL_BLOCK window_net_state;
+extern WINDOW_DIAGNOSTIC_MENU_CONTROL_BLOCK window_diagnostic_menu;
+extern WINDOW_CAN_ID_CONTROL_BLOCK window_can_id;
+extern WINDOW_MENU_DC_CONTROL_BLOCK window_menu_DC;
+extern WINDOW_MANUAL_DC_CTRL_CONTROL_BLOCK window_manual_DC_ctrl;
+extern WINDOW_MAIN_DC_CONTROL_BLOCK window_main_DC;
+extern WINDOW_MAN_BLDC_CTRL_CONTROL_BLOCK window_man_BLDC_ctrl;
+extern WINDOW_SPEED_EDIT_CONTROL_BLOCK window_speed_edit;
+extern WINDOW_ANGLE_CALIBR_CONTROL_BLOCK window_angle_calibr;
+extern WINDOW_MAIN_BLDC_CONTROL_BLOCK window_main_BLDC;
+extern WINDOW_MENU_BLDC_CONTROL_BLOCK window_menu_BLDC;
 #endif
 
 /* Declare event process functions, draw functions, and callback functions     */
 
+UINT W_comm_law_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID W_comm_law_draw_callback(GX_WINDOW *widget);
+UINT Mn_mot_test_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Mn_mot_test_draw_callback(GX_WINDOW *widget);
 UINT CanRC_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID CanRC_draw_callback(GX_WINDOW *widget);
-UINT Dmenu_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID Dmenu_draw_callback(GX_WINDOW *widget);
+UINT SDcard_state_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID SDcard_state_draw_callback(GX_WINDOW *widget);
+UINT Net_state_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Net_state_draw_callback(GX_WINDOW *widget);
+UINT Diagnostic_menu_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Diagnostic_menu_draw_callback(GX_WINDOW *widget);
+UINT Can_id_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Can_id_draw_callback(GX_WINDOW *widget);
+UINT Menu_DC_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Menu_DC_draw_callback(GX_WINDOW *widget);
+UINT Manual_DC_ctrl_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Manual_DC_ctrl_draw_callback(GX_WINDOW *widget);
+UINT Main_DC_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Main_DC_draw_callback(GX_WINDOW *widget);
 UINT Qmenu_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID Qmenu_draw_callback(GX_WINDOW *widget);
 UINT Speed_edit_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
@@ -288,14 +416,8 @@ UINT Angle_calibr_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID Angle_calibr_draw_callback(GX_WINDOW *widget);
 UINT Main_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
 VOID Main_draw_callback(GX_WINDOW *widget);
-UINT Can_id_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID Can_id_draw_callback(GX_WINDOW *widget);
-UINT Menu_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID Menu_draw_callback(GX_WINDOW *widget);
-UINT SDcard_state_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID SDcard_state_draw_callback(GX_WINDOW *widget);
-UINT Net_state_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
-VOID Net_state_draw_callback(GX_WINDOW *widget);
+UINT Menu_BLDC_event_callback(GX_WINDOW *widget, GX_EVENT *event_ptr);
+VOID Menu_BLDC_draw_callback(GX_WINDOW *widget);
 
 /* Declare the GX_STUDIO_DISPLAY_INFO structure                                */
 

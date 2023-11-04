@@ -457,14 +457,13 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state>$PROJ_DIR$\Doc</state>
-                    <state>$PROJ_DIR$\Doc\Article</state>
-                    <state>$PROJ_DIR$\Doc\Article2</state>
-                    <state>$PROJ_DIR$\Doc\Article3</state>
-                    <state>$PROJ_DIR$\Doc\MATLAB_PID</state>
-                    <state>$PROJ_DIR$\Doc\MATLAB_records_from_hardware</state>
-                    <state>$PROJ_DIR$\Doc\__Previews</state>
                     <state>$PROJ_DIR$\src</state>
+                    <state>$PROJ_DIR$\src\App</state>
+                    <state>$PROJ_DIR$\src\App\Async_Rotation</state>
+                    <state>$PROJ_DIR$\src\App\BLDC_control</state>
+                    <state>$PROJ_DIR$\src\App\BLDC_test</state>
+                    <state>$PROJ_DIR$\src\App\DC_servo_control</state>
+                    <state>$PROJ_DIR$\src\App\OPS_BLDC_control</state>
                     <state>$PROJ_DIR$\src\App_common</state>
                     <state>$PROJ_DIR$\src\Compressors</state>
                     <state>$PROJ_DIR$\src\FileSystem</state>
@@ -480,14 +479,17 @@
                     <state>$PROJ_DIR$\src\GUIX\common\src</state>
                     <state>$PROJ_DIR$\src\GUIX\imgs</state>
                     <state>$PROJ_DIR$\src\HMI</state>
-                    <state>$PROJ_DIR$\src\HMI\Screens</state>
+                    <state>$PROJ_DIR$\src\HMI\BLDC_Control_Screens</state>
+                    <state>$PROJ_DIR$\src\HMI\BLDC_Test_screens</state>
+                    <state>$PROJ_DIR$\src\HMI\Common_screens</state>
+                    <state>$PROJ_DIR$\src\HMI\DC_Control_Screens</state>
                     <state>$PROJ_DIR$\src\JSON</state>
                     <state>$PROJ_DIR$\src\Logger</state>
+                    <state>$PROJ_DIR$\src\MATLAB_ADRC</state>
                     <state>$PROJ_DIR$\src\MATLAB_PID</state>
                     <state>$PROJ_DIR$\src\Net</state>
                     <state>$PROJ_DIR$\src\NV_store</state>
                     <state>$PROJ_DIR$\src\Params_manager</state>
-                    <state>$PROJ_DIR$\src\Params_manager\ParametersGenerator</state>
                     <state>$PROJ_DIR$\src\RTT</state>
                     <state>$PROJ_DIR$\src\SoC_periphery</state>
                     <state>$PROJ_DIR$\src\Sound_player</state>
@@ -875,7 +877,7 @@
             <name>BUILDACTION</name>
             <archiveVersion>1</archiveVersion>
             <data>
-                <prebuild>del .\Out\MC50\Obj\MC50\src\Utils\String_utils.o</prebuild>
+                <prebuild></prebuild>
                 <postbuild></postbuild>
             </data>
         </settings>
@@ -1280,7 +1282,172 @@
         <group>
             <name>src</name>
             <group>
+                <name>App</name>
+                <group>
+                    <name>Async_Rotation</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\Async_Rotation\Async_Sinusoidal_rotation.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\Async_Rotation\Async_Sinusoidal_rotation.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>BLDC_control</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_control\Motor_BLDC_control.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_control\Motor_BLDC_control.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_control\Servo_BLDC_control.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_control\Servo_BLDC_control.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>BLDC_test</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_test\BLDC_mot_test.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_test\BLDC_mot_test.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_test\CommutationLaw_search.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\BLDC_test\CommutationLaw_search.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>DC_servo_control</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\DC_servo_control\DC_servo_control.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\DC_servo_control\DC_servo_control.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>OPS_BLDC_control</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\OPS_BLDC_control\Motor_OPS_BLDC_control.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\OPS_BLDC_control\Motor_OPS_BLDC_control.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\OPS_BLDC_control\Servo_OPS_BLDC_control.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\App\OPS_BLDC_control\Servo_OPS_BLDC_control.h</name>
+                    </file>
+                </group>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Background_thread.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Background_thread.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\BSP_init.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\CAN_communication.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\CAN_communication.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Common_control.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Common_control.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\CSVPWM_gen.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\CSVPWM_gen.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Current_PID.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Current_PID.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Hall_3PH_encoder.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Hall_3PH_encoder.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Main_thread.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\MC50.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Measurements.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Measurements.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Memory_manager.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Memory_manager.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\MotDriver_TMC6200.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\MotDriver_TMC6200.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Outputs_control.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Outputs_control.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\PWM_generator_test.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Quad_encoder.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Quad_encoder.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Sin_gen_3Ph.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Sin_gen_3Ph.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Speed_PID.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Speed_PID.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Speed_S-curve.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\App\Speed_S-curve.h</name>
+                </file>
+            </group>
+            <group>
                 <name>App_common</name>
+                <file>
+                    <name>$PROJ_DIR$\src\App_common\Build_date_time.c</name>
+                </file>
                 <file>
                     <name>$PROJ_DIR$\src\App_common\CAN_bus_defs.h</name>
                 </file>
@@ -6253,513 +6420,105 @@
             <group>
                 <name>HMI</name>
                 <group>
-                    <name>Screens</name>
+                    <name>BLDC_Control_Screens</name>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Calibration_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Main_BLDC_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Calibration_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Main_BLDC_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\CAN_id_edit_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Manual_BLDC_ctrl_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\CAN_id_edit_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Manual_BLDC_ctrl_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\CanRC_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Menu_BLDC_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\CanRC_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Control_Screens\Menu_BLDC_screen.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>BLDC_Test_screens</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Test_screens\BLDC_test_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\DMenu_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Test_screens\BLDC_test_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\DMenu_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Test_screens\Comm_law_search_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Main_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\BLDC_Test_screens\Comm_law_search_screen.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>Common_screens</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Calibration_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Main_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Calibration_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Menu_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\CAN_id_edit_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Menu_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\CAN_id_edit_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Net_state_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\CAN_RemControl_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Net_state_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\CAN_RemControl_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\QMenu_screen.c</name>
-                        <configuration>
-                            <name>Debug</name>
-                            <settings>
-                                <name>ICCARM</name>
-                                <data>
-                                    <version>37</version>
-                                    <wantNonLocal>0</wantNonLocal>
-                                    <debug>1</debug>
-                                    <option>
-                                        <name>CCDefines</name>
-                                        <state>_DLIB_TIME_USES_64=1</state>
-                                        <state>ACTUAL_DATE=__DATE__</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPreprocFile</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPreprocComments</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPreprocLine</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCListCFile</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCListCMnemonics</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCListCMessages</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCListAssFile</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCListAssSource</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCEnableRemarks</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCDiagSuppress</name>
-                                        <state></state>
-                                    </option>
-                                    <option>
-                                        <name>CCDiagRemark</name>
-                                        <state></state>
-                                    </option>
-                                    <option>
-                                        <name>CCDiagWarning</name>
-                                        <state></state>
-                                    </option>
-                                    <option>
-                                        <name>CCDiagError</name>
-                                        <state></state>
-                                    </option>
-                                    <option>
-                                        <name>CCObjPrefix</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCAllowList</name>
-                                        <version>1</version>
-                                        <state>00000000</state>
-                                    </option>
-                                    <option>
-                                        <name>CCDebugInfo</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IEndianMode</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IProcessor</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IExtraOptionsCheck</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IExtraOptions</name>
-                                        <state> --no_const_align</state>
-                                    </option>
-                                    <option>
-                                        <name>CCLangConformance</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCSignedPlainChar</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCRequirePrototypes</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCDiagWarnAreErr</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCCompilerRuntimeInfo</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IFpuProcessor</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>OutputFile</name>
-                                        <state>$FILE_BNAME$.o</state>
-                                    </option>
-                                    <option>
-                                        <name>CCLibConfigHeader</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>PreInclude</name>
-                                        <state></state>
-                                    </option>
-                                    <option>
-                                        <name>CCStdIncCheck</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCCodeSection</name>
-                                        <state>.text</state>
-                                    </option>
-                                    <option>
-                                        <name>IProcessorMode2</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCOptLevel</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCOptStrategy</name>
-                                        <version>0</version>
-                                        <state>2</state>
-                                    </option>
-                                    <option>
-                                        <name>CCOptLevelSlave</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPosIndRopi</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPosIndRwpi</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCPosIndNoDynInit</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccLang</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccCDialect</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IccAllowVLA</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccStaticDestr</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IccCppInlineSemantics</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccCmsis</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>IccFloatSemantics</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCOptimizationNoSizeConstraints</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCNoLiteralPool</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCOptStrategySlave</name>
-                                        <version>0</version>
-                                        <state>2</state>
-                                    </option>
-                                    <option>
-                                        <name>CCEncSource</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCEncOutput</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCEncOutputBom</name>
-                                        <state>1</state>
-                                    </option>
-                                    <option>
-                                        <name>CCEncInput</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccExceptions2</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>IccRTTI2</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCStackProtection</name>
-                                        <state>0</state>
-                                    </option>
-                                    <option>
-                                        <name>CCIncludePath2</name>
-                                        <state>$PROJ_DIR$\Doc</state>
-                                        <state>$PROJ_DIR$\Doc\Article</state>
-                                        <state>$PROJ_DIR$\Doc\Article2</state>
-                                        <state>$PROJ_DIR$\Doc\Article3</state>
-                                        <state>$PROJ_DIR$\Doc\MATLAB_PID</state>
-                                        <state>$PROJ_DIR$\Doc\MATLAB_records_from_hardware</state>
-                                        <state>$PROJ_DIR$\Doc\__Previews</state>
-                                        <state>$PROJ_DIR$\src</state>
-                                        <state>$PROJ_DIR$\src\App_common</state>
-                                        <state>$PROJ_DIR$\src\Compressors</state>
-                                        <state>$PROJ_DIR$\src\FileSystem</state>
-                                        <state>$PROJ_DIR$\src\FileSystem\FileX</state>
-                                        <state>$PROJ_DIR$\src\FileSystem\FileX\FileX_cfg</state>
-                                        <state>$PROJ_DIR$\src\FileSystem\FileX\fx_src</state>
-                                        <state>$PROJ_DIR$\src\FileSystem\FileX\fx_src\filex_exFAT</state>
-                                        <state>$PROJ_DIR$\src\FileSystem\FileX\fx_src\filex_utilities</state>
-                                        <state>$PROJ_DIR$\src\FreeMaster</state>
-                                        <state>$PROJ_DIR$\src\GUIX</state>
-                                        <state>$PROJ_DIR$\src\GUIX\common</state>
-                                        <state>$PROJ_DIR$\src\GUIX\common\inc</state>
-                                        <state>$PROJ_DIR$\src\GUIX\common\src</state>
-                                        <state>$PROJ_DIR$\src\GUIX\imgs</state>
-                                        <state>$PROJ_DIR$\src\HMI</state>
-                                        <state>$PROJ_DIR$\src\HMI\Screens</state>
-                                        <state>$PROJ_DIR$\src\JSON</state>
-                                        <state>$PROJ_DIR$\src\Logger</state>
-                                        <state>$PROJ_DIR$\src\MATLAB_PID</state>
-                                        <state>$PROJ_DIR$\src\Net</state>
-                                        <state>$PROJ_DIR$\src\NV_store</state>
-                                        <state>$PROJ_DIR$\src\Params_manager</state>
-                                        <state>$PROJ_DIR$\src\Params_manager\ParametersGenerator</state>
-                                        <state>$PROJ_DIR$\src\RTT</state>
-                                        <state>$PROJ_DIR$\src\SoC_periphery</state>
-                                        <state>$PROJ_DIR$\src\Sound_player</state>
-                                        <state>$PROJ_DIR$\src\synergy</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\bsp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\bsp\cmsis</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\bsp\cmsis\Include</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\bsp\cmsis\Include\dsp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\driver</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\driver\api</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\driver\instances</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\api</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\el</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\el\cm4_iar</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\el\cm4_iar\nxd</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\el\nxd</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\el\nxd_application_layer</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\inc\framework\instances</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\Device</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\Device\RENESAS</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\Device\RENESAS\S5D9</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\Device\RENESAS\S5D9\Include</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\Device\RENESAS\S5D9\Source</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\DSP_Lib</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\DSP_Lib\cm4_iar</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\NN_Lib</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\cmsis\NN_Lib\cm4_iar</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\mcu</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\mcu\all</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\bsp\mcu\s5d9</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_adc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_adc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_cgc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_cgc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dmac</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dmac\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dmac\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dtc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dtc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_dtc\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_elc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_elc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_elc\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_flash_hp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_flash_hp\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_flash_hp\hw\target</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_fmi</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_fmi\libs</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_gpt</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_gpt\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_gpt\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_ioport</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_ioport\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_decode</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_decode\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_decode\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_encode</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_encode\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_jpeg_encode\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic_slave</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic_slave\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_riic_slave\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rspi</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rspi\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rspi\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rtc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rtc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_rtc\hw\common</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sce</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sce\libs</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sci_i2c</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sci_i2c\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sci_spi</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sci_spi\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sdmmc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\driver\r_sdmmc\hw</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd\nxd_src</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_auto_ip</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_crypto_generic</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_dhcp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_dhcp_server</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_dns</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_ftp_client</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_http_client</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_http_server</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_mdns</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_mqtt_client</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_nat</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_pop3</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_ppp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_smtp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_snmp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_sntp</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_telnet_client</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_telnet_server</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_tls_secure</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_web_http_client</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_application_layer\nxd_web_http_server</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nxd_bsd</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nx_des</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nx_md5</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\nx_sha1</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\tx</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\tx\cm4_iar</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\tx\tx_src</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\el\tx\tx_src\synergy</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_block_media_sdmmc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_cipher</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_cipher\aes</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_cipher\rsa</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_hash</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_key</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_key\aes</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_key\ecc</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_key\rsa</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_key_installation</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_signature</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_signature\rsa</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_crypto_trng</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_el_fx</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_el_nx_crypto</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_el_ux</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_el_ux_comms_v2</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_i2c</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp\src\framework\sf_spi</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp_supplemental</state>
-                                        <state>$PROJ_DIR$\src\synergy\ssp_supplemental\filex_stub</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg\ssp_cfg</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg\ssp_cfg\bsp</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg\ssp_cfg\driver</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg\ssp_cfg\framework</state>
-                                        <state>$PROJ_DIR$\src\synergy_cfg\ssp_cfg\framework\el</state>
-                                        <state>$PROJ_DIR$\src\synergy_gen</state>
-                                        <state>$PROJ_DIR$\src\USB</state>
-                                        <state>$PROJ_DIR$\src\UsbX</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\core</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\core\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\core\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_device_classes</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_device_classes\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_device_classes\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_classes</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_classes\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_classes\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_controllers</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_controllers\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_host_controllers\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_network</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_network\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_network\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_pictbridge</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_pictbridge\inc</state>
-                                        <state>$PROJ_DIR$\src\UsbX\common\usbx_pictbridge\src</state>
-                                        <state>$PROJ_DIR$\src\UsbX\ports</state>
-                                        <state>$PROJ_DIR$\src\Utils</state>
-                                        <state>$PROJ_DIR$\src\VT100</state>
-                                    </option>
-                                </data>
-                            </settings>
-                        </configuration>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Diagnostic_Menu_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\QMenu_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Diagnostic_Menu_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\SDcard_state_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Net_state_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\SDcard_state_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Net_state_screen.h</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Speed_edit_screen.c</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\SDcard_state_screen.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\src\HMI\Screens\Speed_edit_screen.h</name>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\SDcard_state_screen.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Speed_edit_screen.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\Common_screens\Speed_edit_screen.h</name>
+                    </file>
+                </group>
+                <group>
+                    <name>DC_Control_Screens</name>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Main_DC_screen.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Main_DC_screen.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Manual_DC_ctrl_screen.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Manual_DC_ctrl_screen.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Menu_DC_screen.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\src\HMI\DC_Control_Screens\Menu_DC_screen.h</name>
                     </file>
                 </group>
                 <file>
@@ -6767,6 +6526,12 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\HMI\HMI.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\HMI\Manual_Encoder.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\HMI\Manual_Encoder.h</name>
                 </file>
             </group>
             <group>
@@ -6842,6 +6607,27 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\Logger\Start_report.h</name>
+                </file>
+            </group>
+            <group>
+                <name>MATLAB_ADRC</name>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\ADRCcontroller.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\ADRCcontroller.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\mw_cmsis.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\sadrc_data.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\sadrc_private.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\MATLAB_ADRC\sadrc_types.h</name>
                 </file>
             </group>
             <group>
@@ -7039,28 +6825,10 @@
                     <name>$PROJ_DIR$\src\SoC_periphery\ELC_tbl.h</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\Encoder_handler.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\Encoder_handler.h</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\Flasher.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\Flasher.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\GPT32EH0_PWM.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\GPT32EH0_PWM.h</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\GPT_11_12_Capture.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\src\SoC_periphery\GPT_11_12_Capture.h</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\Pins.c</name>
@@ -7069,10 +6837,34 @@
                     <name>$PROJ_DIR$\src\SoC_periphery\Pins.h</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_3Ph_OPS.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_3Ph_OPS.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_Triangle_3Ph_2buffered.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_Triangle_3Ph_2buffered.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_Triangle_3Ph_buffered.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\PWM_Triangle_3Ph_buffered.h</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\Realtime_clock.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\Realtime_clock.h</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\Rot_Encoders_capturing.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\src\SoC_periphery\Rot_Encoders_capturing.h</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\src\SoC_periphery\s7_sdmmc.c</name>
@@ -15559,63 +15351,6 @@
                     <name>$PROJ_DIR$\src\VT100\System_info_monitor.h</name>
                 </file>
             </group>
-            <file>
-                <name>$PROJ_DIR$\src\Background_thread.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Background_thread.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\BSP_init.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\CAN_communication.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\CAN_communication.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Main_thread.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\MC50.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Measurements.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Measurements.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Memory_manager.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Memory_manager.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\MotDriver_TMC6200.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\MotDriver_TMC6200.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Motor_control.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Motor_control.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Outputs_control.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Outputs_control.h</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Search_6step_sequence.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\src\Search_6step_sequence.h</name>
-            </file>
         </group>
     </group>
 </project>

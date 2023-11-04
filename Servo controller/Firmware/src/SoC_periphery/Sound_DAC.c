@@ -96,7 +96,7 @@ void Sound_DAC_update_sample_rate(uint32_t sample_rate)
 {
   if (sample_rate > PLAYER_MAX_SAMPLE_RATE) sample_rate = PLAYER_MAX_SAMPLE_RATE;
 
-  Init_AGT1_ticks_to_DTC(AGT_CLOCK_FREQ / sample_rate);
+  Init_AGT1_ticks_to_DAC_DTC(AGT_CLOCK_FREQ / sample_rate);
 
 }
 

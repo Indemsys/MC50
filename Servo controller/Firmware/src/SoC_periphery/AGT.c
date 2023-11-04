@@ -4,13 +4,32 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #include   "MC50.h"
 
+IRQn_Type             agt0_int_num;
+
+void  AGT0_isr(void);
+
+SSP_VECTOR_DEFINE_CHAN(AGT0_isr, AGT, INT, 0);
+
 
 /*-----------------------------------------------------------------------------------------------------
-  Инициализируем AGT0 для генерации сигналов выборки ADC
+  Обработчик прерывания по исчерпанию счетчика AGT0
+  Используется для обслуживания ручного энкодера
+
+  \param void
+-----------------------------------------------------------------------------------------------------*/
+void  AGT0_isr(void)
+{
+  Manual_encoder_processing();           // 1.98 us Обрабатываем сигналы с ручного энкодера
+  R_ICU->IELSRn_b[agt0_int_num].IR = 0;  // Сбрасываем IR флаг в ICU
+}
+
+
+/*-----------------------------------------------------------------------------------------------------
+  Инициализируем AGT0
 
   \param rate
 -----------------------------------------------------------------------------------------------------*/
-void Init_AGT0_ticks_to_ADC(uint16_t rate)
+void Init_AGT0_ticks_man_enc(uint16_t rate)
 {
   // Инициализируем таймер AGT0
   R_MSTP->MSTPCRD_b.MSTPD3  = 0; // AGT0.                          0: Cancel the module-stop state
@@ -31,6 +50,14 @@ void Init_AGT0_ticks_to_ADC(uint16_t rate)
              + LSHIFT(1,  0) // TSTART | AGT Count Start           | 1: Start count.
   ;
 
+
+  agt0_int_num = (IRQn_Type)Find_IRQ_number_by_evt(ELC_EVENT_AGT0_INT);
+  NVIC_SetPriority(agt0_int_num, AGT0_PRIO);
+
+  R_ICU->IELSRn_b[agt0_int_num].IR = 0;  // Сбрасываем IR флаг в ICU
+  NVIC_ClearPendingIRQ(agt0_int_num);
+  NVIC_EnableIRQ(agt0_int_num);
+
 }
 
 /*-----------------------------------------------------------------------------------------------------
@@ -38,7 +65,7 @@ void Init_AGT0_ticks_to_ADC(uint16_t rate)
 
   \param rate
 -----------------------------------------------------------------------------------------------------*/
-void Init_AGT1_ticks_to_DTC(uint16_t rate)
+void Init_AGT1_ticks_to_DAC_DTC(uint16_t rate)
 {
   if (R_MSTP->MSTPCRD_b.MSTPD2 != 0)
   {

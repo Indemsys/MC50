@@ -2,41 +2,216 @@
 #include "freemaster_tsa.h"
 
 
-#define  WVAR_SIZE        64
-#define  PARMNU_ITEM_NUM   19
+#define  WVAR_SIZE        83
+#define  PARMNU_ITEM_NUM   23
 
-#define  SELECTORS_NUM     6
+#define  SELECTORS_NUM     7
 
 WVAR_TYPE  wvar;
 
 
 static const T_parmenu parmenu[PARMNU_ITEM_NUM]=
 {
-{ MC50_servo_controller       , MC50_Movement               , "Movement parameters        ", "                    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_BLDC_motor             , "BLDC motor parameters      ", "                    ", -1   }, // 
+{ MC50_Applications           , MC50_DC_motor_controller    , "DC traction motor          ", "DC traction motor   ", -1   }, // DC traction motor
 { MC50_0                      , MC50_main                   , "Parameters and settings    ", "PARAMETERS          ", -1   }, // Основная категория
-{ MC50_servo_controller       , MC50_Calibrating            , "Movement calibrating       ", "                    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_Movement               , "Movement parameters        ", "                    ", -1   }, // 
+{ MC50_Interfaces             , MC50_CAN_interface          , "CAN interface settings     ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_USB_Interface          , "USB Interface settings     ", "                    ", -1   }, // 
-{ MC50_servo_controller       , MC50_CurrentLoop            , "Motor current loop control ", "                    ", -1   }, // 
+{ MC50_Applications           , MC50_BLDC_servo_controller  , "BLDC Servo controller      ", "                    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_Calibrating            , "Movement calibrating       ", "                    ", -1   }, // 
+{ MC50_main                   , MC50_General                , "General settings           ", "GENERAL_SETTINGS    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_CurrentLoop            , "Motor current loop control ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_Display                , "Display settings           ", "                    ", -1   }, // 
-{ MC50_servo_controller       , MC50_SpeedLoop              , "Motor speed loop control   ", "                    ", -1   }, // 
+{ MC50_main                   , MC50_Applications           , "Applications               ", "                    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_SpeedLoop              , "Motor speed loop control   ", "                    ", -1   }, // 
+{ MC50_main                   , MC50_DriverIC               , "Driver IC settings         ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_Settings               , "Settings format            ", "                    ", -1   }, // 
-{ MC50_servo_controller       , MC50_Driver                 , "Driver IC settings         ", "                    ", -1   }, // 
+{ MC50_BLDC_servo_controller  , MC50_ADRC_loop              , "ADRC loop control          ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_Network                , "Network settings           ", "                    ", -1   }, // 
+{ MC50_main                   , MC50_Interfaces             , "Interfaces settings        ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_MQTT                   , "MQTT settings              ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_FTP_server             , "FTP server settings        ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_MATLAB                 , "MATLAB communication settings", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_SNTP                   , "Net time protocol setting  ", "                    ", -1   }, // 
 { MC50_Interfaces             , MC50_Sounds_player          , "Sounds player settings     ", "                    ", -1   }, // 
-{ MC50_main                   , MC50_General                , "General settings           ", "GENERAL_SETTINGS    ", -1   }, // 
-{ MC50_main                   , MC50_servo_controller       , "Servo controller settings  ", "                    ", -1   }, // 
-{ MC50_main                   , MC50_CAN_interface          , "CAN interface settings     ", "                    ", -1   }, // 
-{ MC50_main                   , MC50_Interfaces             , "Interfaces settings        ", "                    ", -1   }, // 
 };
 
 
 static const T_NV_parameters arr_wvar[WVAR_SIZE]=
 {
 // N: 0
+  {
+    "en_adrc",
+    "Enable ADRC algorithm (1-yes, 0-no)",
+    "-",
+    (void*)&wvar.en_adrc,
+    tint8u,
+    0,
+    0,
+    1,
+    0,
+    MC50_ADRC_loop,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.en_adrc),
+    0,
+    1,
+  },
+// N: 1
+  {
+    "adrc_b0",
+    "Critical gain",
+    "-",
+    (void*)&wvar.adrc_b0,
+    tfloat,
+    10000000.00,
+    -1.00000002004087728E20,
+    1.00000002004087728E20,
+    0,
+    MC50_ADRC_loop,
+    "",
+    "%e",
+    0,
+    sizeof(wvar.adrc_b0),
+    1,
+    0,
+  },
+// N: 2
+  {
+    "adrc_cbw",
+    "Controller bandwidth",
+    "-",
+    (void*)&wvar.adrc_cbw,
+    tfloat,
+    1000.00,
+    -1.00000002004087728E20,
+    1.00000002004087728E20,
+    0,
+    MC50_ADRC_loop,
+    "",
+    "%e",
+    0,
+    sizeof(wvar.adrc_cbw),
+    2,
+    0,
+  },
+// N: 3
+  {
+    "adrc_pwm_lo_lim",
+    "PWM_lower_limit",
+    "-",
+    (void*)&wvar.adrc_pwm_lo_lim,
+    tfloat,
+    3.00,
+    0.00,
+    1000.00,
+    0,
+    MC50_ADRC_loop,
+    "",
+    "%.1f",
+    0,
+    sizeof(wvar.adrc_pwm_lo_lim),
+    3,
+    0,
+  },
+// N: 4
+  {
+    "adrc_filter_k",
+    "Speed filter value ",
+    "-",
+    (void*)&wvar.adrc_filter_k,
+    tfloat,
+    64.00,
+    1.00,
+    2048.00,
+    0,
+    MC50_ADRC_loop,
+    "",
+    "%f",
+    0,
+    sizeof(wvar.adrc_filter_k),
+    4,
+    0,
+  },
+// N: 5
+  {
+    "bldc_comm_law",
+    "Commutation law (6 digit)",
+    "-",
+    (void*)&wvar.bldc_comm_law,
+    tint32u,
+    264513,
+    123456,
+    654321,
+    0,
+    MC50_BLDC_motor,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.bldc_comm_law),
+    0,
+    0,
+  },
+// N: 6
+  {
+    "bldc_mot_pole_num",
+    "Rotor pole numbers",
+    "-",
+    (void*)&wvar.bldc_mot_pole_num,
+    tint8u,
+    8,
+    1,
+    16,
+    0,
+    MC50_BLDC_motor,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.bldc_mot_pole_num),
+    1,
+    0,
+  },
+// N: 7
+  {
+    "bldc_max_rot_speed",
+    "Rotor maximum rotation speed (turn/s)",
+    "-",
+    (void*)&wvar.bldc_max_rot_speed,
+    tfloat,
+    84.00,
+    1.00,
+    84.00,
+    0,
+    MC50_BLDC_motor,
+    "",
+    "%0.1f",
+    0,
+    sizeof(wvar.bldc_max_rot_speed),
+    2,
+    0,
+  },
+// N: 8
+  {
+    "bldc_sett_max_current",
+    "Maximum current during setting (A)",
+    "-",
+    (void*)&wvar.bldc_sett_max_current,
+    tfloat,
+    5.00,
+    0.10,
+    10.00,
+    0,
+    MC50_BLDC_motor,
+    "",
+    "%0.f",
+    0,
+    sizeof(wvar.bldc_sett_max_current),
+    3,
+    0,
+  },
+// N: 9
   {
     "close_position",
     "Angle sensor value on 0 dgr. ",
@@ -55,7 +230,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     0,
   },
-// N: 1
+// N: 10
   {
     "open_position",
     "Angle sensor value on 90 dgr.",
@@ -74,7 +249,26 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 2
+// N: 11
+  {
+    "opposit_sensor_mnt",
+    "Opposite sensor mounting (1-yes, 0-no)",
+    "-",
+    (void*)&wvar.opposit_sensor_mnt,
+    tint8u,
+    0,
+    0,
+    1,
+    0,
+    MC50_Calibrating,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.opposit_sensor_mnt),
+    2,
+    1,
+  },
+// N: 12
   {
     "can_id",
     "CAN ID (8 digit hex number)",
@@ -93,7 +287,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     0,
   },
-// N: 3
+// N: 13
   {
     "can_node_number",
     "CAN node number (1...31)",
@@ -112,7 +306,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 4
+// N: 14
   {
     "can_speed_select",
     "Speed select (0-555Kbit, 1-100Kbit)",
@@ -131,7 +325,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 5
+// N: 15
   {
     "i_k_prop",
     "Kp (Proporcional)",
@@ -150,7 +344,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 6
+// N: 16
   {
     "i_k_diff",
     "Kd (Derivative)",
@@ -169,7 +363,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 7
+// N: 17
   {
     "i_k_integr",
     "Ki (Integral)",
@@ -188,7 +382,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 8
+// N: 18
   {
     "i_k_filter",
     "Kn (Filter coefficient) ",
@@ -207,7 +401,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     0,
   },
-// N: 9
+// N: 19
   {
     "i_max_slew_rate",
     "Maximum slew rate",
@@ -226,7 +420,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     0,
   },
-// N: 10
+// N: 20
   {
     "i_min_out",
     "Minimum output value (% PWM)",
@@ -245,7 +439,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     6,
     0,
   },
-// N: 11
+// N: 21
   {
     "i_max_out",
     "Maximum output value (% PWM)",
@@ -264,7 +458,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     7,
     0,
   },
-// N: 12
+// N: 22
   {
     "en_soft_commutation",
     "Enable soft commutation (1-yes, 0 -no)",
@@ -283,7 +477,64 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     8,
     1,
   },
-// N: 13
+// N: 23
+  {
+    "dc_motor_max_pwm",
+    "Max PWM level (%)",
+    "-",
+    (void*)&wvar.dc_motor_max_pwm,
+    tint32u,
+    100,
+    1,
+    100,
+    0,
+    MC50_DC_motor_controller,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.dc_motor_max_pwm),
+    1,
+    0,
+  },
+// N: 24
+  {
+    "dc_acceleration_time",
+    "Acceleration time (ms)",
+    "-",
+    (void*)&wvar.dc_acceleration_time,
+    tint32u,
+    5000,
+    100,
+    100000,
+    0,
+    MC50_DC_motor_controller,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.dc_acceleration_time),
+    2,
+    0,
+  },
+// N: 25
+  {
+    "dc_deceleration_time",
+    "Deceleration time (ms)",
+    "-",
+    (void*)&wvar.dc_deceleration_time,
+    tint32u,
+    5000,
+    100,
+    100000,
+    0,
+    MC50_DC_motor_controller,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.dc_deceleration_time),
+    3,
+    0,
+  },
+// N: 26
   {
     "screen_orientation",
     "Screen orientation (0..3)",
@@ -302,7 +553,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     0,
   },
-// N: 14
+// N: 27
   {
     "short_vs_det_level",
     "Short to VS detector level for lowside FETs (1- highest..15-lowest)",
@@ -313,7 +564,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     15,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -321,7 +572,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     0,
   },
-// N: 15
+// N: 28
   {
     "short_gnd_det_level",
     "Short to GND detector level for highside FETs (2- highest..15lowest)",
@@ -332,7 +583,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     15,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -340,7 +591,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 16
+// N: 29
   {
     "short_det_spike_filter",
     "Spike filtering bandwidth for short detection (0-100ns..3-3us)",
@@ -351,7 +602,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     3,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -359,7 +610,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 17
+// N: 30
   {
     "short_det_delay_param",
     "Short detection delay parameter (0..1)",
@@ -370,7 +621,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     1,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -378,7 +629,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 18
+// N: 31
   {
     "enable_short_to_gnd_prot",
     "Disable short to GND protection (1-Yes, 0-No)",
@@ -389,7 +640,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     1,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -397,7 +648,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     1,
   },
-// N: 19
+// N: 32
   {
     "enable_short_to_vs_prot",
     "Disable short to VS protection (1-Yes, 0-No)",
@@ -408,7 +659,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     1,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -416,7 +667,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     1,
   },
-// N: 20
+// N: 33
   {
     "gate_driver_current_param",
     "Gate driver current parameter (0-weak..4-strong)",
@@ -427,7 +678,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     3,
     0,
-    MC50_Driver,
+    MC50_DriverIC,
     "",
     "%d",
     0,
@@ -435,7 +686,45 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     6,
     0,
   },
-// N: 21
+// N: 34
+  {
+    "shunt_resistor",
+    "Shunt resistor (Ohm)",
+    "-",
+    (void*)&wvar.shunt_resistor,
+    tfloat,
+    0.00,
+    0.00,
+    1.00,
+    0,
+    MC50_DriverIC,
+    "",
+    "%0.4f",
+    0,
+    sizeof(wvar.shunt_resistor),
+    7,
+    0,
+  },
+// N: 35
+  {
+    "input_shunt_resistor",
+    "Input shunt resistor (Ohm)",
+    "-",
+    (void*)&wvar.input_shunt_resistor,
+    tfloat,
+    0.00,
+    0.00,
+    1.00,
+    0,
+    MC50_DriverIC,
+    "",
+    "%0.4f",
+    0,
+    sizeof(wvar.input_shunt_resistor),
+    8,
+    0,
+  },
+// N: 36
   {
     "enable_ftp_server",
     "Enable FTP server",
@@ -454,7 +743,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     1,
   },
-// N: 22
+// N: 37
   {
     "ftp_serv_login",
     "Login",
@@ -473,7 +762,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 23
+// N: 38
   {
     "ftp_serv_password",
     "Password ",
@@ -492,7 +781,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 24
+// N: 39
   {
     "name",
     "Product  name",
@@ -511,7 +800,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 25
+// N: 40
   {
     "manuf_date",
     "Manufacturing date",
@@ -530,7 +819,45 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 26
+// N: 41
+  {
+    "app_type",
+    "Applicationl type (0- Servo  BLDC with OPS, 1- DC traction motor, 2- Servo  BLDC, 3 - Async.rot., 4 - Test)",
+    "-",
+    (void*)&wvar.app_type,
+    tint8u,
+    0,
+    0,
+    4,
+    0,
+    MC50_General,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.app_type),
+    3,
+    6,
+  },
+// N: 42
+  {
+    "pwm_frequency",
+    "PWM frequency (Hz)",
+    "-",
+    (void*)&wvar.pwm_frequency,
+    tint32u,
+    16000,
+    1000,
+    20000,
+    0,
+    MC50_General,
+    "",
+    "%d",
+    0,
+    sizeof(wvar.pwm_frequency),
+    4,
+    0,
+  },
+// N: 43
   {
     "en_matlab",
     "Enable MATLAB communication server",
@@ -549,10 +876,10 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     1,
   },
-// N: 27
+// N: 44
   {
     "rotation_speed",
-    "Nominal rotation speed (grad per sec)",
+    "Nominal rotation speed (deg per sec)",
     "-",
     (void*)&wvar.rotation_speed,
     tfloat,
@@ -568,10 +895,10 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     0,
   },
-// N: 28
+// N: 45
   {
     "min_rotation_speed",
-    "Minimal rotation speed (grad per sec)",
+    "Minimal rotation speed (deg per sec)",
     "-",
     (void*)&wvar.min_rotation_speed,
     tfloat,
@@ -587,7 +914,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 29
+// N: 46
   {
     "acceleration_time_ms",
     "Acceleration time (msec)",
@@ -606,7 +933,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 30
+// N: 47
   {
     "deceleration_time_ms ",
     "Deceleration time (msec)",
@@ -625,7 +952,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 31
+// N: 48
   {
     "movement_max_duration",
     "Movement max duration (sec)",
@@ -644,7 +971,45 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     0,
   },
-// N: 32
+// N: 49
+  {
+    "opening_margine",
+    "Opening margine (deg)",
+    "-",
+    (void*)&wvar.opening_margine,
+    tfloat,
+    0.00,
+    0.00,
+    45.00,
+    0,
+    MC50_Movement,
+    "",
+    "%0.1f",
+    0,
+    sizeof(wvar.opening_margine),
+    5,
+    0,
+  },
+// N: 50
+  {
+    "closing_margine",
+    "Closing margine (deg)",
+    "-",
+    (void*)&wvar.closing_margine,
+    tfloat,
+    10.00,
+    0.00,
+    45.00,
+    0,
+    MC50_Movement,
+    "",
+    "%0.1f",
+    0,
+    sizeof(wvar.closing_margine),
+    6,
+    0,
+  },
+// N: 51
   {
     "mqtt_enable",
     "Enable MQTT client ",
@@ -663,7 +1028,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     1,
   },
-// N: 33
+// N: 52
   {
     "mqtt_client_id",
     "Client ID",
@@ -682,7 +1047,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 34
+// N: 53
   {
     "mqtt_server_ip",
     "MQTT server IP address",
@@ -701,7 +1066,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 35
+// N: 54
   {
     "mqtt_server_port",
     "MQTT server port number",
@@ -720,7 +1085,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     0,
   },
-// N: 36
+// N: 55
   {
     "mqtt_user_name",
     "User name",
@@ -739,7 +1104,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     0,
   },
-// N: 37
+// N: 56
   {
     "mqtt_password",
     "User password",
@@ -758,7 +1123,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     6,
     0,
   },
-// N: 38
+// N: 57
   {
     "default_ip_addr",
     "Default IP address",
@@ -777,7 +1142,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     2,
   },
-// N: 39
+// N: 58
   {
     "default_net_mask",
     "Default network mask ",
@@ -796,7 +1161,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     2,
   },
-// N: 40
+// N: 59
   {
     "default_gateway_addr",
     "Default gateway address",
@@ -815,7 +1180,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     2,
   },
-// N: 41
+// N: 60
   {
     "en_dhcp_client",
     "Enable DHCP client (0-No, 1-Yes)",
@@ -834,7 +1199,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     1,
   },
-// N: 42
+// N: 61
   {
     "this_host_name",
     "This device host name",
@@ -853,7 +1218,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     0,
   },
-// N: 43
+// N: 62
   {
     "en_compress_settins",
     "Enable compress settings file (1-yes, 0-no)",
@@ -872,7 +1237,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     1,
   },
-// N: 44
+// N: 63
   {
     "en_formating_settings",
     "Enable formating in  settings file (1-yes, 0-no)",
@@ -891,7 +1256,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     1,
   },
-// N: 45
+// N: 64
   {
     "en_sntp",
     "Enable SNTP client",
@@ -910,7 +1275,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     1,
   },
-// N: 46
+// N: 65
   {
     "en_sntp_time_receiving",
     "Allow to receive time from time servers",
@@ -929,7 +1294,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     1,
   },
-// N: 47
+// N: 66
   {
     "utc_offset",
     "UTC offset (difference in hours +-)",
@@ -948,7 +1313,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 48
+// N: 67
   {
     "time_server_1",
     "Time server 1 URL",
@@ -967,7 +1332,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     0,
   },
-// N: 49
+// N: 68
   {
     "time_server_2",
     "Time server 2 URL",
@@ -986,7 +1351,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     0,
   },
-// N: 50
+// N: 69
   {
     "time_server_3",
     "Time serber 3 URL",
@@ -1005,7 +1370,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     6,
     0,
   },
-// N: 51
+// N: 70
   {
     "sntp_poll_interval",
     "Poll interval (s)",
@@ -1024,7 +1389,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     7,
     0,
   },
-// N: 52
+// N: 71
   {
     "en_sounds",
     "Enable sounds",
@@ -1043,7 +1408,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     0,
     1,
   },
-// N: 53
+// N: 72
   {
     "voice_language",
     "Language of voice",
@@ -1062,7 +1427,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 54
+// N: 73
   {
     "sound_loudness",
     "Sound loudness (0...10)",
@@ -1081,7 +1446,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 55
+// N: 74
   {
     "s_k_prop",
     "PID Kp (Proporcional)",
@@ -1100,7 +1465,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     0,
   },
-// N: 56
+// N: 75
   {
     "s_k_diff",
     "PID Kd (Derivative)",
@@ -1119,7 +1484,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     2,
     0,
   },
-// N: 57
+// N: 76
   {
     "s_k_integr",
     "PID Ki (Integral)",
@@ -1138,7 +1503,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     3,
     0,
   },
-// N: 58
+// N: 77
   {
     "s_k_filter",
     "PID Kn (Filter coefficient) ",
@@ -1157,7 +1522,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     4,
     0,
   },
-// N: 59
+// N: 78
   {
     "s_max_slew_rate",
     "PID Maximum slew rate",
@@ -1176,7 +1541,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     5,
     0,
   },
-// N: 60
+// N: 79
   {
     "s_min_out",
     "PID Minimum output value (A)",
@@ -1195,7 +1560,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     6,
     0,
   },
-// N: 61
+// N: 80
   {
     "s_max_out",
     "PID Maximum output value (A)",
@@ -1214,7 +1579,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     7,
     0,
   },
-// N: 62
+// N: 81
   {
     "usb_mode",
     "USB interface mode",
@@ -1233,7 +1598,7 @@ static const T_NV_parameters arr_wvar[WVAR_SIZE]=
     1,
     4,
   },
-// N: 63
+// N: 82
   {
     "rndis_config",
     "RNDIS interface configuration (0-Win home net, 1 - DHCP server)",
@@ -1288,6 +1653,16 @@ static const T_selector_items selector_5[2] =
   { 1 , "Preconfigured DHCP server                   " , -1},
 };
  
+// Selector description:  Application type
+static const T_selector_items selector_6[5] = 
+{
+  { 0 , "Servo_OPS_BLDC                              " , -1},
+  { 1 , "Traction_DC                                 " , -1},
+  { 2 , "Servo__BLDC                                 " , -1},
+  { 3 , "Async_BLDC_rotation                         " , -1},
+  { 4 , "BLDC_test                                   " , -1},
+};
+ 
 static const T_selectors_list selectors_list[SELECTORS_NUM] = 
 {
   {"string"                      , 0    , 0             },
@@ -1296,6 +1671,7 @@ static const T_selectors_list selectors_list[SELECTORS_NUM] =
   {"leds_mode"                   , 2    , selector_3    },
   {"usb_mode"                    , 7    , selector_4    },
   {"rndis_config"                , 2    , selector_5    },
+  {"app_type"                    , 5    , selector_6    },
 };
  
 const T_NV_parameters_instance wvar_inst =

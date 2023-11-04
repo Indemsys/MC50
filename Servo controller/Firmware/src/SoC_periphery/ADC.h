@@ -1,6 +1,7 @@
 #ifndef ADC_H
   #define ADC_H
 
+typedef void (*T_ADC_isr_callback)(void);
 
 typedef struct
 {
@@ -15,6 +16,8 @@ typedef struct
     uint16_t smpl_MISC;        // ADC1 AN002
     uint16_t smpl_TEMP;        // ADC1 AN005 Температерный сенсор у силовых транзисторов
     uint16_t smpl_V_VPWR;      // ADC1 AN007
+
+    uint8_t  skip_adc_res;
 
     float    V_IPWR_fltr;
     float    V_VPWR_fltr;
@@ -37,18 +40,12 @@ typedef struct
     int32_t  smpl_V_IV_norm;     //
     int32_t  smpl_V_IW_norm;     //
 
-    int32_t  smpl_avr_cnt;       // Счетчик уккумулированных сэмплов при усреднении
-    int32_t  smpl_V_IU_norm_acc; // Аккумулированные откорректированные сэмплы с датчиков тока в фазах мотора для усредения на каждом шаге коммутации
-    int32_t  smpl_V_IV_norm_acc; //
-    int32_t  smpl_V_IW_norm_acc; //
 
-    int32_t  smpl_V_IU_norm_avr; // Среднее откорректированных сэмплов с датчиков тока в фазах мотора на шаге коммутации
-    int32_t  smpl_V_IV_norm_avr; //
-    int32_t  smpl_V_IW_norm_avr; //
+    float    instant_bldc_motor_current;     //
+    float    filtered_bldc_motor_current;
 
-    int32_t  instant_motor_current; //
-    float    instant_motor_current_fltr;//
-    float    filtered_motor_current;
+    float    instant_dc_motor_current;      //
+    float    filtered_dc_motor_current;
 
     float    i_u;                    // Ток в фазе U
     float    i_v;                    // Ток в фазе V
@@ -68,10 +65,12 @@ typedef struct
     float    input_pwr;              // Потреблемая устройством мощность
 
     int32_t  prev_smpl_POS_SENS;
-    float    shaft_speed;            // Скорость вращения выходного вала.  Скорость имеет знак. Выражается в градусах в секунду
+    float    shaft_speed_rt;            // Скорость вращения выходного вала.  Скорость имеет знак. Выражается в градусах в секунду
                                      // Знак + означает движение в сторону открывания, если  открываестя по часовой стрелке при взгляде сверху
                                      // знак - означает движение в сторону закрывания, если  открываестя по часовой стрелке при взгляде сверху
-    float    shaft_abs_speed;        // Беззнаковая скорость вращения выходного вала
+    float    shaft_abs_speed_rt;     // Беззнаковая скорость вращения выходного вала
+    float    shaft_speed_smoothly;   // Скорость вращения выходного вала.  Скорость имеет знак. Выражается в градусах в секунду
+    float    shaft_abs_speed_smoothly;// Беззнаковая скорость вращения выходного вала
 
     float    shaft_position_grad;    // Позиция выходного вала относительно нулевой позиции в градусах
 
@@ -79,32 +78,22 @@ typedef struct
     float    grad_to_samples_scale;  // Коэффициент приведения угла поворота выходного вала из градусов в отсчеты АЦП
     float    samples_ps_to_grad_ps;  // Коэффициент приведения скорости выходного вала из отсчетов АЦП в секунду в градусы в секунду
 
+
+    IRQn_Type             adc0_scan_int_num;
+    TX_EVENT_FLAGS_GROUP  adc_flags;
+
+    T_ADC_isr_callback    ISR_callback;
+
 } T_adc_cbl;
 
 
 extern  T_adc_cbl        adc;
 
-extern uint8_t           hall_u;
-extern uint8_t           hall_v;
-extern uint8_t           hall_w;
 
-extern  uint8_t          hall_state;
-extern  uint8_t          skip_adc_res;
-
-extern int32_t           hall_u_capt;
-extern int32_t           hall_v_capt;
-extern int32_t           hall_w_capt;
-extern uint32_t          hall_capt;
-extern uint32_t          one_turn_period;
-extern int32_t           rotating_direction;
-extern uint8_t           current_hall_state;
-
-
-void       ADC_init(void);
+void       ADC_init(T_ADC_isr_callback isr_callback);
 uint32_t   ADC_set_averaging_done(void);
 uint32_t   ADC_wait_averaging_done(void);
-void       Reset_rotor_speed_detector(void);
-
+void       ADC_set_callback(T_ADC_isr_callback isr_callback);
 #endif
 
 

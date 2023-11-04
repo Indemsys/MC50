@@ -127,6 +127,8 @@ extern const T_IO_pins_configuration MC50_pins_cfg[];
 
 
 void      MC50_board_pins_init(void);
+void      MC50_3Ph_PWM_pins_init(void);
+void      MC50_OPS_PWM_pins_init(void);
 uint32_t  MC50_get_pin_count(void);
 void      MC50_get_pin_conf_str(uint32_t pin_num, char *dstr);
 
