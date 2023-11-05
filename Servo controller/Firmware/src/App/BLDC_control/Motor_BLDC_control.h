@@ -35,6 +35,7 @@ typedef struct
   T_6step_rec   fw_comm[6];
   uint32_t      pwm_indx_to_comp[PWM_STEP_COUNT]; // Таблица конвертации коэфициента заполнения ШИМ в значение компаратора таймера
   uint32_t      gpt_top_val;        // Максимальное значение компаратора таймеров при генерации ШИМ
+  uint8_t       bitmask;            // Переменная содержащая предыдущую маску состояния битов сигналов с датчиков Холла.
 
   float         rotation_freq;
   T_int32_3ph   angle_3ph;

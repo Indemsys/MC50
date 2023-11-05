@@ -7,9 +7,12 @@
 #include   "MC50_resources.h"
 
 
+#define PWM_STEPS_NUM          100
+
 static GX_WINDOW              *w_comm_law_screen;
 static uint8_t                 current_changer_active = 0;
-
+static uint8_t                 pwm_changer_active = 0;
+static float                   pwm_step;
 
 static void _Rot_forward(void *p);
 static void _Rot_reverse(void *p);
@@ -18,6 +21,7 @@ static void _Rot_freewheel(void *p);
 static void _Start_search(void *p);
 static void _Save_law(void *p);
 static void _Change_current(void *p);
+static void _Change_pwm(void *p);
 
 static const T_gui_menu_content  comm_law_menu_content[] =
 {
@@ -29,6 +33,7 @@ static const T_gui_menu_content  comm_law_menu_content[] =
   { MENU_ITEM_COMMAND ,(GX_WIDGET *)&w_comm_law.w_comm_law_prmpt_search          , _Start_search   },
   { MENU_ITEM_COMMAND ,(GX_WIDGET *)&w_comm_law.w_comm_law_prmpt_save            , _Save_law       },
   { MENU_ITEM_COMMAND ,(GX_WIDGET *)&w_comm_law.w_comm_law_Val_current           , _Change_current },
+  { MENU_ITEM_COMMAND ,(GX_WIDGET *)&w_comm_law.w_comm_law_Val_pwm               , _Change_pwm     },
 };
 
 #define HMI_COMM_LAW_MENU_ITEMS_COUNT (sizeof(comm_law_menu_content)/sizeof(comm_law_menu_content[0]))
@@ -92,6 +97,16 @@ static void _Change_current(void *p)
 
 }
 
+/*-----------------------------------------------------------------------------------------------------
+
+
+  \param p
+-----------------------------------------------------------------------------------------------------*/
+static void _Change_pwm(void *p)
+{
+
+}
+
 
 /*-----------------------------------------------------------------------------------------------------
 
@@ -127,6 +142,7 @@ void Init_comm_law_search_screen(void *p)
     gx_studio_named_widget_create("w_comm_law" , 0, (GX_WIDGET **)&w_comm_law_screen);
   }
   comm_law_cbl.enc_cnt = Get_encoder_counter();
+  pwm_step = (float)PWM_100 / (float)PWM_STEPS_NUM;
   gx_widget_attach((GX_WIDGET *)root, (GX_WIDGET *)w_comm_law_screen);
 }
 
@@ -192,6 +208,36 @@ static uint32_t _Encoder_processing(void)
       current_changer_active = 0;
     }
   }
+  else if ((comm_law_menu_content[comm_law_cbl.item_num].item_function == _Change_pwm) && pwm_changer_active)
+  {
+    if (delta != 0)
+    {
+      if (delta > 0)
+      {
+        if (g_test_fp_pwm < PWM_100)
+        {
+          g_test_fp_pwm += pwm_step;
+          if (g_test_fp_pwm > PWM_100) g_test_fp_pwm = PWM_100;
+          g_test_pwm_val = lroundf(g_test_fp_pwm);
+        }
+      }
+      else
+      {
+        if (g_test_fp_pwm > 0)
+        {
+          g_test_fp_pwm -= pwm_step;
+          if (g_test_fp_pwm < 0) g_test_fp_pwm  = 0;
+          g_test_pwm_val = lroundf(g_test_fp_pwm);
+
+        }
+      }
+    }
+
+    if (Get_switch_press_signal())
+    {
+      pwm_changer_active = 0;
+    }
+  }
   else
   {
     if (delta != 0)
@@ -226,6 +272,10 @@ static uint32_t _Encoder_processing(void)
         if (comm_law_menu_content[comm_law_cbl.item_num].item_function == _Change_current)
         {
           current_changer_active = 1;
+        }
+        else if (comm_law_menu_content[comm_law_cbl.item_num].item_function == _Change_pwm)
+        {
+          pwm_changer_active = 1;
         }
         else
         {

@@ -84,10 +84,13 @@ static void _BLDC_test_ISR_handler(void)
 static void BLDC_test_6step_commutation(void)
 {
   T_6step_rec  *tbl;
-  uint8_t step = h3.bitmask;
+  uint8_t hall_mask = h3.bitmask;
 
-  if ((step < 1) || (step > 6)) return;
-  step--;
+  if (r3ph.bitmask == hall_mask) return;
+  r3ph.bitmask = hall_mask;
+
+  if ((hall_mask < 1) || (hall_mask > 6)) return;
+  hall_mask--;
 
   if (reverse_rotation)
   {
@@ -98,12 +101,12 @@ static void BLDC_test_6step_commutation(void)
     tbl = r3ph.fw_comm;
   }
 
-  if (tbl[step].U == 1)
+  if (tbl[hall_mask].U == 1)
   {
     r3ph.gpt_U_pwm_val = g_test_pwm_val;
     r3ph.out_U_state_req = OUT_TO_ENABLE;
   }
-  else if (tbl[step].U == -1)
+  else if (tbl[hall_mask].U == -1)
   {
     r3ph.gpt_U_pwm_val = 0;
     r3ph.out_U_state_req = OUT_TO_ENABLE;
@@ -111,14 +114,23 @@ static void BLDC_test_6step_commutation(void)
   else
   {
     r3ph.out_U_state_req = OUT_TO_DISABLE;
+    // Заранее переключаем уровень ШИМ, чтобы не появилось нежелательных импульсов при выходе из Z состояния
+    if (r3ph.gpt_U_pwm_val == 0)
+    {
+      r3ph.gpt_U_pwm_val = g_test_pwm_val;
+    }
+    else
+    {
+      r3ph.gpt_U_pwm_val = 0;
+    }
   }
 
-  if (tbl[step].V == 1)
+  if (tbl[hall_mask].V == 1)
   {
     r3ph.gpt_V_pwm_val = g_test_pwm_val;
     r3ph.out_V_state_req = OUT_TO_ENABLE;
   }
-  else if (tbl[step].V == -1)
+  else if (tbl[hall_mask].V == -1)
   {
     r3ph.gpt_V_pwm_val = 0;
     r3ph.out_V_state_req = OUT_TO_ENABLE;
@@ -126,14 +138,23 @@ static void BLDC_test_6step_commutation(void)
   else
   {
     r3ph.out_V_state_req = OUT_TO_DISABLE;
+    // Заранее переключаем уровень ШИМ, чтобы не появилось нежелательных импульсов при выходе из Z состояния
+    if (r3ph.gpt_V_pwm_val == 0)
+    {
+      r3ph.gpt_V_pwm_val = g_test_pwm_val;
+    }
+    else
+    {
+      r3ph.gpt_V_pwm_val = 0;
+    }
   }
 
-  if (tbl[step].W == 1)
+  if (tbl[hall_mask].W == 1)
   {
     r3ph.gpt_W_pwm_val = g_test_pwm_val;
     r3ph.out_W_state_req = OUT_TO_ENABLE;
   }
-  else if (tbl[step].W == -1)
+  else if (tbl[hall_mask].W == -1)
   {
     r3ph.gpt_W_pwm_val = 0;
     r3ph.out_W_state_req = OUT_TO_ENABLE;
@@ -141,6 +162,15 @@ static void BLDC_test_6step_commutation(void)
   else
   {
     r3ph.out_W_state_req = OUT_TO_DISABLE;
+    // Заранее переключаем уровень ШИМ, чтобы не появилось нежелательных импульсов при выходе из Z состояния
+    if (r3ph.gpt_W_pwm_val == 0)
+    {
+      r3ph.gpt_W_pwm_val = g_test_pwm_val;
+    }
+    else
+    {
+      r3ph.gpt_W_pwm_val = 0;
+    }
   }
 
 
@@ -313,6 +343,7 @@ static void _BLDC_start_rotation(uint8_t dir)
       }
     }
 
+    r3ph.bitmask     = 0; // Обнуляем битовую маску датчиков холла, чтобы инициализировать начало процесса коммутации
     reverse_rotation = dir;
     enable_rotation  = 1;
   }
